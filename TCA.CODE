@@ -243,6 +243,10 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                 printf("\nShinobi Cadastrado Com Sucesso!\n");
                 congelar_tela();
             }
+            else
+            {
+                return -1;
+            }
         }
         else
         {
@@ -297,6 +301,10 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                 printf("\nCla Cadastrado Com Sucesso!\n");
                 congelar_tela();
             }
+            else
+            {
+                return -1;
+            }
         }
         else
         {
@@ -350,6 +358,10 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                 printf("\nJutsu Cadastrado Com Sucesso!\n");
                 congelar_tela();
             }
+            else
+            {
+                return -1;
+            }
         }
         else
         {
@@ -401,6 +413,10 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                 _NumeroDaMissao++;
                 printf("\nMissao Cadastrada Com Sucesso!\n");
                 congelar_tela();
+            }
+            else
+            {
+                return -1;
             }
         }
 
@@ -501,7 +517,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                     }
                     else
                     {
-                        printf("Deseja Voltar Para o Menu Exibir?(s/n)");
+                        printf("Deseja Voltar Para o Menu Exibir?(s/n) ");
                         if (simOUnao() == 1)
                         {
                             break;
@@ -775,7 +791,15 @@ tNinja CriarShinobi()
         {
             printf("\n<===(CADASTRO DE SHINOBI: CLA DO SHINOBI)===>\n");
             printf("\nCaso o Cla Que Voce Deseja Esteja Cadastrado, Selecione-o:\n");
-            NovoCadastro(2, 1);
+            OpçaoDeCla = NovoCadastro(2, 1);
+            if (OpçaoDeCla == -1)
+            {
+                limpar_tela();
+                printf("\n<===(CADASTRO DE SHINOBI: CLA DO SHINOBI)===>\n");
+                printf("\nVoce Deve Cadastrar Um Cla Para Proceguir com o Cadastro!\n");
+                congelar_tela();
+                continue;
+            }
             limpar_tela();
             printf("\n<===(CADASTRO DE SHINOBI: CLA DO SHINOBI)===>\n");
             printf("\nCaso o Cla Que Voce Deseja Esteja Cadastrado, Selecione-o:\n");
@@ -832,7 +856,7 @@ tNinja CriarShinobi()
                     CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias = NULL;
                 }
 
-                if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus > 0)
+                if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus > 0 )
                 {
                     CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais = malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus)) * sizeof(tJutsu *));
                     CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsus = _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus;
@@ -865,7 +889,6 @@ tNinja CriarShinobi()
                 else
                 {
                     CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsus = 0;
-                    CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais = NULL;
                 }
                 break;
             }
@@ -942,7 +965,16 @@ tNinja CriarShinobi()
         {
             printf("\n<===(CADASTRO DE SHINOBI: JUTSU %d DO SHINOBI)===>\n", i + 1);
             printf("\nCaso o Jutsu Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o:\n", i + 1);
-            NovoCadastro(3, 1);
+            OpçaoDeJutsu = NovoCadastro(3, 1);
+            if (OpçaoDeJutsu == -1)
+            {
+                limpar_tela();
+                printf("\n<===(CADASTRO DE SHINOBI: JUTSU %d DO SHINOBI)===>\n", i + 1);
+                printf("\nVoce Deve Cadastrar Um Jutsu Para Proceguir com o Cadastro!\n");
+                congelar_tela();
+                i--;
+                continue;
+            }
             limpar_tela();
             printf("\n<===(CADASTRO DE SHINOBI: JUTSU %d DO SHINOBI)===>\n", i + 1);
             printf("\nCaso o Jutsu Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o:\n", i + 1);
@@ -1069,7 +1101,16 @@ tCla CriarCla()
             {
                 printf("\n<===(CADASTRO DE CLA: JUTSU HEREDITARIO %d DO CLA)===>\n", i + 1);
                 printf("\nCaso o Jutsu Hereditario Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o:\n", i + 1);
-                NovoCadastro(3, 1);
+                OpçaoDeJutsu = NovoCadastro(3, 1);
+                if (OpçaoDeJutsu == -1)
+                {
+                    limpar_tela();
+                    printf("\n<===(CADASTRO DE CLA: JUTSU HEREDITARIO %d DO CLA)===>\n", i + 1);
+                    printf("\nVoce Deve Cadastrar Um Jutsu Para Proceguir com o Cadastro!\n");
+                    congelar_tela();
+                    i--;
+                    continue;
+                }
                 limpar_tela();
                 printf("\n<===(CADASTRO DE CLA: JUTSU HEREDITARIO %d DO CLA)===>\n", i + 1);
                 printf("\nCaso o Jutsu Hereditario Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o:\n", i + 1);
@@ -1126,7 +1167,6 @@ tCla CriarCla()
     else
     {
         CadastroDeCla.QuantidadeDeHabilidades = 0;
-        CadastroDeCla.HabilidadesHereditarias = NULL;
     }
 
     // Cadastro do Jutsu Tradicional:
@@ -1173,6 +1213,15 @@ tCla CriarCla()
                 printf("\n<===(CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA)===>\n");
                 printf("Caso o Jutsu Tradicional Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o: \n", i + 1);
                 NovoCadastro(3, 1);
+                if (OpçaoDeJutsu == -1)
+                {
+                    limpar_tela();
+                    printf("\n<===(CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA)===>\n");
+                    printf("\nVoce Deve Cadastrar Um Jutsu Para Proceguir com o Cadastro!\n");
+                    congelar_tela();
+                    i--;
+                    continue;
+                }
                 limpar_tela();
                 printf("\n<===(CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA)===>\n");
                 printf("Caso o Jutsu Tradicional Numero %d Que Voce Deseja Esteja Cadastrado, Selecione-o: \n", i + 1);
@@ -1228,7 +1277,6 @@ tCla CriarCla()
     else
     {
         CadastroDeCla.QuantidadeDeJutsus = 0;
-        CadastroDeCla.JutsusTradicionais = NULL;
     }
 
     return CadastroDeCla;
@@ -1320,7 +1368,6 @@ tJutsu CriarJutsu()
     else
     {
         CadastroDeJutsu.QuantidadeDeElementos = 0;
-        CadastroDeJutsu.Elementos = NULL;
     }
 
     // LOGICA CUSTO DE CHAKRA:
@@ -1785,13 +1832,14 @@ void VerificadorDeTexto(char Texto[100])
     {
         ctt = 1;
         gets(Texto);
+        fflush(stdin);
         for (i = 0; Texto[i] != '\0'; i++)
         {
             if (!isalpha(Texto[i]) && Texto[i] != ' ')
             {
+                ctt = 0;
                 MensagemErro(-2);
                 printf("\nDigite Novamnete: ");
-                ctt = 0;
                 continue;
             }
         }
