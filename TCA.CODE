@@ -42,7 +42,7 @@ typedef struct
 typedef struct
 {
     char *Titulo;
-    char *LiderResponsavel;
+    tNinja *LiderResponsavel;
     char *NivelDificuldade;
     char *Status;
     int QuantidadeDeNinjas;
@@ -154,14 +154,13 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     case 1:
         if (_NumeroDoShinobi == 0)
         {
-            printf("\nNao a Nenhum Shinobi Cadastrado no Momento!");
-            printf("\nDeseja Cadastrar Um Novo Shinobi?(s/n) ");
+            printf("\nNao a Nenhum Shinobi Cadastrado no Momento!\nDeseja Cadastrar Um Novo Shinobi?(s/n) ");
             if (simOUnao() == 1)
             {
                 _ConjuntoDeShinobis = (tNinja *)malloc(1 * sizeof(tNinja));
                 _ConjuntoDeShinobis[_NumeroDoShinobi] = CriarShinobi();
                 _NumeroDoShinobi++;
-                printf("\nShinobi Cadastrado Com Sucesso!\n");
+                printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nShinobi Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 congelar_tela();
             }
             else
@@ -179,7 +178,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                     _ConjuntoDeShinobis = (tNinja *)realloc(_ConjuntoDeShinobis, (_NumeroDoShinobi + 1) * sizeof(tNinja));
                     _ConjuntoDeShinobis[_NumeroDoShinobi] = CriarShinobi();
                     _NumeroDoShinobi++;
-                    printf("\nShinobi Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nShinobi Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                 }
             }
@@ -187,15 +186,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             {
                 int OpçaoDeShinobi;
                 int NovoShinobi = 0;
-                printf("\n{ 0 } - Cadastrar Novo Shinobi\n");
-                printf("Escolha uma opção: ");
+                printf("\n{ 0 } - Cadastrar Novo Shinobi\nEscolha uma opção: ");
                 OpçaoDeShinobi = VereficaQuantia(NovoShinobi, (_NumeroDoShinobi));
                 if (OpçaoDeShinobi == NovoShinobi)
                 {
                     _ConjuntoDeShinobis = (tNinja *)realloc(_ConjuntoDeShinobis, (_NumeroDoShinobi + 1) * sizeof(tNinja));
                     _ConjuntoDeShinobis[_NumeroDoShinobi] = CriarShinobi();
                     _NumeroDoShinobi++;
-                    printf("\nShinobi Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nShinobi Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                     return _NumeroDoShinobi;
                 }
@@ -211,14 +209,13 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     {
         if (_NumeroDoCla == 0)
         {
-            printf("\nNao a Nenhum Cla Cadastrado no Momento!");
-            printf("\nDeseja Cadastrar Um Novo Cla?(s/n) ");
+            printf("\nNao a Nenhum Cla Cadastrado no Momento!\nDeseja Cadastrar Um Novo Cla?(s/n) ");
             if (simOUnao() == 1)
             {
                 _ConjuntoDeClas = (tCla *)malloc(1 * sizeof(tCla));
                 _ConjuntoDeClas[_NumeroDoCla] = CriarCla();
                 _NumeroDoCla++;
-                printf("\nCla Cadastrado Com Sucesso!\n");
+                printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nCla Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 congelar_tela();
             }
             else
@@ -236,7 +233,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                     _ConjuntoDeClas = (tCla *)realloc(_ConjuntoDeClas, (_NumeroDoCla + 1) * sizeof(tCla));
                     _ConjuntoDeClas[_NumeroDoCla] = CriarCla();
                     _NumeroDoCla++;
-                    printf("\nCla Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nCla Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                 }
             }
@@ -244,15 +241,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             {
                 int OpçaoDeCla;
                 int NovoCla = 0;
-                printf("\n{ 0 } - Cadastrar Novo Cla\n");
-                printf("Escolha uma opção: ");
+                printf("\n{ 0 } - Cadastrar Novo Cla\nEscolha uma opção: ");
                 OpçaoDeCla = VereficaQuantia(NovoCla, (_NumeroDoCla));
                 if (OpçaoDeCla == NovoCla)
                 {
                     _ConjuntoDeClas = (tCla *)realloc(_ConjuntoDeClas, (_NumeroDoCla + 1) * sizeof(tCla));
                     _ConjuntoDeClas[_NumeroDoCla] = CriarCla();
                     _NumeroDoCla++;
-                    printf("\nCla Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nCla Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                     return _NumeroDoCla;
                 }
@@ -268,14 +264,13 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     case 3:
         if (_NumeroDoJutsu == 0)
         {
-            printf("\nNao a Nenhum Jutsu Cadastrado no Momento!");
-            printf("\nDeseja Cadastrar Um Novo Jutsu?(s/n) ");
+            printf("\nNao a Nenhum Jutsu Cadastrado no Momento!\nDeseja Cadastrar Um Novo Jutsu?(s/n) ");
             if (simOUnao() == 1)
             {
                 _ConjuntoDeJutsus = (tJutsu *)malloc(1 * sizeof(tJutsu));
                 _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
                 _NumeroDoJutsu++;
-                printf("\nJutsu Cadastrado Com Sucesso!\n");
+                printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nJutsu Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 congelar_tela();
             }
             else
@@ -293,7 +288,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                     _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
                     _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
                     _NumeroDoJutsu++;
-                    printf("\nJutsu Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nJutsu Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                 }
             }
@@ -301,15 +296,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             {
                 int OpçaoDeJutsu;
                 int NovoJutsu = 0;
-                printf("\n{ 0 } - Cadastrar Novo Jutsu\n");
-                printf("Escolha uma opção: ");
+                printf("\n{ 0 } - Cadastrar Novo Jutsu\nEscolha uma opção: ");
                 OpçaoDeJutsu = VereficaQuantia(NovoJutsu, _NumeroDoJutsu);
                 if (OpçaoDeJutsu == NovoJutsu)
                 {
                     _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
                     _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
                     _NumeroDoJutsu++;
-                    printf("\nJutsu Cadastrado Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nJutsu Cadastrado Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                     return _NumeroDoJutsu;
                 }
@@ -324,14 +318,13 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     case 4:
         if (_NumeroDaMissao == 0)
         {
-            printf("\nNao a Nenhuma Missao Cadastrada no Momento!");
-            printf("\nDeseja Cadastrar Uma Nova Missao?(s/n) ");
+            printf("\nNao a Nenhuma Missao Cadastrada no Momento!\nDeseja Cadastrar Uma Nova Missao?(s/n) ");
             if (simOUnao() == 1)
             {
                 _ConjuntoDeMissoes = (tMissao *)malloc(1 * sizeof(tMissao));
                 _ConjuntoDeMissoes[_NumeroDaMissao] = CriarMissao();
                 _NumeroDaMissao++;
-                printf("\nMissao Cadastrada Com Sucesso!\n");
+                printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nMissao Cadastrada Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                 congelar_tela();
             }
             else
@@ -350,7 +343,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                     _ConjuntoDeMissoes = (tMissao *)realloc(_ConjuntoDeMissoes, (_NumeroDaMissao + 1) * sizeof(tMissao));
                     _ConjuntoDeMissoes[_NumeroDaMissao] = CriarMissao();
                     _NumeroDaMissao++;
-                    printf("\nMissao Cadastrada Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nMissao Cadastrada Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                 }
             }
@@ -358,15 +351,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             {
                 int OpçaoDeMissao;
                 int NovaMissao = 0;
-                printf("\n{ 0 } - Cadastrar Nova Missao\n");
-                printf("Escolha uma opção: ");
+                printf("\n{ 0 } - Cadastrar Nova Missao\nEscolha uma opção: ");
                 OpçaoDeMissao = VereficaQuantia(NovaMissao, _NumeroDaMissao);
                 if (OpçaoDeMissao == NovaMissao)
                 {
                     _ConjuntoDeMissoes = (tMissao *)realloc(_ConjuntoDeMissoes, (_NumeroDaMissao + 1) * sizeof(tMissao));
                     _ConjuntoDeMissoes[_NumeroDaMissao] = CriarMissao();
                     _NumeroDaMissao++;
-                    printf("\nMissao Cadastrada Com Sucesso!\n");
+                    printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\nMissao Cadastrada Com Sucesso!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
                     congelar_tela();
                     return _NumeroDaMissao;
                 }
@@ -388,8 +380,7 @@ tNinja CriarShinobi()
     char StrAux[100];
 
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE SHINOBI: INFORMAÇOES OPCIONAIS ]==~>\n");
-    printf("\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Shinobis?(s/n) ");
+    printf("\n<~==[ CADASTRO DE SHINOBI: INFORMAÇOES OPCIONAIS ]==~>\n\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Shinobis?(s/n) ");
     if (simOUnao() == 1)
     {
         SinalDoSabetudo = SabeTudo;
@@ -403,8 +394,7 @@ tNinja CriarShinobi()
     {
         int erro = 0;
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: NOME DO SHINOBI ]==~>\n");
-        printf("\nDigite o Nome Do Shinobi: ");
+        printf("\n<~==[ CADASTRO DE SHINOBI: NOME DO SHINOBI ]==~>\n\nDigite o Nome Do Shinobi: ");
         VerificadorDeTexto(StrAux);
         if (_NumeroDoShinobi > 0)
         {
@@ -421,9 +411,7 @@ tNinja CriarShinobi()
         if (erro)
         {
             limpar_tela();
-            limpar_tela();
-            printf("\n<~==[ CADASTRO DE SHINOBI: NOME DO SHINOBI ]==~>\n");
-            printf("\nUm Shinobi Com Este Nome Ja Foi Cadastrado!");
+            printf("\n<~==[ CADASTRO DE SHINOBI: NOME DO SHINOBI ]==~>\n\nUm Shinobi Com Este Nome Ja Foi Cadastrado!");
             congelar_tela();
             continue;
         }
@@ -438,12 +426,9 @@ tNinja CriarShinobi()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: CLA DO SHINOBI ]==~>\n");
-        printf("\nFalando Sobre Clas...");
+        printf("\n<~==[ CADASTRO DE SHINOBI: CLA DO SHINOBI ]==~>\n\nFalando Sobre Clas...");
         DesejaInformaçoes(0);
     }
-    limpar_tela();
-
     CadastroDeShinobi.CaracteristicasDoCla = malloc(sizeof(tCla));
     OpçaoDeCla = EscolheOpçao(2);
 
@@ -566,8 +551,7 @@ tNinja CriarShinobi()
     printf("\n{ 4 } Tokubetsu Jounin - especialista em área específica");
     printf("\n{ 5 } Jounin - elite da vila");
     printf("\n{ 6 } ANBU - força especial secreta");
-    printf("\n{ 7 } Kage - liderança máxima da vila\n\n");
-    printf("Escolha uma opção: ");
+    printf("\n{ 7 } Kage\n\nEscolha uma opção: ");
     SelecionaPatente((VereficaQuantia(1, 7)), StrAux);
     CadastroDeShinobi.Patente = (char *)malloc(((strlen(StrAux)) + 1) * sizeof(char));
     strcpy(CadastroDeShinobi.Patente, StrAux);
@@ -575,25 +559,21 @@ tNinja CriarShinobi()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: RESERVA DE CHAKRA DO SHINOBI ]==~>\n");
-        printf("\nFalando Sobre a Reserva de Chakra do Shinobi...");
+        printf("\n<~==[ CADASTRO DE SHINOBI: RESERVA DE CHAKRA DO SHINOBI ]==~>\n\nFalando Sobre a Reserva de Chakra do Shinobi...");
         DesejaInformaçoes(7);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE SHINOBI: RESERVA DE CHAKRA DO SHINOBI ]==~>\n");
-    printf("\nDigite a Reserva de Chakra do Shinobi(0/100): ");
+    printf("\n<~==[ CADASTRO DE SHINOBI: RESERVA DE CHAKRA DO SHINOBI ]==~>\n\nDigite a Reserva de Chakra do Shinobi(0/100): ");
     CadastroDeShinobi.QuantidadeDeChakra = VereficaQuantia(1, 100);
 
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n");
-        printf("\nFalando Sobre o Elemento Principal do Shinobi");
+        printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n\nFalando Sobre o Elemento Principal do Shinobi...");
         DesejaInformaçoes(8);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n");
-    printf("\nDigite o Elemento Principal do Shinobi: ");
+    printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n\nDigite o Elemento Principal do Shinobi: ");
     VerificadorDeTexto(StrAux);
     CadastroDeShinobi.ElementoPrincipal = (char *)malloc(((strlen(StrAux)) + 1) * sizeof(char));
     strcpy(CadastroDeShinobi.ElementoPrincipal, StrAux);
@@ -601,20 +581,17 @@ tNinja CriarShinobi()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n");
-        printf("\nFalando Sobre os Jutsus do Shinobi");
+        printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n\nFalando Sobre os Jutsus do Shinobi...");
         DesejaInformaçoes(9);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n");
-    printf("\nO Shinobi Domina Algum Jutsu?(s/n) ");
+    printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n\nO Shinobi Domina Algum Jutsu?(s/n) ");
     if (simOUnao() == 1)
     {
         int *aux = calloc(101, sizeof(int));
 
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n");
-        printf("\nDigite Quantos Jutsus o Shinobi Possui: ");
+        printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n\nDigite Quantos Jutsus o Shinobi Possui: ");
         NumDeJutsus = VereficaQuantia(1, 1000);
 
         CadastroDeShinobi.QuantidadeDeJutsus = NumDeJutsus;
@@ -622,7 +599,6 @@ tNinja CriarShinobi()
         for (i = 0; i < NumDeJutsus; i++)
         {
             CadastroDeShinobi.CaracteristicasDoJutsu[i] = malloc(sizeof(tJutsu));
-            limpar_tela();
 
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[i] = OpçaoDeJutsu;
@@ -692,8 +668,7 @@ tCla CriarCla()
     int i, j, SinalDoSabetudo, SabeTudo = 1, SabeNada = 2, OpçaoDeJutsu = 0;
 
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE CLA: INFORMAÇOES OPCIONAIS ]==~>\n");
-    printf("\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Clas?(s/n) ");
+    printf("\n<~==[ CADASTRO DE CLA: INFORMAÇOES OPCIONAIS ]==~>\n\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Clas?(s/n) ");
     if (simOUnao() == 1)
     {
         SinalDoSabetudo = SabeTudo;
@@ -707,8 +682,7 @@ tCla CriarCla()
     {
         int erro = 0;
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: NOME DO CLA ]==~>\n");
-        printf("\nDigite o Nome do Cla: ");
+        printf("\n<~==[ CADASTRO DE CLA: NOME DO CLA ]==~>\n\nDigite o Nome do Cla: ");
         VerificadorDeTexto(StrAux);
         if (_NumeroDoCla > 0)
         {
@@ -725,8 +699,7 @@ tCla CriarCla()
         if (erro)
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO DE CLA: NOME DO CLA ]==~>\n");
-            printf("\nUm Cla Com Este Nome Ja Foi Cadastrado!");
+            printf("\n<~==[ CADASTRO DE CLA: NOME DO CLA ]==~>\n\nUm Cla Com Este Nome Ja Foi Cadastrado!");
             congelar_tela();
             continue;
         }
@@ -742,21 +715,18 @@ tCla CriarCla()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n");
-        printf("\nFalando Sobre Jutsus Hereditarios Dos Clas...");
+        printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nFalando Sobre Jutsus Hereditarios Dos Clas...");
         DesejaInformaçoes(1);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n");
-    printf("\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
+    printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
     if (simOUnao() == 1)
     {
         int i, NumDeJutsusHereditarios;
         int *aux = calloc(101, sizeof(int));
 
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n");
-        printf("\nDigite Quantos Jutsus Hereditarios o Cla Possui: ");
+        printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nDigite Quantos Jutsus Hereditarios o Cla Possui: ");
         NumDeJutsusHereditarios = VereficaQuantia(1, 100);
 
         CadastroDeCla.QuantidadeDeHabilidades = NumDeJutsusHereditarios;
@@ -764,7 +734,6 @@ tCla CriarCla()
         for (i = 0; i < NumDeJutsusHereditarios; i++)
         {
             CadastroDeCla.HabilidadesHereditarias[i] = malloc(sizeof(tJutsu));
-            limpar_tela();
 
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[i] = OpçaoDeJutsu;
@@ -829,21 +798,18 @@ tCla CriarCla()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n");
-        printf("\nFalando Sobre Jutsus Tradicionais Dos CLas...");
+        printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nFalando Sobre Jutsus Tradicionais Dos CLas...");
         DesejaInformaçoes(3);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n");
-    printf("\nO Cla Possui Algum Jutsu Tradicional?(s/n) ");
+    printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Tradicional?(s/n) ");
     if (simOUnao() == 1)
     {
         int i, NumDeJutsusTradicionais;
         int *aux = calloc(101, sizeof(int));
 
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n");
-        printf("\nDigite Quantos Jutsus Tradicionais o Cla Possui: ");
+        printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nDigite Quantos Jutsus Tradicionais o Cla Possui: ");
         NumDeJutsusTradicionais = VereficaQuantia(1, 100);
 
         CadastroDeCla.QuantidadeDeJutsus = NumDeJutsusTradicionais;
@@ -851,7 +817,6 @@ tCla CriarCla()
         for (i = 0; i < NumDeJutsusTradicionais; i++)
         {
             CadastroDeCla.JutsusTradicionais[i] = malloc(sizeof(tJutsu));
-            limpar_tela();
 
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[i] = OpçaoDeJutsu;
@@ -922,8 +887,7 @@ tJutsu CriarJutsu()
 
     // LOGICA DO SABE TUDO:
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE JUTSU: INFORMAÇOES OPCIONAIS ]==~>\n");
-    printf("\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Jutsus?(s/n) ");
+    printf("\n<~==[ CADASTRO DE JUTSU: INFORMAÇOES OPCIONAIS ]==~>\n\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Jutsus?(s/n) ");
     if (simOUnao() == 1)
     {
         SinalDoSabetudo = SabeTudo;
@@ -937,8 +901,7 @@ tJutsu CriarJutsu()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n");
-        printf("\nFalando Sobre Jutsus...");
+        printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n\nFalando Sobre Jutsus...");
         DesejaInformaçoes(9);
     }
 
@@ -946,8 +909,7 @@ tJutsu CriarJutsu()
     {
         int erro = 0;
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n");
-        printf("\nDigite o Nome do Jutsu: ");
+        printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n\nDigite o Nome do Jutsu: ");
         VerificadorDeTexto(StrAuX);
         if (_NumeroDoJutsu > 0)
         {
@@ -964,8 +926,7 @@ tJutsu CriarJutsu()
         if (erro)
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n");
-            printf("\nUm Jutsu Com Este Nome Ja Foi Cadastrado!");
+            printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n\nUm Jutsu Com Este Nome Ja Foi Cadastrado!");
             congelar_tela();
             continue;
         }
@@ -983,13 +944,11 @@ tJutsu CriarJutsu()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: TIPO DE JUTSU ]==~>\n");
-        printf("\nFalando Sobre Tipos dos Jutsus...");
+        printf("\n<~==[ CADASTRO DE JUTSU: TIPO DE JUTSU ]==~>\n\nFalando Sobre Tipos dos Jutsus...");
         DesejaInformaçoes(4);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE JUTSU: TIPO DE JUTSU ]==~>\n");
-    printf("\nDigite o Tipo do Jutsu: ");
+    printf("\n<~==[ CADASTRO DE JUTSU: TIPO DE JUTSU ]==~>\n\nDigite o Tipo do Jutsu: ");
     VerificadorDeTexto(StrAuX);
     CadastroDeJutsu.TipoJutsu = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
     strcpy(CadastroDeJutsu.TipoJutsu, StrAuX);
@@ -999,28 +958,24 @@ tJutsu CriarJutsu()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n");
-        printf("\nFalando Sobre Elementos Presentes Nos Jutsus...");
+        printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nFalando Sobre Elementos Presentes Nos Jutsus...");
         DesejaInformaçoes(2);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n");
-    printf("\nO Jutsu Tem Relaçao Com Algum Elemento?(s/n) ");
+    printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nO Jutsu Tem Relaçao Com Algum Elemento?(s/n) ");
     if (simOUnao() == 1)
     {
         int QuantidadeDeElementos;
 
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n");
-        printf("\nDigite Quantos Elementos o jutsu faz relaçao: ");
+        printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nDigite Quantos Elementos o jutsu faz relaçao: ");
         QuantidadeDeElementos = VereficaQuantia(1, 20);
         CadastroDeJutsu.QuantidadeDeElementos = QuantidadeDeElementos;
         CadastroDeJutsu.Elementos = (char **)malloc((QuantidadeDeElementos + 1) * sizeof(char *));
         for (i = 0; i < QuantidadeDeElementos; i++)
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTO %d DO JUTSU ]==~>\n", i + 1);
-            printf("\nDigite o Elemento %d: ", i + 1);
+            printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTO %d DO JUTSU ]==~>\n\nDigite o Elemento %d: ", i + 1, i + 1);
             VerificadorDeTexto(StrAuX);
             CadastroDeJutsu.Elementos[i] = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
             strcpy(CadastroDeJutsu.Elementos[i], StrAuX);
@@ -1037,26 +992,22 @@ tJutsu CriarJutsu()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: CUSTO DE CHAKRA DO JUTSU ]==~>\n");
-        printf("\nFalando Sobre Custo de Chakra dos Jutsus...");
+        printf("\n<~==[ CADASTRO DE JUTSU: CUSTO DE CHAKRA DO JUTSU ]==~>\n\nFalando Sobre Custo de Chakra dos Jutsus...");
         DesejaInformaçoes(5);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE JUTSU: CUSTO DE CHAKRA DO JUTSU ]==~>\n");
-    printf("\nDigite o Custo de Chakra do Jutsu(0/100): ");
+    printf("\n<~==[ CADASTRO DE JUTSU: CUSTO DE CHAKRA DO JUTSU ]==~>\n\nDigite o Custo de Chakra do Jutsu(0/100): ");
     CadastroDeJutsu.CustodeChakra = VereficaQuantia(1, 100);
 
     // LOGICA PODER DE ATAQUE:
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE JUTSU: PODER DE ATAQUE DO JUTSU ]==~>\n");
-        printf("\nFalando Sobre Poder de Ataque dos Jutsus...");
-        DesejaInformaçoes(5);
+        printf("\n<~==[ CADASTRO DE JUTSU: PODER DE ATAQUE DO JUTSU ]==~>\n\nFalando Sobre Poder de Ataque dos Jutsus...");
+        DesejaInformaçoes(6);
     }
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE JUTSU: PODER DE ATAQUE DO JUTSU ]==~>\n");
-    printf("\nDigite o Poder de Ataque do Jutsu(0/100): ");
+    printf("\n<~==[ CADASTRO DE JUTSU: PODER DE ATAQUE DO JUTSU ]==~>\n\nDigite o Poder de Ataque do Jutsu(0/100): ");
     CadastroDeJutsu.PoderdeAtaque = VereficaQuantia(1, 100);
 
     return CadastroDeJutsu;
@@ -1070,8 +1021,7 @@ tMissao CriarMissao()
 
     // LOGICA DO SABE TUDO:
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE MISSAO: INFORMAÇOES OPCIONAIS ]==~>\n");
-    printf("\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Missoes?(s/n) ");
+    printf("\n<~==[ CADASTRO DE MISSAO: INFORMAÇOES OPCIONAIS ]==~>\n\nAntes de Inicar o Cadastro, Deseja Pular Todas as Explicaçoes e os Exemplos Sobre Missoes?(s/n) ");
     if (simOUnao() == 1)
     {
         SinalDoSabetudo = SabeTudo;
@@ -1084,8 +1034,7 @@ tMissao CriarMissao()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n");
-        printf("\nFalando Sobre Missoes...");
+        printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n\nFalando Sobre Missoes...");
         DesejaInformaçoes(10);
     }
 
@@ -1093,8 +1042,7 @@ tMissao CriarMissao()
     {
         int erro = 0;
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n");
-        printf("\nDigite o Titulo da Missao: ");
+        printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n\nDigite o Titulo da Missao: ");
         VerificadorDeTexto(StrAuX);
         if (_NumeroDaMissao > 0)
         {
@@ -1111,8 +1059,7 @@ tMissao CriarMissao()
         if (erro)
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n");
-            printf("\nUma Missao Com Este Titulo Ja Foi Cadastrada!");
+            printf("\n<~==[ CADASTRO DE MISSAO: TITULO DA MISSAO ]==~>\n\nUma Missao Com Este Titulo Ja Foi Cadastrada!");
             congelar_tela();
             continue;
         }
@@ -1128,14 +1075,12 @@ tMissao CriarMissao()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE MISSAO: NIVEL DA MISSAO ]==~>\n");
-        printf("\nFalando Sobre Nivel de Dificuldade das Missoes...");
+        printf("\n<~==[ CADASTRO DE MISSAO: NIVEL DA MISSAO ]==~>\n\nFalando Sobre Nivel de Dificuldade das Missoes...");
         DesejaInformaçoes(12);
     }
 
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE MISSAO: NIVEL DA MISSAO ]==~>\n");
-    printf("\nDigite o Nivel de Dificuldade da Missao(D/C/B/A/S): ");
+    printf("\n<~==[ CADASTRO DE MISSAO: NIVEL DA MISSAO ]==~>\n\nDigite o Nivel de Dificuldade da Missao(D/C/B/A/S): ");
     VerificaNivelDeDificuldade(StrAuX);
     CadastroDeMissao.NivelDificuldade = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
     strcpy(CadastroDeMissao.NivelDificuldade, StrAuX);
@@ -1144,26 +1089,231 @@ tMissao CriarMissao()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n");
-        printf("\nFalando Sobre Lideres das Missoes...");
+        printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nFalando Sobre Lideres das Missoes...");
         DesejaInformaçoes(11);
     }
+
+    int *aux = calloc(101, sizeof(int));
+    int OpçaoDeShinobi = 0;
+
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n");
-    printf("\nDigite o Nome do Lider Responsavel: ");
-    VerificadorDeTexto(StrAuX);
-    CadastroDeMissao.LiderResponsavel = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
-    strcpy(CadastroDeMissao.LiderResponsavel, StrAuX);
-    fflush(stdin);
+    printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nSelecione o Lider Desejado...");
+    congelar_tela();
+
+    while (1)
+    {
+        OpçaoDeShinobi = EscolheOpçao(1);
+        aux[0] = OpçaoDeShinobi;
+
+        if (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Estudante da Academia") != 0 && strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Genin") != 0)
+        {
+            if (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Chunin") == 0 && (strcmp(CadastroDeMissao.NivelDificuldade, "A") == 0 || strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0))
+            {
+                limpar_tela();
+                printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nUm Chunin só pode liderar missões de nível C ou B!");
+                congelar_tela();
+                continue;
+            }
+        }
+        else
+        {
+            limpar_tela();
+            printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n");
+            if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Estudante da Academia") == 0))
+            {
+                printf("\nUm Estudante ainda não é um shinobi! Missões estão fora de alcance!");
+                congelar_tela();
+            }
+            else if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Genin") == 0))
+            {
+                printf("\nUm Genin não possui autoridade para liderar missões!");
+                congelar_tela();
+            }
+            continue;
+        }
+        break;
+    }
+
+    if (OpçaoDeShinobi != 0)
+    {
+        CadastroDeMissao.LiderResponsavel = malloc(sizeof(tNinja));
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome != NULL)
+        {
+            CadastroDeMissao.LiderResponsavel->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome) + 1) * sizeof(char));
+            strcpy(CadastroDeMissao.LiderResponsavel->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome);
+        }
+
+        CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla = malloc(sizeof(tCla));
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->NomeDoCla != NULL)
+        {
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->NomeDoCla = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->NomeDoCla) + 1) * sizeof(char));
+            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->NomeDoCla, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->NomeDoCla);
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias != NULL)
+        {
+            int j;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeHabilidades = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades) + 1) * sizeof(tJutsu *));
+            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades); j++)
+            {
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j] = malloc(sizeof(tJutsu));
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome != NULL)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu != NULL)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos != NULL)
+                {
+                    int k;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                    for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos; k++)
+                    {
+                        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] != NULL)
+                        {
+                            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]) + 1) * sizeof(char));
+                            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]);
+                        }
+                    }
+                }
+                else
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = 0;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = NULL;
+                }
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra;
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque;
+            }
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais != NULL)
+        {
+            int j;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeJutsus = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus) + 1) * sizeof(tJutsu *));
+            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus); j++)
+            {
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j] = malloc(sizeof(tJutsu));
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Nome != NULL)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Nome);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->TipoJutsu != NULL)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->TipoJutsu);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Elementos != NULL)
+                {
+                    int k;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                    for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos; k++)
+                    {
+                        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Elementos[k] != NULL)
+                        {
+                            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Elementos[k]) + 1) * sizeof(char));
+                            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->Elementos[k]);
+                        }
+                    }
+                }
+                else
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->QuantidadeDeElementos = 0;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->Elementos = NULL;
+                }
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->CustodeChakra;
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais[j]->PoderdeAtaque;
+            }
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente != NULL)
+        {
+            CadastroDeMissao.LiderResponsavel->Patente = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente) + 1) * sizeof(char));
+            strcpy(CadastroDeMissao.LiderResponsavel->Patente, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente);
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeChakra)
+        {
+            CadastroDeMissao.LiderResponsavel->QuantidadeDeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeChakra;
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].ElementoPrincipal != NULL)
+        {
+            CadastroDeMissao.LiderResponsavel->ElementoPrincipal = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].ElementoPrincipal) + 1) * sizeof(char));
+            strcpy(CadastroDeMissao.LiderResponsavel->ElementoPrincipal, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].ElementoPrincipal);
+        }
+
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeJutsus > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu != NULL)
+        {
+            int j;
+            CadastroDeMissao.LiderResponsavel->QuantidadeDeJutsus = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeJutsus;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeJutsus) + 1) * sizeof(tJutsu *));
+            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].QuantidadeDeJutsus); j++)
+            {
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j] = malloc(sizeof(tJutsu));
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Nome)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Nome);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->TipoJutsu != NULL)
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->TipoJutsu);
+                }
+
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Elementos != NULL)
+                {
+                    int k;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->QuantidadeDeElementos;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                    for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->QuantidadeDeElementos; k++)
+                    {
+                        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Elementos[k])
+                        {
+                            CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Elementos[k]) + 1) * sizeof(char));
+                            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->Elementos[k]);
+                        }
+                    }
+                }
+                else
+                {
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->QuantidadeDeElementos = 0;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->Elementos = NULL;
+                }
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->CustodeChakra;
+
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoJutsu[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoJutsu[j]->PoderdeAtaque;
+            }
+        }
+    }
 
     limpar_tela();
     printf("\n<~==[ CADASTRO DE MISSAO: STATUS ]==~>\n\n");
-    printf("{ 1 } Pendente - ainda nao iniciada\n");
-    printf("{ 2 } Em Andamento - equipe ativa\n");
-    printf("{ 3 } Concluida - objetivo cumprido\n");
-    printf("{ 4 } Falha - objetivo nao alcançado\n");
-    printf("{ 5 } Cancelada - nao sera realizada\n\n");
-    printf("Escolha uma opção: ");
+    printf("{ 1 } Pendente\n{ 2 } Em Andamento\n{ 3 } Concluida\n{ 4 } Falha\n{ 5 } Cancelada\n\nEscolha uma opção: ");
     SelecionaStatus(VereficaQuantia(1, 5), StrAuX);
     CadastroDeMissao.Status = (char *)malloc(((strlen(StrAuX)) + 1) * sizeof(char));
     strcpy(CadastroDeMissao.Status, StrAuX);
@@ -1171,13 +1321,12 @@ tMissao CriarMissao()
     if (SinalDoSabetudo == SabeNada)
     {
         limpar_tela();
-        printf("\n<~==[ CADASTRO DE MISSAO: QUANTIDADE DE NINJAS ]==~>\n");
-        printf("\nFalando Sobre Quantidade de Ninjas nas Missoes...");
+        printf("\n<~==[ CADASTRO DE MISSAO: QUANTIDADE DE NINJAS ]==~>\n\nFalando Sobre Quantidade de Ninjas nas Missoes...");
         DesejaInformaçoes(13);
     }
 
-    limpar_tela();
     int QuantiaAux;
+    limpar_tela();
     printf("\n<~==[ CADASTRO DE MISSAO: QUANTIDADE DE NINJAS ]==~>\n");
     if (strcmp(CadastroDeMissao.NivelDificuldade, "D") == 0)
     {
@@ -1207,9 +1356,6 @@ tMissao CriarMissao()
 
     CadastroDeMissao.QuantidadeDeNinjas = QuantiaAux;
 
-    int OpçaoDeShinobi = 0;
-    int *aux = calloc(101, sizeof(int));
-
     CadastroDeMissao.NinjasDaMissao = malloc(QuantiaAux * sizeof(tNinja *));
     for (i = 0; i < QuantiaAux; i++)
     {
@@ -1217,11 +1363,11 @@ tMissao CriarMissao()
         limpar_tela();
 
         OpçaoDeShinobi = EscolheOpçao(1);
-        aux[i] = OpçaoDeShinobi;
+        aux[i + 1] = OpçaoDeShinobi;
 
         limpar_tela();
         printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n");
-        if (i > 0 && (VerficaRepetiçaoDeOpçao(i, QuantiaAux, aux, OpçaoDeShinobi)))
+        if ((VerficaRepetiçaoDeOpçao(!i + 1, QuantiaAux, aux, OpçaoDeShinobi)))
         {
             i--;
             continue;
@@ -1237,11 +1383,10 @@ tMissao CriarMissao()
                 {
                     if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeMissoes[j].NinjasDaMissao[k]->Nome) == 0))
                     {
-                        if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0 || strcmp(_ConjuntoDeMissoes[j].Status, "Pendente") == 0))
+                        if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0))
                         {
                             limpar_tela();
-                            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n");
-                            printf("\nEste shinobi já está designado a uma missão em andamento.!");
+                            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nEste shinobi já está designado a uma missão em andamento!");
                             sinal = 1;
                             break;
                         }
@@ -1501,12 +1646,12 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 for (i = 0; i < _NumeroDoShinobi; i++)
                 {
-                    printf("\n{ %d } - %s", i + 1, _ConjuntoDeShinobis[i].Nome);
+                    printf("\n{ %d } - %s: %s %s", i + 1,_ConjuntoDeShinobis[i].Patente, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeShinobis[i].CaracteristicasDoCla->NomeDoCla);
                 }
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\nDeseja Ver Algum de Maneira Detalhada?(s/n) ");
+                    printf("\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Shinobi Que Deseja: ");
@@ -1561,7 +1706,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
+                    printf("\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Cla Que Deseja: ");
@@ -1611,7 +1756,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 for (i = 0; i < _NumeroDoJutsu; i++)
                 {
-                    printf("\n{ %d } - %s", i + 1, _ConjuntoDeJutsus[i].Nome);
+                    printf("\n{ %d } - %s: %s", i + 1, _ConjuntoDeJutsus[i].TipoJutsu, _ConjuntoDeJutsus[i].Nome);
                 }
 
                 if (CasoDeImpressao == 1)
@@ -1667,7 +1812,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 for (i = 0; i < _NumeroDaMissao; i++)
                 {
-                    printf("\n{ %d } - %s", i + 1, _ConjuntoDeMissoes[i].Titulo);
+                    printf("\n{ %d } - %s: %s", i + 1,_ConjuntoDeMissoes[i].NivelDificuldade, _ConjuntoDeMissoes[i].Titulo);
                 }
 
                 if (CasoDeImpressao == 1)
@@ -2024,7 +2169,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         }
 
         printf("\nTitulo da Missao: (%s)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].Titulo);
-        printf("\nLider da Missao: (%s)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].LiderResponsavel);
+        printf("\nLider da Missao: (%s)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].LiderResponsavel->Nome);
         printf("\nNivel da Missao: (%s)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].NivelDificuldade);
         printf("\nStatus da Missao: (%s)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].Status);
         if (_ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas > 0 &&
@@ -2123,8 +2268,7 @@ int simOUnao()
             aux = 1;
         } // erro
 
-    } while (aux == 1 && printf("\nDigite novamente: "));
-    printf("\n");
+    } while (aux == 1 && printf("\nDigite novamente:\n"));
     return simOUnao;
 }
 
@@ -2356,10 +2500,10 @@ int DesejaInformaçoes(int informaçao)
 
 void Exemplos(int informaçao)
 {
+    limpar_tela();
     switch (informaçao)
     {
     case 0: // EXEMPLO: Clas em Naruto;
-        limpar_tela();
         printf("Exemplos de clas em Naruto:\n");
         printf("1. Uchiha\n");
         printf("2. Hyuuga\n");
@@ -2369,7 +2513,6 @@ void Exemplos(int informaçao)
         break;
 
     case 1: // EXEMPLO: Habilidades Hereditarias em Naruto;
-        limpar_tela();
         printf("Exemplos de habilidades hereditarias de clas em Naruto:\n");
         printf("1. Cla Uchiha: Sharingan (percepcao ocular avancada)\n");
         printf("2. Cla Hyuga: Byakugan (visao de 360 graus e percepcao de chakra)\n");
@@ -2379,7 +2522,6 @@ void Exemplos(int informaçao)
         break;
 
     case 2: // EXEMPLO: Elementos em Naruto;
-        limpar_tela();
         printf("Exemplos de elementos em Naruto:\n");
         printf("1. Fogo (Katon) [火]\n");
         printf("2. Agua (Suiton) [水]\n");
@@ -2389,7 +2531,6 @@ void Exemplos(int informaçao)
         break;
 
     case 3: // EXEMPLO: Jutsus Tradicionais em Naruto;
-        limpar_tela();
         printf("Exemplos de Jutsus Tradicionais de Clas em Naruto:\n");
         printf("1. Cla Uchiha: Jutsu Bola de Fogo (Katon: Gokakyu no Jutsu)\n");
         printf("2. Cla Hyuga: Rotacao da Palma dos Oito Trigramas (Hakke Kusho)\n");
@@ -2399,7 +2540,6 @@ void Exemplos(int informaçao)
         break;
 
     case 4: // EXEMPLO: Tipos de Jutsu em Naruto;
-        limpar_tela();
         printf("Exemplos de Tipos de Jutsus em Naruto:\n");
         printf("1. Ninjutsu\n");
         printf("2. Taijutsu\n");
@@ -2409,7 +2549,6 @@ void Exemplos(int informaçao)
         break;
 
     case 5: // EXEMPLO: Custo de Chakra em Naruto
-        limpar_tela();
         printf("Exemplos de Custo de Chakra (0 a 100) em Naruto:\n");
         printf("1. Custo: 20/100 - jutsus simples, baixo consumo (ex.: Clone Basico).\n");
         printf("2. Custo: 40/100 - tecnicas moderadas (ex.: Fireball Jutsu).\n");
@@ -2419,7 +2558,6 @@ void Exemplos(int informaçao)
         break;
 
     case 6: // EXEMPLO: Dano em Naruto;
-        limpar_tela();
         printf("Exemplos de Dano (0 a 100) em Naruto:\n");
         printf("1. Dano: 20/100 - leve arranhao.\n");
         printf("2. Dano: 40/100 - corte superficial.\n");
@@ -2429,7 +2567,6 @@ void Exemplos(int informaçao)
         break;
 
     case 7: // EXEMPLO: Reserva de Chakra em Naruto;
-        limpar_tela();
         printf("Exemplos de Reserva de Chakra (0 a 100) em Naruto:\n");
         printf("1. Chakra: 20/100  - nivel baixo, jutsus simples apenas.\n");
         printf("2. Chakra: 40/100  - nivel medio-baixo, tecnicas curtas e limitadas.\n");
@@ -2439,7 +2576,6 @@ void Exemplos(int informaçao)
         break;
 
     case 8: // EXEMPLO: Elemento Principal de um Shinobi em Naruto
-        limpar_tela();
         printf("Exemplos de Elemento Principal de um Shinobi em Naruto:\n");
         printf("1. Fogo [火] - tecnicas ofensivas com chamas, cortam e queimam o inimigo.\n");
         printf("2. Agua [水] - tecnicas flexiveis e de longo alcance, podem congelar ou controlar fluxo.\n");
@@ -2449,7 +2585,6 @@ void Exemplos(int informaçao)
         break;
 
     case 9: // EXEMPLO: Jutsus Famosos em Naruto
-        limpar_tela();
         printf("Exemplos de Jutsus Famosos em Naruto:\n");
         printf("1. Rasengan [螺旋丸] - esfera de chakra giratoria criada por Minato, exige alto controle.\n");
         printf("2. Chidori [千鳥] - tecnica de relampago criada por Kakashi, foco em velocidade e perfuracao.\n");
@@ -2459,7 +2594,6 @@ void Exemplos(int informaçao)
         break;
 
     case 10: // EXEMPLO: Missoes em Naruto
-        limpar_tela();
         printf("Exemplos de Missoes em Naruto:\n");
         printf("1. Missões D - tarefas simples e seguras, como ajudar aldeões ou encontrar animais.\n");
         printf("2. Missões C - envolvem algum risco, geralmente fora da vila, como escoltar mercadores.\n");
@@ -2469,7 +2603,6 @@ void Exemplos(int informaçao)
         break;
 
     case 11: // EXEMPLO: Lideres de Missoes em Naruto
-        limpar_tela();
         printf("Exemplos de Lideres de Missoes e seus Times em Naruto:\n");
         printf("1. Kakashi Hatake - Lider do Time 7 (Naruto, Sasuke e Sakura).\n");
         printf("2. Asuma Sarutobi - Lider do Time 10 (Shikamaru, Choji e Ino).\n");
@@ -2479,32 +2612,22 @@ void Exemplos(int informaçao)
         break;
 
     case 12: // EXEMPLO: Nivel de Dificuldade das Missoes
-        printf("Exemplos de Nivel de Dificuldade:\n");
+        printf("Exemplos de Nivel de Missao em Naruto:\n");
         printf("1. Resgate de Hokage - Nivel: S\n");
         printf("2. Patrulha da Vila - Nivel: C\n");
         printf("3. Investigacao de Akatsuki - Nivel: A\n");
         printf("4. Entrega de Mensagem Secreta - Nivel: D\n");
         printf("5. Protecao de Diplomata - Nivel: B\n\n");
         break;
-
-    case 13: // EXEMPLO: Exemplos de Quantidade de Ninjas
-        limpar_tela();
-        printf("Exemplos de Quantidade de Ninjas:\n");
-        printf("1. Missao Nivel D - 2 ninjas\n");
-        printf("2. Missao Nivel C - 3 ninjas\n");
-        printf("3. Missao Nivel B - 4 ninjas\n");
-        printf("4. Missao Nivel A - 5 ninjas\n");
-        printf("5. Missao Nivel S - 6 ninjas\n\n");
-        break;
     }
 }
 
 void Explicaçoes(int informaçao)
 {
+    limpar_tela();
     switch (informaçao)
     {
     case 0: // EXPLICACAO: Clas em Naruto;
-        limpar_tela();
         printf("Clas em Naruto:\n");
         printf("Familia ou linhagem de ninjas com sangue compartilhado.\n");
         printf("Possuem habilidades ou tecnicas unicas, passadas de geracao em geracao.\n");
@@ -2514,7 +2637,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 1: // EXPLICACAO: Habilidades Hereditarias em Naruto;
-        limpar_tela();
         printf("Habilidades Hereditarias em Naruto:\n");
         printf("Tecnicas ou poderes passados geneticamente de pais para filhos.\n");
         printf("Podem incluir doujutsus, estilos de luta ou afinidades elementares.\n");
@@ -2524,7 +2646,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 2: // EXPLICACAO: Elementos em Naruto;
-        limpar_tela();
         printf("Elementos em Naruto:\n");
         printf("Um elemento eh uma forca da natureza que o ninja pode controlar usando chakra.\n");
         printf("Cada ninja geralmente tem afinidade com um ou mais elementos, determinando seus ataques.\n");
@@ -2534,7 +2655,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 3: // EXPLICACAO: Jutsus Tradicionais;
-        limpar_tela();
         printf("Jutsus Tradicionais em Naruto:\n");
         printf("Jutsus Tradicionais sao tecnicas especificas de um cla, passadas de geracao em geracao.\n");
         printf("Eles refletem a historia, habilidades e estilo de combate do cla.\n");
@@ -2544,7 +2664,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 4: // EXPLICACAO: Tipos de Jutsu em Naruto;
-        limpar_tela();
         printf("Tipos de Jutsus em Naruto:\n");
         printf("Sao diferentes categorias de tecnicas usadas pelos ninjas em combate.\n");
         printf("Cada tipo de jutsu representa uma forma distinta de manipular chakra.\n");
@@ -2554,7 +2673,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 5: // EXPLICACAO: Chakra em Naruto;
-        limpar_tela();
         printf("Chakra em Naruto:\n");
         printf("Combinacao de energia fisica (corpo) e espiritual (mente) usada para jutsus.\n");
         printf("Circula pelos canais internos do corpo, precisa ser bem controlada.\n");
@@ -2564,7 +2682,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 6: // EXPLICACAO: Dano de Jutsus em Naruto;
-        limpar_tela();
         printf("Dano de Jutsus em Naruto:\n");
         printf("O dano eh causado pelo impacto do jutsu no inimigo, seja fisico ou elemental.\n");
         printf("Quanto mais chakra e controle o ninja aplica, maior o dano.\n");
@@ -2574,7 +2691,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 7: // EXPLICACAO: Reserva de Chakra em Naruto;
-        limpar_tela();
         printf("Reserva de Chakra em Naruto:\n");
         printf("Eh a quantidade total de energia espiritual e fisica acumulada por um ninja.\n");
         printf("Determina quanto tempo ele pode lutar e quantos jutsus consegue realizar.\n");
@@ -2584,7 +2700,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 8: // EXPLICACAO: Elemento Principal de um Shinobi em Naruto
-        limpar_tela();
         printf("Elemento Principal de um Shinobi em Naruto:\n");
         printf("Eh o tipo de chakra que um ninja manipula naturalmente, determinado pelo seu DNA ou afinidade.\n");
         printf("Define a natureza das tecnicas que ele consegue aprender e dominar mais facilmente.\n");
@@ -2594,7 +2709,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 9: // EXPLICACAO: Jutsus em Geral em Naruto
-        limpar_tela();
         printf("Jutsus em Geral em Naruto:\n");
         printf("Sao tecnicas ninjas que utilizam chakra moldado e liberado de diferentes formas.\n");
         printf("Cada jutsu exige controle preciso de energia fisica e espiritual, combinadas em proporcoes especificas.\n");
@@ -2604,7 +2718,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 10: // EXPLICACAO: Missoes em Naruto
-        limpar_tela();
         printf("Missoes em Naruto:\n");
         printf("Sao tarefas designadas pelos lideres das vilas aos ninjas.\n");
         printf("Elas variam em dificuldade, objetivo e risco, servindo para testar e fortalecer os shinobis.\n");
@@ -2614,7 +2727,6 @@ void Explicaçoes(int informaçao)
         break;
 
     case 11: // EXPLICACAO: Lider das Missoes
-        limpar_tela();
         printf("Lider das Missoes em Naruto:\n");
         printf("E a pessoa responsavel por designar e supervisionar as missoes dos ninjas.\n");
         printf("Geralmente e um ninja experiente que conhece bem as habilidades de sua equipe.\n");
@@ -2624,23 +2736,12 @@ void Explicaçoes(int informaçao)
         break;
 
     case 12: // EXPLICAÇAO: Nivel de Dificuldade das Missoes
-        limpar_tela();
-        printf("Explicacao do Nivel de Dificuldade (D, C, B, A, S):\n");
+        printf("Nivel de Dificuldade (D, C, B, A, S) em Naruto:\n");
         printf("D - Missao facil, baixo risco e pouca complexidade.\n");
         printf("C - Missao comum, com desafios moderados.\n");
         printf("B - Missao dificil, exige estrategia e habilidade.\n");
         printf("A - Missao muito dificil, risco alto de falha.\n");
         printf("S - Missao especial, exige ninjas fortes e experiencia.\n\n");
-        break;
-
-    case 13: // EXPLICAÇAO: Explicação da Quantidade de Ninjas
-        limpar_tela();
-        printf("Explicacao da Quantidade de Ninjas:\n");
-        printf("Missao de baixo risco (Nivel de Dificuldade D), precisa de poucos ninjas.\n");
-        printf("Missao de dificuldade moderada (Nivel de Dificuldade C),precisa de equipe equilibrada.\n");
-        printf("Missao dificil (Nivel de Dificuldade B), exige mais ninjas para garantir sucesso.\n");
-        printf("Missao muito dificil (Nivel de Dificuldade A), precisa de equipe forte e numerosa.\n");
-        printf("Missao especial (Nivel de Dificuldade S), exige todos os recursos e varios ninjas experientes.\n\n");
         break;
     }
 }
@@ -2654,11 +2755,7 @@ void SelecionadorDeMenu(int TipoDeMenu)
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         printf("                MENU              \n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Cadastrar\n");
-        printf(" { 2 } Exibir\n");
-        printf(" { 3 } Alterar\n");
-        printf(" { 4 } Deletar\n");
-        printf(" { 5 } Sair\n");
+        printf(" { 1 } Cadastrar\n { 2 } Exibir\n { 3 } Alterar\n { 4 } Deletar\n { 5 } Sair\n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         break;
 
@@ -2667,11 +2764,7 @@ void SelecionadorDeMenu(int TipoDeMenu)
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         printf("           MENU CADASTRAR            \n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Cadastrar Shinobi\n");
-        printf(" { 2 } Cadastrar Clã\n");
-        printf(" { 3 } Cadastrar Jutsu\n");
-        printf(" { 4 } Cadastrar Missão\n");
-        printf(" { 5 } Voltar\n");
+        printf(" { 1 } Cadastrar Shinobi\n { 2 } Cadastrar Clã\n { 3 } Cadastrar Jutsu\n { 4 } Cadastrar Missão\n { 5 } Voltar\n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         break;
 
@@ -2680,11 +2773,7 @@ void SelecionadorDeMenu(int TipoDeMenu)
         printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         printf("             MENU EXIBIR             \n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Exibir Shinobi\n");
-        printf(" { 2 } Exibir Clã\n");
-        printf(" { 3 } Exibir Jutsu\n");
-        printf(" { 4 } Exibir Missão\n");
-        printf(" { 5 } Voltar\n");
+        printf(" { 1 } Exibir Shinobi\n { 2 } Exibir Clã\n { 3 } Exibir Jutsu\n { 4 } Exibir Missão\n { 5 } Voltar\n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         break;
 
@@ -2693,11 +2782,7 @@ void SelecionadorDeMenu(int TipoDeMenu)
         printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         printf("             MENU ALTERAR            \n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Alterar Shinobi\n");
-        printf(" { 2 } Alterar Clã\n");
-        printf(" { 3 } Alterar Jutsu\n");
-        printf(" { 4 } Alterar Missão\n");
-        printf(" { 5 } Voltar\n");
+        printf(" { 1 } Alterar Shinobi\n { 2 } Alterar Clã\n { 3 } Alterar Jutsu\n { 4 } Alterar Missão\n { 5 } Voltar\n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         break;
 
@@ -2706,11 +2791,7 @@ void SelecionadorDeMenu(int TipoDeMenu)
         printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         printf("             MENU DELETAR            \n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Deletar Shinobi\n");
-        printf(" { 2 } Deletar Clã\n");
-        printf(" { 3 } Deletar Jutsu\n");
-        printf(" { 4 } Deletar Missão\n");
-        printf(" { 5 } Voltar\n");
+        printf(" { 1 } Deletar Shinobi\n { 2 } Deletar Clã\n { 3 } Deletar Jutsu\n { 4 } Deletar Missão\n { 5 } Voltar\n");
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         break;
     }
@@ -2795,13 +2876,11 @@ int EscolheOpçao(int Contexto)
         {
             limpar_tela();
             printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
-
             OpçaoDesejada = NovoCadastro(Contexto, 1);
             if (OpçaoDesejada == -1)
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
-
+                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCadastre um %s para continuar o cadastro!\n", TipoDeContexto, TipoDeContexto);
                 congelar_tela();
                 i--;
                 continue;
