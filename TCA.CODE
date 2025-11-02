@@ -22,10 +22,10 @@ typedef struct
 typedef struct
 {
     char *NomeDoCla;
-    tJutsu **HabilidadesHereditarias;
-    int QuantidadeDeHabilidades;
+    tJutsu **JutsusHereditarios;
+    int QuantidadeDeJutsusHereditarios;
     tJutsu **JutsusTradicionais;
-    int QuantidadeDeJutsus;
+    int QuantidadeDeJutsusTradicionais;
 } tCla;
 
 typedef struct
@@ -446,61 +446,61 @@ tNinja CriarShinobi()
             strcpy(CadastroDeShinobi.CaracteristicasDoCla->NomeDoCla, _ConjuntoDeClas[OpçaoDeCla - 1].NomeDoCla);
         }
 
-        if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeHabilidades > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias != NULL)
+        if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusHereditarios > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios != NULL)
         {
-            CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias = malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeHabilidades)) * sizeof(tJutsu *));
-            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeHabilidades = _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeHabilidades;
-            for (i = 0; i < _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeHabilidades; i++)
+            CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios = malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusHereditarios)) * sizeof(tJutsu *));
+            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsusHereditarios = _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusHereditarios;
+            for (i = 0; i < _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusHereditarios; i++)
             {
-                CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i] = malloc(sizeof(tJutsu));
+                CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i] = malloc(sizeof(tJutsu));
 
-                if (_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Nome != NULL)
+                if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Nome != NULL)
                 {
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Nome = (char *)malloc(((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Nome)) + 1) * sizeof(char));
-                    strcpy(CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Nome, _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Nome);
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Nome = (char *)malloc(((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Nome)) + 1) * sizeof(char));
+                    strcpy(CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Nome, _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Nome);
                 }
 
-                if (_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->TipoJutsu != NULL)
+                if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->TipoJutsu != NULL)
                 {
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->TipoJutsu = (char *)malloc(((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->TipoJutsu)) + 1) * sizeof(char));
-                    strcpy(CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->TipoJutsu, _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->TipoJutsu);
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->TipoJutsu = (char *)malloc(((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->TipoJutsu)) + 1) * sizeof(char));
+                    strcpy(CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->TipoJutsu, _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->TipoJutsu);
                 }
 
-                if (_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->QuantidadeDeElementos > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Elementos != NULL)
+                if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->QuantidadeDeElementos > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Elementos != NULL)
                 {
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->QuantidadeDeElementos = _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->QuantidadeDeElementos;
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Elementos = (char **)malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->QuantidadeDeElementos) + 1) * sizeof(char *));
-                    for (j = 0; j < (_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->QuantidadeDeElementos); j++)
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->QuantidadeDeElementos = _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->QuantidadeDeElementos;
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Elementos = (char **)malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                    for (j = 0; j < (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->QuantidadeDeElementos); j++)
                     {
-                        if (_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Elementos[j])
+                        if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Elementos[j])
                         {
-                            CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Elementos[j]) + 1) * sizeof(char));
-                            strcpy(CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Elementos[j], _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->Elementos[j]);
+                            CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Elementos[j]) + 1) * sizeof(char));
+                            strcpy(CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Elementos[j], _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->Elementos[j]);
                         }
                     }
                 }
                 else
                 {
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->QuantidadeDeElementos = 0;
-                    CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->Elementos = NULL;
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->QuantidadeDeElementos = 0;
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->Elementos = NULL;
                 }
 
-                CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->CustodeChakra = _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->CustodeChakra;
+                CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->CustodeChakra = _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->CustodeChakra;
 
-                CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias[i]->PoderdeAtaque = _ConjuntoDeClas[OpçaoDeCla - 1].HabilidadesHereditarias[i]->PoderdeAtaque;
+                CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios[i]->PoderdeAtaque = _ConjuntoDeClas[OpçaoDeCla - 1].JutsusHereditarios[i]->PoderdeAtaque;
             }
         }
         else
         {
-            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeHabilidades = 0;
-            CadastroDeShinobi.CaracteristicasDoCla->HabilidadesHereditarias = NULL;
+            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsusHereditarios = 0;
+            CadastroDeShinobi.CaracteristicasDoCla->JutsusHereditarios = NULL;
         }
 
-        if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais != NULL)
+        if (_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusTradicionais > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais != NULL)
         {
-            CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais = malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus)) * sizeof(tJutsu *));
-            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsus = _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus;
-            for (i = 0; i < _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsus; i++)
+            CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais = malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusTradicionais)) * sizeof(tJutsu *));
+            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsusTradicionais = _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusTradicionais;
+            for (i = 0; i < _ConjuntoDeClas[OpçaoDeCla - 1].QuantidadeDeJutsusTradicionais; i++)
             {
                 CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais[i] = malloc(sizeof(tJutsu));
 
@@ -519,7 +519,7 @@ tNinja CriarShinobi()
                 if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->QuantidadeDeElementos > 0 && _ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->Elementos != NULL)
                 {
                     CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais[i]->QuantidadeDeElementos = _ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->QuantidadeDeElementos;
-                    CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais[i]->Elementos = (char **)malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->QuantidadeDeElementos)) * sizeof(char *));
+                    CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais[i]->Elementos = (char **)malloc(((_ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->QuantidadeDeElementos) + 1) * sizeof(char *));
                     for (j = 0; j < (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->QuantidadeDeElementos); j++)
                     {
                         if (_ConjuntoDeClas[OpçaoDeCla - 1].JutsusTradicionais[i]->Elementos[j] != NULL)
@@ -542,7 +542,7 @@ tNinja CriarShinobi()
         }
         else
         {
-            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsus = 0;
+            CadastroDeShinobi.CaracteristicasDoCla->QuantidadeDeJutsusTradicionais = 0;
             CadastroDeShinobi.CaracteristicasDoCla->JutsusTradicionais = NULL;
         }
     }
@@ -737,11 +737,11 @@ tCla CriarCla()
         printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nDigite Quantos Jutsus Hereditarios o Cla Possui: ");
         NumDeJutsusHereditarios = VereficaQuantia(1, 100);
 
-        CadastroDeCla.QuantidadeDeHabilidades = NumDeJutsusHereditarios;
-        CadastroDeCla.HabilidadesHereditarias = malloc(NumDeJutsusHereditarios * sizeof(tJutsu *));
+        CadastroDeCla.QuantidadeDeJutsusHereditarios = NumDeJutsusHereditarios;
+        CadastroDeCla.JutsusHereditarios = malloc(NumDeJutsusHereditarios * sizeof(tJutsu *));
         for (i = 0; i < NumDeJutsusHereditarios; i++)
         {
-            CadastroDeCla.HabilidadesHereditarias[i] = malloc(sizeof(tJutsu));
+            CadastroDeCla.JutsusHereditarios[i] = malloc(sizeof(tJutsu));
 
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[i] = OpçaoDeJutsu;
@@ -757,49 +757,49 @@ tCla CriarCla()
 
             if (OpçaoDeJutsu != 0)
             {
-                CadastroDeCla.HabilidadesHereditarias[i] = malloc(sizeof(tJutsu));
+                CadastroDeCla.JutsusHereditarios[i] = malloc(sizeof(tJutsu));
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome != NULL)
                 {
-                    CadastroDeCla.HabilidadesHereditarias[i]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.HabilidadesHereditarias[i]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
+                    CadastroDeCla.JutsusHereditarios[i]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusHereditarios[i]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
                 }
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu != NULL)
                 {
-                    CadastroDeCla.HabilidadesHereditarias[i]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.HabilidadesHereditarias[i]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
+                    CadastroDeCla.JutsusHereditarios[i]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusHereditarios[i]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
                 }
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos > 0 && _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos != NULL)
                 {
-                    CadastroDeCla.HabilidadesHereditarias[i]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
-                    CadastroDeCla.HabilidadesHereditarias[i]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos)) * sizeof(char *));
+                    CadastroDeCla.JutsusHereditarios[i]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
+                    CadastroDeCla.JutsusHereditarios[i]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos)) * sizeof(char *));
                     for (j = 0; j < _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos; j++)
                     {
                         if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j] != NULL)
                         {
-                            CadastroDeCla.HabilidadesHereditarias[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
-                            strcpy(CadastroDeCla.HabilidadesHereditarias[i]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
+                            CadastroDeCla.JutsusHereditarios[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
+                            strcpy(CadastroDeCla.JutsusHereditarios[i]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
                         }
                     }
                 }
                 else
                 {
-                    CadastroDeCla.HabilidadesHereditarias[i]->QuantidadeDeElementos = 0;
-                    CadastroDeCla.HabilidadesHereditarias[i]->Elementos = NULL;
+                    CadastroDeCla.JutsusHereditarios[i]->QuantidadeDeElementos = 0;
+                    CadastroDeCla.JutsusHereditarios[i]->Elementos = NULL;
                 }
 
-                CadastroDeCla.HabilidadesHereditarias[i]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
+                CadastroDeCla.JutsusHereditarios[i]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
 
-                CadastroDeCla.HabilidadesHereditarias[i]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
+                CadastroDeCla.JutsusHereditarios[i]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
             }
         }
     }
     else
     {
-        CadastroDeCla.QuantidadeDeHabilidades = 0;
-        CadastroDeCla.HabilidadesHereditarias = NULL;
+        CadastroDeCla.QuantidadeDeJutsusHereditarios = 0;
+        CadastroDeCla.JutsusHereditarios = NULL;
     }
 
     OpçaoDeJutsu = 0;
@@ -821,7 +821,7 @@ tCla CriarCla()
         printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nDigite Quantos Jutsus Tradicionais o Cla Possui: ");
         NumDeJutsusTradicionais = VereficaQuantia(1, 100);
 
-        CadastroDeCla.QuantidadeDeJutsus = NumDeJutsusTradicionais;
+        CadastroDeCla.QuantidadeDeJutsusTradicionais = NumDeJutsusTradicionais;
         CadastroDeCla.JutsusTradicionais = malloc(NumDeJutsusTradicionais * sizeof(tJutsu *));
         for (i = 0; i < NumDeJutsusTradicionais; i++)
         {
@@ -833,7 +833,7 @@ tCla CriarCla()
             limpar_tela();
             if (i > 0 && (VerficaRepetiçaoDeOpçao(i, NumDeJutsusTradicionais, aux, OpçaoDeJutsu)))
             {
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nEsta Opçao Ja Foi Escolhida!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nEsta Opçao Ja Foi Escolhida!");
                 i--;
                 continue;
             }
@@ -881,7 +881,7 @@ tCla CriarCla()
     }
     else
     {
-        CadastroDeCla.QuantidadeDeJutsus = 0;
+        CadastroDeCla.QuantidadeDeJutsusTradicionais = 0;
         CadastroDeCla.JutsusTradicionais = NULL;
     }
 
@@ -1162,59 +1162,59 @@ tMissao CriarMissao()
             strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->NomeDoCla, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->NomeDoCla);
         }
 
-        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias != NULL)
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios != NULL)
         {
             int j;
-            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeHabilidades = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades;
-            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades) + 1) * sizeof(tJutsu *));
-            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades); j++)
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeJutsusHereditarios = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios) + 1) * sizeof(tJutsu *));
+            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios); j++)
             {
-                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j] = malloc(sizeof(tJutsu));
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j] = malloc(sizeof(tJutsu));
 
-                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome != NULL)
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome != NULL)
                 {
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome) + 1) * sizeof(char));
-                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome);
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome);
                 }
 
-                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu != NULL)
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu != NULL)
                 {
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu) + 1) * sizeof(char));
-                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu);
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu);
                 }
 
-                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos != NULL)
+                if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos != NULL)
                 {
                     int k;
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos;
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
-                    for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos; k++)
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                    for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos; k++)
                     {
-                        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] != NULL)
+                        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k] != NULL)
                         {
-                            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]) + 1) * sizeof(char));
-                            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]);
+                            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k]) + 1) * sizeof(char));
+                            strcpy(CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k]);
                         }
                     }
                 }
                 else
                 {
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = 0;
-                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = NULL;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos = 0;
+                    CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos = NULL;
                 }
 
-                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra;
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->CustodeChakra;
 
-                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque;
+                CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusHereditarios[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->PoderdeAtaque;
             }
         }
 
-        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais != NULL)
+        if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais != NULL)
         {
             int j;
-            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeJutsus = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus;
-            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus) + 1) * sizeof(tJutsu *));
-            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus); j++)
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->QuantidadeDeJutsusTradicionais = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais;
+            CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais) + 1) * sizeof(tJutsu *));
+            for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais); j++)
             {
                 CadastroDeMissao.LiderResponsavel->CaracteristicasDoCla->JutsusTradicionais[j] = malloc(sizeof(tJutsu));
 
@@ -1380,7 +1380,7 @@ tMissao CriarMissao()
             if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Genin") == 0) && (((strcmp(CadastroDeMissao.NivelDificuldade, "D") != 0) && (strcmp(CadastroDeMissao.NivelDificuldade, "C") != 0))) && ((strcmp(CadastroDeMissao.LiderResponsavel->Patente, "Jounin") != 0) && ((strcmp(CadastroDeMissao.LiderResponsavel->Patente, "Chunin") != 0))))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Genins só Podem participar de missões D ou C, e deve estar acompanhados por um Chunin ou um Jounin!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Genins só Podem participar de missões D ou C, e deve estar acompanhados por um Chunin ou um Jounin!");
                 congelar_tela();
                 i--;
                 continue;
@@ -1388,7 +1388,7 @@ tMissao CriarMissao()
             else if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Chunin") == 0) && strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0)
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Chunins Não Podem Participar de Missões Rank S Sem autorização do Hokage!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Chunins Não Podem Participar de Missões Rank S Sem autorização do Hokage!");
                 congelar_tela();
                 i--;
                 continue;
@@ -1398,7 +1398,7 @@ tMissao CriarMissao()
                 if ((strcmp(CadastroDeMissao.LiderResponsavel->Patente, "Chunin") == 0))
                 {
                     limpar_tela();
-                    printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nUm Jounin Não Segue Ordens De Um Chunin. Isso Fere A Hierarquia Ninja!!");
+                    printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nUm Jounin Não Segue Ordens De Um Chunin. Isso Fere A Hierarquia Ninja!!");
                     congelar_tela();
                     i--;
                     continue;
@@ -1406,7 +1406,7 @@ tMissao CriarMissao()
                 else if (strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0)
                 {
                     limpar_tela();
-                    printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Tokubetsu Jounins e Jounins só Atuam em Missoes de Rank S Com Ordem do Hokage!");
+                    printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Tokubetsu Jounins e Jounins só Atuam em Missoes de Rank S Com Ordem do Hokage!");
                     congelar_tela();
                     i--;
                     continue;
@@ -1415,7 +1415,7 @@ tMissao CriarMissao()
             else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "ANBU") == 0)) && (strcmp(CadastroDeMissao.LiderResponsavel->Patente, "ANBU") != 0 && strcmp(CadastroDeMissao.LiderResponsavel->Patente, "Kage") != 0) && strcmp(CadastroDeMissao.NivelDificuldade, "A") != 0 && strcmp(CadastroDeMissao.NivelDificuldade, "S") != 0)
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs ANBU só atuam em missões Rank A e S, sob ordens diretas do Hokage!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs ANBU só atuam em missões Rank A e S, sob ordens diretas do Hokage!");
                 congelar_tela();
                 i--;
                 continue;
@@ -1423,7 +1423,7 @@ tMissao CriarMissao()
             else if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Kage") == 0))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Kages Não Seguem Ordens e Podem Liderar Qualquer Missão!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nOs Kages Não Seguem Ordens e Podem Liderar Qualquer Missão!");
                 congelar_tela();
                 i--;
                 continue;
@@ -1432,7 +1432,7 @@ tMissao CriarMissao()
         else
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nUm Estudante Ainda Não é Um Shinobi! Missões Estão Fora de Alcance!");
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nUm Estudante Ainda Não é Um Shinobi! Missões Estão Fora de Alcance!");
             congelar_tela();
             i--;
             continue;
@@ -1441,7 +1441,7 @@ tMissao CriarMissao()
         limpar_tela();
         if ((VerficaRepetiçaoDeOpçao(i + 1, QuantiaAux, aux, OpçaoDeShinobi)))
         {
-            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nEsta Opçao Ja Foi Escolhida!");
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nEsta Opçao Ja Foi Escolhida!");
             i--;
             continue;
         }
@@ -1459,7 +1459,7 @@ tMissao CriarMissao()
                         if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0))
                         {
                             limpar_tela();
-                            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nEste shinobi já está designado a uma missão em andamento!");
+                            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nEste shinobi já está designado a uma missão em andamento!");
                             sinal = 1;
                             break;
                         }
@@ -1496,59 +1496,59 @@ tMissao CriarMissao()
                 strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->NomeDoCla, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->NomeDoCla);
             }
 
-            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias != NULL)
+            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios != NULL)
             {
                 int j;
-                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->QuantidadeDeHabilidades = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades;
-                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades) + 1) * sizeof(tJutsu *));
-                for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeHabilidades); j++)
+                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->QuantidadeDeJutsusHereditarios = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios;
+                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios) + 1) * sizeof(tJutsu *));
+                for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusHereditarios); j++)
                 {
-                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j] = malloc(sizeof(tJutsu));
+                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j] = malloc(sizeof(tJutsu));
 
-                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome != NULL)
+                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome != NULL)
                     {
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome) + 1) * sizeof(char));
-                        strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Nome);
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Nome = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome) + 1) * sizeof(char));
+                        strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Nome, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Nome);
                     }
 
-                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu != NULL)
+                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu != NULL)
                     {
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu) + 1) * sizeof(char));
-                        strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->TipoJutsu);
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu) + 1) * sizeof(char));
+                        strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu, _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->TipoJutsu);
                     }
 
-                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos != NULL)
+                    if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos != NULL)
                     {
                         int k;
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos;
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
-                        for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos; k++)
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos;
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos = (char **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos) + 1) * sizeof(char *));
+                        for (k = 0; k < _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos; k++)
                         {
-                            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] != NULL)
+                            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k] != NULL)
                             {
-                                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]) + 1) * sizeof(char));
-                                strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos[k]);
+                                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k] = (char *)malloc((strlen(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k]) + 1) * sizeof(char));
+                                strcpy(CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k], _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->Elementos[k]);
                             }
                         }
                     }
                     else
                     {
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->QuantidadeDeElementos = 0;
-                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->Elementos = NULL;
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->QuantidadeDeElementos = 0;
+                        CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->Elementos = NULL;
                     }
 
-                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->CustodeChakra;
+                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->CustodeChakra = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->CustodeChakra;
 
-                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->HabilidadesHereditarias[j]->PoderdeAtaque;
+                    CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusHereditarios[j]->PoderdeAtaque = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusHereditarios[j]->PoderdeAtaque;
                 }
             }
 
-            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais != NULL)
+            if (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais > 0 && _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->JutsusTradicionais != NULL)
             {
                 int j;
-                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->QuantidadeDeJutsus = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus;
-                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusTradicionais = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus) + 1) * sizeof(tJutsu *));
-                for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsus); j++)
+                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->QuantidadeDeJutsusTradicionais = _ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais;
+                CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusTradicionais = (tJutsu **)malloc(((_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais) + 1) * sizeof(tJutsu *));
+                for (j = 0; j < (_ConjuntoDeShinobis[OpçaoDeShinobi - 1].CaracteristicasDoCla->QuantidadeDeJutsusTradicionais); j++)
                 {
                     CadastroDeMissao.NinjasDaMissao[i]->CaracteristicasDoCla->JutsusTradicionais[j] = malloc(sizeof(tJutsu));
 
@@ -2060,22 +2060,22 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
 
         printf("\nNome do Cla: (%s)", _ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla);
 
-        // HABILIDADES HEREDITARIAS COM VERIFICAÇÕES
-        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeHabilidades > 0 &&
-            _ConjuntoDeClas[OpçaoDeContexto - 1].HabilidadesHereditarias != NULL)
+        // JUTSUS HEREDITARIOS COM VERIFICAÇÕES
+        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios > 0 &&
+            _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios != NULL)
         {
-            printf("\nHabilidades Hereditarias Do Cla: (");
+            printf("\nJutsus Hereditarios Do Cla: (");
             int primeiro = 1;
-            for (j = 0; j < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeHabilidades; j++)
+            for (j = 0; j < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios; j++)
             {
-                if (_ConjuntoDeClas[OpçaoDeContexto - 1].HabilidadesHereditarias[j] != NULL &&
-                    _ConjuntoDeClas[OpçaoDeContexto - 1].HabilidadesHereditarias[j]->Nome != NULL)
+                if (_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios[j] != NULL &&
+                    _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios[j]->Nome != NULL)
                 {
                     if (!primeiro)
                     {
                         printf(", ");
                     }
-                    printf("%s", _ConjuntoDeClas[OpçaoDeContexto - 1].HabilidadesHereditarias[j]->Nome);
+                    printf("%s", _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios[j]->Nome);
                     primeiro = 0;
                 }
             }
@@ -2083,16 +2083,16 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         }
         else
         {
-            printf("\nHabilidades Hereditarias Do Cla: (Nenhum Jutsu)");
+            printf("\nJutsus Hereditarios Do Cla: (Nenhum Jutsu)");
         }
 
         // JUTSUS TRADICIONAIS COM VERIFICAÇÕES
-        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsus > 0 &&
+        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais > 0 &&
             _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais != NULL)
         {
             printf("\nJutsus Tradicionais Do Cla: (");
             int primeiro = 1;
-            for (j = 0; j < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsus; j++)
+            for (j = 0; j < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais; j++)
             {
                 if (_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[j] != NULL &&
                     _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[j]->Nome != NULL)
@@ -2132,14 +2132,14 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                     {
                         limpar_tela();
                         printf("\n<~==[ EXIBIR: JUTSUS HEREDITARIOS DO CLA ]==~>\n");
-                        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeHabilidades > 0)
+                        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios > 0)
                         {
-                            for (i = 0; i < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeHabilidades; i++)
+                            for (i = 0; i < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios; i++)
                             {
-                                printf("\n{ %d } - %s", i + 1, _ConjuntoDeClas[OpçaoDeContexto - 1].HabilidadesHereditarias[i]->Nome);
+                                printf("\n{ %d } - %s", i + 1, _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios[i]->Nome);
                             }
                             printf("\nDigite o Numero do Jutsu Que Deseja: ");
-                            OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeHabilidades));
+                            OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: JUTSU HEREDITARIO ESPECIFICO DO CLA ]==~>\n");
                             RelatorioDaOpçao(3, (OpçaoDeJutsu), 1);
@@ -2157,14 +2157,14 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                     {
                         limpar_tela();
                         printf("\n<~==[ EXIBIR: JUTSUS TRADICIONAIS DO CLA ]==~>\n");
-                        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsus > 0)
+                        if (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais > 0)
                         {
-                            for (i = 0; i < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsus; i++)
+                            for (i = 0; i < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais; i++)
                             {
                                 printf("\n{ %d } - %s", i + 1, _ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[i]->Nome);
                             }
                             printf("\nDigite o Numero do Jutsu Que Deseja: ");
-                            OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsus));
+                            OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: JUTSU TRADICIONAL ESPECIFICO DO CLA ]==~>\n");
                             RelatorioDaOpçao(3, (OpçaoDeJutsu), 1);
@@ -2289,10 +2289,10 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         {
                             printf("\n{ %d } - %s", i + 1, _ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]->Nome);
                         }
-                        printf("\nDigite o Numero do Jutsu Que Deseja: ");
+                        printf("\nDigite o Numero do Shinobi Que Deseja: ");
                         OpçaoDeShinobi = VereficaQuantia(1, (_ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas));
                         limpar_tela();
-                        printf("\n<~==[ EXIBIR: SHINOBI ESPECIFICO DO MISSAO ]==~>\n");
+                        printf("\n<~==[ EXIBIR: SHINOBI ESPECIFICO DA MISSAO ]==~>\n");
                         RelatorioDaOpçao(1, (OpçaoDeShinobi), 2);
                         congelar_tela();
                         printf("\nDeseja Voltar Para o Menu Inicial?(s/n) ");
@@ -2535,6 +2535,131 @@ int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima)
     return NumAux;
 }
 
+int EscolheOpçao(int Contexto)
+{
+    int i, OpçaoDesejada, VariavelDeContexto;
+    char TipoDeContexto[100];
+
+    switch (Contexto)
+    {
+    case 1:
+        VariavelDeContexto = _NumeroDoShinobi;
+        strcpy(TipoDeContexto, "SHINOBI");
+        break;
+
+    case 2:
+        VariavelDeContexto = _NumeroDoCla;
+        strcpy(TipoDeContexto, "CLA");
+        break;
+
+    case 3:
+        VariavelDeContexto = _NumeroDoJutsu;
+        strcpy(TipoDeContexto, "JUTSU");
+        break;
+
+    case 4:
+        VariavelDeContexto = _NumeroDaMissao;
+        strcpy(TipoDeContexto, "MISSAO");
+        break;
+    }
+
+    while (1)
+    {
+        if (VariavelDeContexto > 0)
+        {
+            limpar_tela();
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
+            Imprime(2, Contexto);
+            OpçaoDesejada = NovoCadastro(Contexto, 2);
+        }
+        else
+        {
+            limpar_tela();
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
+            OpçaoDesejada = NovoCadastro(Contexto, 1);
+            if (OpçaoDesejada == -1)
+            {
+                limpar_tela();
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s DESEJADO ]==~>\n\nCadastre um %s para continuar o cadastro!\n", TipoDeContexto, TipoDeContexto);
+                congelar_tela();
+                i--;
+                continue;
+            }
+            limpar_tela();
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s  DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
+            Imprime(2, Contexto);
+            OpçaoDesejada = NovoCadastro(Contexto, 2);
+        }
+
+        limpar_tela();
+        printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s  DESEJADO ]==~>\n", TipoDeContexto);
+        RelatorioDaOpçao(Contexto, OpçaoDesejada, 1);
+        printf("Esta Seria a Opçao Desejada?(s/n) ");
+        if (simOUnao() == 1)
+        {
+            return OpçaoDesejada;
+        }
+        else
+        {
+            printf("\nEntao Selecione Novamente!\n");
+            congelar_tela();
+            continue;
+        }
+    }
+    return 0;
+}
+
+void SelecionadorDeMenu(int TipoDeMenu)
+{
+    switch (TipoDeMenu)
+    {
+    case 0:
+        limpar_tela();
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("                MENU              \n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf(" { 1 } Cadastrar\n { 2 } Exibir\n { 3 } Alterar\n { 4 } Deletar\n { 5 } Sair\n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
+
+    case 1:
+        limpar_tela();
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("           MENU CADASTRAR            \n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf(" { 1 } Cadastrar Shinobi\n { 2 } Cadastrar Clã\n { 3 } Cadastrar Jutsu\n { 4 } Cadastrar Missão\n { 5 } Voltar\n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
+
+    case 2:
+        limpar_tela();
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("             MENU EXIBIR             \n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf(" { 1 } Exibir Shinobi\n { 2 } Exibir Clã\n { 3 } Exibir Jutsu\n { 4 } Exibir Missão\n { 5 } Voltar\n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
+
+    case 3:
+        limpar_tela();
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("             MENU ALTERAR            \n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf(" { 1 } Alterar Shinobi\n { 2 } Alterar Clã\n { 3 } Alterar Jutsu\n { 4 } Alterar Missão\n { 5 } Voltar\n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
+
+    case 4:
+        limpar_tela();
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("             MENU DELETAR            \n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf(" { 1 } Deletar Shinobi\n { 2 } Deletar Clã\n { 3 } Deletar Jutsu\n { 4 } Deletar Missão\n { 5 } Voltar\n");
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
+    }
+}
+
 int DesejaInformaçoes(int informaçao)
 {
     int op;
@@ -2584,8 +2709,8 @@ void Exemplos(int informaçao)
         printf("5. Nara\n");
         break;
 
-    case 1: // EXEMPLO: Habilidades Hereditarias em Naruto;
-        printf("Exemplos de habilidades hereditarias de clas em Naruto:\n");
+    case 1: // EXEMPLO: Jutsus Hereditarios em Naruto;
+        printf("Exemplos de jutsus hereditarios de clas em Naruto:\n");
         printf("1. Cla Uchiha: Sharingan (percepcao ocular avancada)\n");
         printf("2. Cla Hyuga: Byakugan (visao de 360 graus e percepcao de chakra)\n");
         printf("3. Cla Aburame: Controle de insetos venenosos\n");
@@ -2708,8 +2833,8 @@ void Explicaçoes(int informaçao)
         printf("Reforcam tradicao, cultura e lacos familiares.\n");
         break;
 
-    case 1: // EXPLICACAO: Habilidades Hereditarias em Naruto;
-        printf("Habilidades Hereditarias em Naruto:\n");
+    case 1: // EXPLICACAO: Jutsus Hereditarios em Naruto;
+        printf("Jutsus Hereditarios em Naruto:\n");
         printf("Tecnicas ou poderes passados geneticamente de pais para filhos.\n");
         printf("Podem incluir doujutsus, estilos de luta ou afinidades elementares.\n");
         printf("Nem todo membro de um cla possui a mesma habilidade ao nascer.\n");
@@ -2818,57 +2943,6 @@ void Explicaçoes(int informaçao)
     }
 }
 
-void SelecionadorDeMenu(int TipoDeMenu)
-{
-    switch (TipoDeMenu)
-    {
-    case 0:
-        limpar_tela();
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf("                MENU              \n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Cadastrar\n { 2 } Exibir\n { 3 } Alterar\n { 4 } Deletar\n { 5 } Sair\n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
-
-    case 1:
-        limpar_tela();
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf("           MENU CADASTRAR            \n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Cadastrar Shinobi\n { 2 } Cadastrar Clã\n { 3 } Cadastrar Jutsu\n { 4 } Cadastrar Missão\n { 5 } Voltar\n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
-
-    case 2:
-        limpar_tela();
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf("             MENU EXIBIR             \n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Exibir Shinobi\n { 2 } Exibir Clã\n { 3 } Exibir Jutsu\n { 4 } Exibir Missão\n { 5 } Voltar\n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
-
-    case 3:
-        limpar_tela();
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf("             MENU ALTERAR            \n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Alterar Shinobi\n { 2 } Alterar Clã\n { 3 } Alterar Jutsu\n { 4 } Alterar Missão\n { 5 } Voltar\n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
-
-    case 4:
-        limpar_tela();
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf("             MENU DELETAR            \n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        printf(" { 1 } Deletar Shinobi\n { 2 } Deletar Clã\n { 3 } Deletar Jutsu\n { 4 } Deletar Missão\n { 5 } Voltar\n");
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
-    }
-}
-
 void MensagemErro(int erro)
 {
     switch (erro)
@@ -2905,78 +2979,4 @@ void MensagemErro(int erro)
         printf("\nErro! A Resposta Conter Apenas Numerais Unicos.");
         break;
     }
-}
-
-int EscolheOpçao(int Contexto)
-{
-    int i, OpçaoDesejada, VariavelDeContexto;
-    char TipoDeContexto[100];
-
-    switch (Contexto)
-    {
-    case 1:
-        VariavelDeContexto = _NumeroDoShinobi;
-        strcpy(TipoDeContexto, "SHINOBI");
-        break;
-
-    case 2:
-        VariavelDeContexto = _NumeroDoCla;
-        strcpy(TipoDeContexto, "CLA");
-        break;
-
-    case 3:
-        VariavelDeContexto = _NumeroDoJutsu;
-        strcpy(TipoDeContexto, "JUTSU");
-        break;
-
-    case 4:
-        VariavelDeContexto = _NumeroDaMissao;
-        strcpy(TipoDeContexto, "MISSAO");
-        break;
-    }
-
-    while (1)
-    {
-        if (VariavelDeContexto > 0)
-        {
-            limpar_tela();
-            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
-            Imprime(2, Contexto);
-            OpçaoDesejada = NovoCadastro(Contexto, 2);
-        }
-        else
-        {
-            limpar_tela();
-            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
-            OpçaoDesejada = NovoCadastro(Contexto, 1);
-            if (OpçaoDesejada == -1)
-            {
-                limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s DESEJADO ]==~>\n\nCadastre um %s para continuar o cadastro!\n", TipoDeContexto, TipoDeContexto);
-                congelar_tela();
-                i--;
-                continue;
-            }
-            limpar_tela();
-            printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s  DESEJADO ]==~>\n\nCaso a Opçao Desejada Esteja Cadastrada, Digite-a:\n", TipoDeContexto);
-            Imprime(2, Contexto);
-            OpçaoDesejada = NovoCadastro(Contexto, 2);
-        }
-
-        limpar_tela();
-        printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> %s  DESEJADO ]==~>\n", TipoDeContexto);
-        RelatorioDaOpçao(Contexto, OpçaoDesejada, 1);
-        printf("Esta Seria a Opçao Desejada?(s/n) ");
-        if (simOUnao() == 1)
-        {
-            return OpçaoDesejada;
-        }
-        else
-        {
-            printf("\nEntao Selecione Novamente!\n");
-            congelar_tela();
-            continue;
-        }
-    }
-    return 0;
 }
