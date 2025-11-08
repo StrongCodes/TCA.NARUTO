@@ -1924,7 +1924,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 for (i = 0; i < _NumeroDaMissao; i++)
                 {
-                    printf("\n{ %d } - %s: %s", i + 1, _ConjuntoDeMissoes[i].NivelDificuldade, _ConjuntoDeMissoes[i].Titulo);
+                    printf("\n{ %d } - Nivel %s: %s", i + 1, _ConjuntoDeMissoes[i].NivelDificuldade, _ConjuntoDeMissoes[i].Titulo);
                 }
 
                 if (CasoDeImpressao == 1)
@@ -2154,7 +2154,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
 
         if (Necessidade == 2)
         {
-            printf("\nDeseja Ver os Jutsus De Maneira Mais Detalhada?(s/n) ");
+            printf("\nDeseja Ver os Membros ou os Jutsus De Maneira Mais Detalhada?(s/n) ");
             if (simOUnao() == 1)
             {
                 int OpçaoEscolhida;
@@ -2165,8 +2165,8 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                 {
                     limpar_tela();
                     printf("\n<~==[ EXIBIR: INFORMAÇOES DO CLA ]==~>\n");
-                    printf("\nEscolha Uma Opcao:\n\n{ 1 } - Jutsus Hereditarios\n{ 2 } - Jutsus Tradicionais\n{ 3 } - Voltar\nOpcao: ");
-                    OpçaoEscolhida = VereficaQuantia(1, 3);
+                    printf("\nEscolha Uma Opcao:\n\n{ 1 } - Jutsus Hereditarios\n{ 2 } - Jutsus Tradicionais\n{ 3 } - Membros\n{ 4 } - Voltar\nOpcao: ");
+                    OpçaoEscolhida = VereficaQuantia(1, 4);
                     if (OpçaoEscolhida == 1)
                     {
                         limpar_tela();
@@ -2215,6 +2215,53 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                             printf("\nEste Cla Nao Possui Nenhum Jutsu Tradicional");
                             congelar_tela();
                             continue;
+                        }
+                    }
+                    else if (OpçaoEscolhida == 3)
+                    {
+                        int *aux = calloc(101, sizeof(int));
+                        int ctt;
+                        int OpçaoDeMembro;
+                        for (i = 0; 1; i++)
+                        {
+                            if (_NumeroDoShinobi > 0)
+                            {
+                                i = 0;
+                                ctt = 0;
+                                limpar_tela();
+                                printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
+                                for (j = 0; j < _NumeroDoShinobi; j++)
+                                {
+                                    if (strcmp(_ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla, _ConjuntoDeShinobis[j].CaracteristicasDoCla->NomeDoCla) == 0)
+                                    {
+                                        printf("\n{ %d } - %s", i + 1, _ConjuntoDeShinobis[j].Nome);
+                                        aux[i] = j;
+                                        ctt++;
+                                    }
+                                }
+                                printf("\nDeseja Ver Algum Membro De Maneira Mais Detalhada?(s/n) ");
+                                if (simOUnao() == 1)
+                                {
+                                    printf("\nDigite o Numero do Membro Que Deseja: ");
+                                    OpçaoDeMembro = VereficaQuantia(1, ctt);
+                                    printf("\n<~==[ EXIBIR: MEMBRO ESPECIFICO DO CLA ]==~>\n");
+                                    RelatorioDaOpçao(1, (aux[OpçaoDeMembro - 1] + 1), 2);
+                                    congelar_tela();
+                                    continue;
+                                }
+                                else 
+                                {
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                limpar_tela();
+                                printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
+                                printf("\nNao ha Shinobis Que Tenham Parentesco Com Este Cla Cadastrados!");
+                                congelar_tela();
+                                break;
+                            }
                         }
                     }
                     else
