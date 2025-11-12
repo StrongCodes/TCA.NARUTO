@@ -704,75 +704,80 @@ tCla CriarCla()
     printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
     if (simOUnao() == 1)
     {
-        int i, NumDeJutsusHereditarios;
+        int NumDeJutsusHereditarios;
         int *aux = calloc(101, sizeof(int));
 
-        limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nDigite Quantos Jutsus Hereditarios o Cla Possui: ");
-        NumDeJutsusHereditarios = VereficaQuantia(1, 100);
-
-        CadastroDeCla.QuantidadeDeJutsusHereditarios = NumDeJutsusHereditarios;
+        NumDeJutsusHereditarios = 1;
         CadastroDeCla.JutsusHereditarios = malloc(NumDeJutsusHereditarios * sizeof(tJutsu *));
-        for (i = 0; i < NumDeJutsusHereditarios; i++)
+
+        while (1)
         {
-            CadastroDeCla.JutsusHereditarios[i] = malloc(sizeof(tJutsu));
+            CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1] = malloc(sizeof(tJutsu));
 
             limpar_tela();
             printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nSelecione o Jutsu Desejado...");
             congelar_tela();
 
             OpçaoDeJutsu = EscolheOpçao(3);
-            aux[i] = OpçaoDeJutsu;
+            aux[NumDeJutsusHereditarios - 1] = OpçaoDeJutsu;
 
-            if (i > 0 && (VerficaRepetiçaoDeOpçao(i, NumDeJutsusHereditarios, aux, OpçaoDeJutsu)))
+            if ((NumDeJutsusHereditarios - 1) > 0 && (VerficaRepetiçaoDeOpçao((NumDeJutsusHereditarios - 1), NumDeJutsusHereditarios, aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
-                i--;
                 congelar_tela();
                 continue;
             }
 
             if (OpçaoDeJutsu != 0)
             {
-                CadastroDeCla.JutsusHereditarios[i] = malloc(sizeof(tJutsu));
+                CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1] = malloc(sizeof(tJutsu));
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome != NULL)
                 {
-                    CadastroDeCla.JutsusHereditarios[i]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.JutsusHereditarios[i]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
                 }
-
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu != NULL)
                 {
-                    CadastroDeCla.JutsusHereditarios[i]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.JutsusHereditarios[i]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
                 }
-
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos > 0 && _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos != NULL)
                 {
-                    CadastroDeCla.JutsusHereditarios[i]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
-                    CadastroDeCla.JutsusHereditarios[i]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos)) * sizeof(char *));
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos)) * sizeof(char *));
                     for (j = 0; j < _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos; j++)
                     {
                         if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j] != NULL)
                         {
-                            CadastroDeCla.JutsusHereditarios[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
-                            strcpy(CadastroDeCla.JutsusHereditarios[i]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
+                            CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
+                            strcpy(CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
                         }
                     }
                 }
                 else
                 {
-                    CadastroDeCla.JutsusHereditarios[i]->QuantidadeDeElementos = 0;
-                    CadastroDeCla.JutsusHereditarios[i]->Elementos = NULL;
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->QuantidadeDeElementos = 0;
+                    CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->Elementos = NULL;
                 }
+                CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
+                CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
+            }
 
-                CadastroDeCla.JutsusHereditarios[i]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
-
-                CadastroDeCla.JutsusHereditarios[i]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
+            printf("\nDeseja Selecionar Mais um Jutsu?(s/n) ");
+            if (simOUnao() == 1)
+            {
+                NumDeJutsusHereditarios = NumDeJutsusHereditarios + 1;
+                CadastroDeCla.JutsusHereditarios = realloc(CadastroDeCla.JutsusHereditarios, NumDeJutsusHereditarios * sizeof(char *));
+                continue;
+            }
+            else
+            {
+                break;
             }
         }
+        CadastroDeCla.QuantidadeDeJutsusHereditarios = NumDeJutsusHereditarios;
     }
     else
     {
@@ -788,73 +793,80 @@ tCla CriarCla()
     printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Tradicional?(s/n) ");
     if (simOUnao() == 1)
     {
-        int i, NumDeJutsusTradicionais;
+        int NumDeJutsusTradicionais = 1;
         int *aux = calloc(101, sizeof(int));
-
-        limpar_tela();
-        printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nDigite Quantos Jutsus Tradicionais o Cla Possui: ");
-        NumDeJutsusTradicionais = VereficaQuantia(1, 100);
-
         CadastroDeCla.QuantidadeDeJutsusTradicionais = NumDeJutsusTradicionais;
+
         CadastroDeCla.JutsusTradicionais = malloc(NumDeJutsusTradicionais * sizeof(tJutsu *));
-        for (i = 0; i < NumDeJutsusTradicionais; i++)
+        while (1)
         {
-            CadastroDeCla.JutsusTradicionais[i] = malloc(sizeof(tJutsu));
+            CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1] = malloc(sizeof(tJutsu));
 
             limpar_tela();
             printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL CLA ]==~>\n\nSelecione o Jutsu Desejado...");
             congelar_tela();
 
             OpçaoDeJutsu = EscolheOpçao(3);
-            aux[i] = OpçaoDeJutsu;
+            aux[NumDeJutsusTradicionais - 1] = OpçaoDeJutsu;
 
-            if (i > 0 && (VerficaRepetiçaoDeOpçao(i, NumDeJutsusTradicionais, aux, OpçaoDeJutsu)))
+            if ((NumDeJutsusTradicionais - 1) > 0 && (VerficaRepetiçaoDeOpçao((NumDeJutsusTradicionais - 1), NumDeJutsusTradicionais, aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
-                i--;
                 congelar_tela();
                 continue;
             }
 
             if (OpçaoDeJutsu != 0)
             {
-                CadastroDeCla.JutsusTradicionais[i] = malloc(sizeof(tJutsu));
+                CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1] = malloc(sizeof(tJutsu));
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome != NULL)
                 {
-                    CadastroDeCla.JutsusTradicionais[i]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.JutsusTradicionais[i]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Nome = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Nome, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Nome);
                 }
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu != NULL)
                 {
-                    CadastroDeCla.JutsusTradicionais[i]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
-                    strcpy(CadastroDeCla.JutsusTradicionais[i]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->TipoJutsu = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu) + 1) * sizeof(char));
+                    strcpy(CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->TipoJutsu, _ConjuntoDeJutsus[OpçaoDeJutsu - 1].TipoJutsu);
                 }
 
                 if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos > 0 && _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos != NULL)
                 {
-                    CadastroDeCla.JutsusTradicionais[i]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
-                    CadastroDeCla.JutsusTradicionais[i]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos) + 1) * sizeof(char *));
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->QuantidadeDeElementos = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos;
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Elementos = (char **)malloc(((_ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos) + 1) * sizeof(char *));
                     for (j = 0; j < _ConjuntoDeJutsus[OpçaoDeJutsu - 1].QuantidadeDeElementos; j++)
                     {
                         if (_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j] != NULL)
                         {
-                            CadastroDeCla.JutsusTradicionais[i]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
-                            strcpy(CadastroDeCla.JutsusTradicionais[i]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
+                            CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Elementos[j] = (char *)malloc((strlen(_ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]) + 1) * sizeof(char));
+                            strcpy(CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Elementos[j], _ConjuntoDeJutsus[OpçaoDeJutsu - 1].Elementos[j]);
                         }
                     }
                 }
                 else
                 {
-                    CadastroDeCla.JutsusTradicionais[i]->QuantidadeDeElementos = 0;
-                    CadastroDeCla.JutsusTradicionais[i]->Elementos = NULL;
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->QuantidadeDeElementos = 0;
+                    CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->Elementos = NULL;
                 }
 
-                CadastroDeCla.JutsusTradicionais[i]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
+                CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->CustodeChakra = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].CustodeChakra;
 
-                CadastroDeCla.JutsusTradicionais[i]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
+                CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1]->PoderdeAtaque = _ConjuntoDeJutsus[OpçaoDeJutsu - 1].PoderdeAtaque;
+            }
+
+            printf("\nDeseja Selecionar mais Algum Jutsu?(s/n) ");
+            if(simOUnao() == 1)
+            {
+                NumDeJutsusTradicionais = NumDeJutsusTradicionais + 1;
+                CadastroDeCla.JutsusTradicionais = realloc(CadastroDeCla.JutsusTradicionais, NumDeJutsusTradicionais * sizeof(char*));
+                continue;
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -932,15 +944,16 @@ tJutsu CriarJutsu()
             limpar_tela();
             printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nDigite o Elementos Que o jutsu faz relaçao: ");
             VerificadorDeTexto(StrAuX);
-            CadastroDeJutsu.Elementos[i] = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
-            strcpy(CadastroDeJutsu.Elementos[i], StrAuX);
+            CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1] = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
+            strcpy(CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1], StrAuX);
             printf("\nDeseja Adicionar mais Algum Elemento?(s/n) ");
-            if(simOUnao() == 1)
+            if (simOUnao() == 1)
             {
-                CadastroDeJutsu.Elementos = realloc(CadastroDeJutsu.Elementos, (QuantidadeDeElementos++) * sizeof(char*));
+                QuantidadeDeElementos = QuantidadeDeElementos + 1;
+                CadastroDeJutsu.Elementos = realloc(CadastroDeJutsu.Elementos, (QuantidadeDeElementos) * sizeof(char *));
                 continue;
             }
-            else 
+            else
             {
                 break;
             }
