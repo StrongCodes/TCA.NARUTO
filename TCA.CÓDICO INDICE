@@ -487,7 +487,7 @@ tNinja CriarShinobi()
             if ((NumDeJutsus - 1) > 0 && (VerficaRepetiçaoDeOpçao((NumDeJutsus - 1), NumDeJutsus, aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
+                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!\nPor Favor Selecione Outra Opçao!");
                 congelar_tela();
                 continue;
             }
@@ -581,7 +581,7 @@ tCla CriarCla()
             if ((NumDeJutsusHereditarios - 1) > 0 && (VerficaRepetiçaoDeOpçao((NumDeJutsusHereditarios - 1), NumDeJutsusHereditarios, aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
+                printf("\n<~==[ CADASTRO POR OPÇAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!\nPor Favor Selecione Outra Opçao!");
                 congelar_tela();
                 continue;
             }
@@ -628,10 +628,10 @@ tCla CriarCla()
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[((CadastroDeCla.QuantidadeDeJutsusHereditarios) + (NumDeJutsusTradicionais - 1))] = OpçaoDeJutsu;
 
-            if ((NumDeJutsusTradicionais - 1) > 0 && (VerficaRepetiçaoDeOpçao(((CadastroDeCla.QuantidadeDeJutsusHereditarios - 1) + (NumDeJutsusTradicionais - 1)) + 1, ((CadastroDeCla.QuantidadeDeJutsusHereditarios) + (NumDeJutsusTradicionais)) + 1, aux, OpçaoDeJutsu)))
+            if ((VerficaRepetiçaoDeOpçao(((CadastroDeCla.QuantidadeDeJutsusHereditarios - 1) + (NumDeJutsusTradicionais - 1)) + 1, ((CadastroDeCla.QuantidadeDeJutsusHereditarios - 1) + (NumDeJutsusTradicionais)), aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
+                printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> JUTSU DESEJADO ]==~>\n\nErro! Esta Opçao Ja está vinculado aos Jutsus Hereditários ou Ja Foi Escolhida!\nPor Favor Selecione Outra Opçao!");
                 congelar_tela();
                 continue;
             }
@@ -683,7 +683,7 @@ tJutsu CriarJutsu()
                 {
                     erro = 1;
                     limpar_tela();
-                    printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n\nErro! Um Jutsu Com Este Nome Ja Foi Cadastrado!");
+                    printf("\n<~==[ CADASTRO DE JUTSU: NOME DO JUTSU ]==~>\n\nErro! Um Jutsu Com Este Nome Ja Foi Cadastrado!\nPor Favor Selecione Outra Opçao!");
                     congelar_tela();
                     break;
                 }
@@ -835,7 +835,7 @@ tMissao CriarMissao()
             if (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Chunin") == 0 && (strcmp(CadastroDeMissao.NivelDificuldade, "A") == 0 || strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0))
             {
                 limpar_tela();
-                printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nErro! Um Chunin só pode liderar missões de nível C ou B!");
+                printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nErro! Um Chunin só pode liderar missões de nível D, C e B!");
                 congelar_tela();
                 continue;
             }
@@ -977,7 +977,7 @@ tMissao CriarMissao()
         if ((VerficaRepetiçaoDeOpçao(i + 1, QuantiaAux, aux, OpçaoDeShinobi)))
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Esta Opçao Ja Foi Escolhida!");
+            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Este Shinobi Ja Foi Designado Anteriormente Para Esta MIssao!\nPor Favor Selecione Outra Opçao!");
             congelar_tela();
             i--;
             continue;
@@ -2749,19 +2749,23 @@ void Alterar(int TipoDeContexto)
             {
             case 1: // SHINOBI
                 printf("{ 1 } - Alterar Nome\n{ 2 } - Alterar Patente\n{ 3 } - Alterar Reserva de Chakra\n{ 4 } - Alterar Elemento Principal\n{ 5 } - Alterar/Remover Clã\n{ 6 } - Gerenciar Jutsus Dominados\n{ 7 } - Voltar\n");
-                maxOpcao = 7;break;
+                maxOpcao = 7;
+                break;
 
             case 2: // CLÃ
                 printf("{ 1 } - Alterar Nome do Clã\n{ 2 } - Gerenciar Jutsus Hereditários\n{ 3 } - Gerenciar Jutsus Tradicionais\n{ 4 } - Voltar\n");
-                maxOpcao = 4;break;
+                maxOpcao = 4;
+                break;
 
             case 3: // JUTSU
                 printf("{ 1 } - Alterar Nome do Jutsu\n{ 2 } - Alterar Tipo do Jutsu\n{ 3 } - Gerenciar Elementos\n{ 4 } - Alterar Custo de Chakra\n{ 5 } - Alterar Poder de Ataque\n{ 6 } - Voltar\n");
-                maxOpcao = 6;break;
+                maxOpcao = 6;
+                break;
 
             case 4: // MISSÃO
                 printf("{ 1 } - Alterar Título da Missão\n{ 2 } - Alterar Líder da Missão\n{ 3 } - Alterar Nível de Dificuldade\n{ 4 } - Alterar Status da Missão\n{ 5 } - Gerenciar Shinobis da Missão\n{ 6 } - Voltar\n");
-                maxOpcao = 6;break;
+                maxOpcao = 6;
+                break;
             }
 
             printf("\nOpção: ");
@@ -3299,25 +3303,32 @@ void SelecionaPatente(int Opçao, char StrAux[100])
     switch (Opçao)
     {
     case 1:
-        strcpy(StrAux, "Estudante da Academia");break;
+        strcpy(StrAux, "Estudante da Academia");
+        break;
 
     case 2:
-        strcpy(StrAux, "Genin");break;
+        strcpy(StrAux, "Genin");
+        break;
 
     case 3:
-        strcpy(StrAux, "Chunin");break;
+        strcpy(StrAux, "Chunin");
+        break;
 
     case 4:
-        strcpy(StrAux, "Tokubetsu Jounin");break;
+        strcpy(StrAux, "Tokubetsu Jounin");
+        break;
 
     case 5:
-        strcpy(StrAux, "Jounin");break;
+        strcpy(StrAux, "Jounin");
+        break;
 
     case 6:
-        strcpy(StrAux, "ANBU");break;
+        strcpy(StrAux, "ANBU");
+        break;
 
     case 7:
-        strcpy(StrAux, "Kage");break;
+        strcpy(StrAux, "Kage");
+        break;
     }
 }
 
@@ -3326,19 +3337,24 @@ void SelecionaStatus(int Opçao, char StrAux[100])
     switch (Opçao)
     {
     case 1:
-        strcpy(StrAux, "Pendente");break;
+        strcpy(StrAux, "Pendente");
+        break;
 
     case 2:
-        strcpy(StrAux, "Em Andamento");break;
+        strcpy(StrAux, "Em Andamento");
+        break;
 
     case 3:
-        strcpy(StrAux, "Concluida");break;
+        strcpy(StrAux, "Concluida");
+        break;
 
     case 4:
-        strcpy(StrAux, "Falha");break;
+        strcpy(StrAux, "Falha");
+        break;
 
     case 5:
-        strcpy(StrAux, "Cancelada");break;
+        strcpy(StrAux, "Cancelada");
+        break;
     }
 }
 
@@ -3481,19 +3497,23 @@ int EscolheOpçao(int Contexto)
     {
     case 1:
         VariavelDeContexto = _NumeroDoShinobi;
-        strcpy(TipoDeContexto, "SHINOBI");break;
+        strcpy(TipoDeContexto, "SHINOBI");
+        break;
 
     case 2:
         VariavelDeContexto = _NumeroDoCla;
-        strcpy(TipoDeContexto, "CLA");break;
+        strcpy(TipoDeContexto, "CLA");
+        break;
 
     case 3:
         VariavelDeContexto = _NumeroDoJutsu;
-        strcpy(TipoDeContexto, "JUTSU");break;
+        strcpy(TipoDeContexto, "JUTSU");
+        break;
 
     case 4:
         VariavelDeContexto = _NumeroDaMissao;
-        strcpy(TipoDeContexto, "MISSAO");break;
+        strcpy(TipoDeContexto, "MISSAO");
+        break;
     }
 
     while (1)
@@ -3550,19 +3570,24 @@ void SelecionadorDeMenu(int TipoDeMenu)
     switch (TipoDeMenu)
     {
     case 0:
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                MENU              \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar\n{ 2 } Exibir\n{ 3 } Alterar\n{ 4 } Deletar\n{ 5 } Sair\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                MENU              \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar\n{ 2 } Exibir\n{ 3 } Alterar\n{ 4 } Deletar\n{ 5 } Sair\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
 
     case 1:
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n           MENU CADASTRAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar Shinobi\n{ 2 } Cadastrar Clã\n{ 3 } Cadastrar Jutsu\n{ 4 } Cadastrar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n           MENU CADASTRAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar Shinobi\n{ 2 } Cadastrar Clã\n{ 3 } Cadastrar Jutsu\n{ 4 } Cadastrar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
 
     case 2:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU EXIBIR             \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Exibir Shinobi\n{ 2 } Exibir Clã\n{ 3 } Exibir Jutsu\n{ 4 } Exibir Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU EXIBIR             \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Exibir Shinobi\n{ 2 } Exibir Clã\n{ 3 } Exibir Jutsu\n{ 4 } Exibir Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
 
     case 3:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU ALTERAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Alterar Shinobi\n{ 2 } Alterar Clã\n{ 3 } Alterar Jutsu\n{ 4 } Alterar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU ALTERAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Alterar Shinobi\n{ 2 } Alterar Clã\n{ 3 } Alterar Jutsu\n{ 4 } Alterar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
 
     case 4:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU DELETAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Deletar Shinobi\n{ 2 } Deletar Clã\n{ 3 } Deletar Jutsu\n{ 4 } Deletar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU DELETAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Deletar Shinobi\n{ 2 } Deletar Clã\n{ 3 } Deletar Jutsu\n{ 4 } Deletar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        break;
     }
 }
 
@@ -3685,187 +3710,187 @@ void RecuperaDados()
     while ((fgets(LinhaDeDados, sizeof(LinhaDeDados), Dados)))
     {
         if (SeparadorDeContexto == 0)
+        {
+            DadosDoJutsu = strtok(LinhaDeDados, ";");
+            _NumeroDoJutsu = 0;
+
+            AuxTok = strtok(DadosDoJutsu, ",");
+            int QuantidadeDeJutsu = atoi(AuxTok);
+            _ConjuntoDeJutsus = (tJutsu *)malloc(QuantidadeDeJutsu * sizeof(tJutsu));
+
+            for (int j = 0; j < QuantidadeDeJutsu; j++)
             {
-                DadosDoJutsu = strtok(LinhaDeDados, ";");
-                _NumeroDoJutsu = 0;
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeJutsus[_NumeroDoJutsu].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].Nome, AuxTok);
 
-                AuxTok = strtok(DadosDoJutsu, ",");
-                int QuantidadeDeJutsu = atoi(AuxTok);
-                _ConjuntoDeJutsus = (tJutsu *)malloc(QuantidadeDeJutsu * sizeof(tJutsu));
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeJutsus[_NumeroDoJutsu].TipoJutsu = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].TipoJutsu, AuxTok);
 
-                for (int j = 0; j < QuantidadeDeJutsu; j++)
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeJutsus[_NumeroDoJutsu].CustodeChakra = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeJutsus[_NumeroDoJutsu].PoderdeAtaque = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos = atoi(AuxTok);
+                if (_ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos > 0)
                 {
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeJutsus[_NumeroDoJutsu].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].Nome, AuxTok);
+                    _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos = (char **)malloc(_ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos * sizeof(char *));
 
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeJutsus[_NumeroDoJutsu].TipoJutsu = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].TipoJutsu, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeJutsus[_NumeroDoJutsu].CustodeChakra = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeJutsus[_NumeroDoJutsu].PoderdeAtaque = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos = atoi(AuxTok);
-                    if (_ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos > 0)
+                    for (int i = 0; i < _ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos; i++)
                     {
-                        _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos = (char **)malloc(_ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos * sizeof(char *));
-
-                        for (int i = 0; i < _ConjuntoDeJutsus[_NumeroDoJutsu].QuantidadeDeElementos; i++)
-                        {
-                            AuxTok = strtok(NULL, "/");
-                            _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos[i] = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                            strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].Elementos[i], AuxTok);
-                        }
+                        AuxTok = strtok(NULL, "/");
+                        _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos[i] = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                        strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].Elementos[i], AuxTok);
                     }
-                    else
-                    {
-                        _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos = NULL;
-                    }
-                    _NumeroDoJutsu++;
                 }
-                SeparadorDeContexto++;
-                continue;
-            }
-            else if (SeparadorDeContexto == 1)
-            {
-                DadosDoCla = strtok(LinhaDeDados, ";");
-                _NumeroDoCla = 0;
-
-                AuxTok = strtok(DadosDoCla, ",");
-                int QuantidadeDeClas = atoi(AuxTok);
-                _ConjuntoDeClas = (tCla *)malloc(QuantidadeDeClas * sizeof(tCla));
-
-                for (int i = 0; i < QuantidadeDeClas; i++)
+                else
                 {
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeClas[_NumeroDoCla].NomeDoCla = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeClas[_NumeroDoCla].NomeDoCla, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais = atoi(AuxTok);
-
-                    if (_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios > 0)
-                    {
-                        int j;
-                        _ConjuntoDeClas[_NumeroDoCla].JutsusHereditarios = malloc(_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios * sizeof(int));
-                        for (j = 0; j < _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios; j++)
-                        {
-                            AuxTok = strtok(NULL, ",");
-                            _ConjuntoDeClas[_NumeroDoCla].JutsusHereditarios[j] = atoi(AuxTok);
-                        }
-                    }
-
-                    if (_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais > 0)
-                    {
-                        int j;
-                        _ConjuntoDeClas[_NumeroDoCla].JutsusTradicionais = malloc(_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais * sizeof(int));
-                        for (j = 0; j < _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais; j++)
-                        {
-                            AuxTok = strtok(NULL, ",");
-                            _ConjuntoDeClas[_NumeroDoCla].JutsusTradicionais[j] = atoi(AuxTok);
-                        }
-                    }
-                    _NumeroDoCla++;
+                    _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos = NULL;
                 }
-                SeparadorDeContexto++;
-                continue;
+                _NumeroDoJutsu++;
             }
-            else if (SeparadorDeContexto == 2)
+            SeparadorDeContexto++;
+            continue;
+        }
+        else if (SeparadorDeContexto == 1)
+        {
+            DadosDoCla = strtok(LinhaDeDados, ";");
+            _NumeroDoCla = 0;
+
+            AuxTok = strtok(DadosDoCla, ",");
+            int QuantidadeDeClas = atoi(AuxTok);
+            _ConjuntoDeClas = (tCla *)malloc(QuantidadeDeClas * sizeof(tCla));
+
+            for (int i = 0; i < QuantidadeDeClas; i++)
             {
-                DadoosDoShinobi = strtok(LinhaDeDados, ";");
-                _NumeroDoShinobi = 0;
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeClas[_NumeroDoCla].NomeDoCla = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeClas[_NumeroDoCla].NomeDoCla, AuxTok);
 
-                AuxTok = strtok(DadoosDoShinobi, ",");
-                int QuantidadeDeShinobis = atoi(AuxTok);
-                _ConjuntoDeShinobis = (tNinja *)malloc(QuantidadeDeShinobis * sizeof(tNinja));
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios = atoi(AuxTok);
 
-                for (int i = 0; i < QuantidadeDeShinobis; i++)
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais = atoi(AuxTok);
+
+                if (_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios > 0)
                 {
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].Nome, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].Patente = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].Patente, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeChakra = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoCla = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeShinobis[_NumeroDoShinobi].ElementoPrincipal = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].ElementoPrincipal, AuxTok);
-
-                    if (_ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus > 0)
-                    {
-                        _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoJutsu = malloc(_ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus * sizeof(int));
-                        for (int j = 0; j < _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus; j++)
-                        {
-                            AuxTok = strtok(NULL, ",");
-                            _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoJutsu[j] = atoi(AuxTok);
-                        }
-                    }
-                    _NumeroDoShinobi++;
-                }
-                SeparadorDeContexto++;
-                continue;
-            }
-            else if (SeparadorDeContexto == 3)
-            {
-                DadosDeMissao = strtok(LinhaDeDados, ";");
-                _NumeroDaMissao = 0;
-
-                AuxTok = strtok(DadosDeMissao, ",");
-                int QuantidadeDeMissoes = atoi(AuxTok);
-                _ConjuntoDeMissoes = (tMissao *)malloc(QuantidadeDeMissoes * sizeof(tMissao));
-
-                for (int i = 0; i < QuantidadeDeMissoes; i++)
-                {
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeMissoes[_NumeroDaMissao].Titulo = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].Titulo, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeMissoes[_NumeroDaMissao].NivelDificuldade = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].NivelDificuldade, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeMissoes[_NumeroDaMissao].Status = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
-                    strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].Status, AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas = atoi(AuxTok);
-
-                    _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
-
-                    AuxTok = strtok(NULL, ",");
-                    _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
-
-                    _ConjuntoDeMissoes[_NumeroDaMissao].NinjasDaMissao = malloc(_ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas * sizeof(int));
-                    for (int j = 0; j < _ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas; j++)
+                    int j;
+                    _ConjuntoDeClas[_NumeroDoCla].JutsusHereditarios = malloc(_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios * sizeof(int));
+                    for (j = 0; j < _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusHereditarios; j++)
                     {
                         AuxTok = strtok(NULL, ",");
-                        _ConjuntoDeMissoes[_NumeroDaMissao].NinjasDaMissao[j] = atoi(AuxTok);
+                        _ConjuntoDeClas[_NumeroDoCla].JutsusHereditarios[j] = atoi(AuxTok);
                     }
-                    _NumeroDaMissao++;
                 }
-                SeparadorDeContexto = 0;
-                break;
+
+                if (_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais > 0)
+                {
+                    int j;
+                    _ConjuntoDeClas[_NumeroDoCla].JutsusTradicionais = malloc(_ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais * sizeof(int));
+                    for (j = 0; j < _ConjuntoDeClas[_NumeroDoCla].QuantidadeDeJutsusTradicionais; j++)
+                    {
+                        AuxTok = strtok(NULL, ",");
+                        _ConjuntoDeClas[_NumeroDoCla].JutsusTradicionais[j] = atoi(AuxTok);
+                    }
+                }
+                _NumeroDoCla++;
             }
+            SeparadorDeContexto++;
+            continue;
+        }
+        else if (SeparadorDeContexto == 2)
+        {
+            DadoosDoShinobi = strtok(LinhaDeDados, ";");
+            _NumeroDoShinobi = 0;
+
+            AuxTok = strtok(DadoosDoShinobi, ",");
+            int QuantidadeDeShinobis = atoi(AuxTok);
+            _ConjuntoDeShinobis = (tNinja *)malloc(QuantidadeDeShinobis * sizeof(tNinja));
+
+            for (int i = 0; i < QuantidadeDeShinobis; i++)
+            {
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].Nome, AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].Patente = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].Patente, AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeChakra = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoCla = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeShinobis[_NumeroDoShinobi].ElementoPrincipal = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].ElementoPrincipal, AuxTok);
+
+                if (_ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus > 0)
+                {
+                    _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoJutsu = malloc(_ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus * sizeof(int));
+                    for (int j = 0; j < _ConjuntoDeShinobis[_NumeroDoShinobi].QuantidadeDeJutsus; j++)
+                    {
+                        AuxTok = strtok(NULL, ",");
+                        _ConjuntoDeShinobis[_NumeroDoShinobi].CaracteristicasDoJutsu[j] = atoi(AuxTok);
+                    }
+                }
+                _NumeroDoShinobi++;
+            }
+            SeparadorDeContexto++;
+            continue;
+        }
+        else if (SeparadorDeContexto == 3)
+        {
+            DadosDeMissao = strtok(LinhaDeDados, ";");
+            _NumeroDaMissao = 0;
+
+            AuxTok = strtok(DadosDeMissao, ",");
+            int QuantidadeDeMissoes = atoi(AuxTok);
+            _ConjuntoDeMissoes = (tMissao *)malloc(QuantidadeDeMissoes * sizeof(tMissao));
+
+            for (int i = 0; i < QuantidadeDeMissoes; i++)
+            {
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeMissoes[_NumeroDaMissao].Titulo = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].Titulo, AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeMissoes[_NumeroDaMissao].NivelDificuldade = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].NivelDificuldade, AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeMissoes[_NumeroDaMissao].Status = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
+                strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].Status, AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas = atoi(AuxTok);
+
+                _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
+
+                AuxTok = strtok(NULL, ",");
+                _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
+
+                _ConjuntoDeMissoes[_NumeroDaMissao].NinjasDaMissao = malloc(_ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas * sizeof(int));
+                for (int j = 0; j < _ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas; j++)
+                {
+                    AuxTok = strtok(NULL, ",");
+                    _ConjuntoDeMissoes[_NumeroDaMissao].NinjasDaMissao[j] = atoi(AuxTok);
+                }
+                _NumeroDaMissao++;
+            }
+            SeparadorDeContexto = 0;
+            break;
+        }
     }
     fclose(Dados);
 }
