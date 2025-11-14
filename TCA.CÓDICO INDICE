@@ -62,10 +62,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao);   // 5. Seleciona o Tipo
 void limpar_tela(void);   // 6. Seleciona o Modo Para Limpar o Terminal de Acordo Com o Sistema OP;
 void congelar_tela(void); // 7. Seleciona o Modo Para Congelar o Terminal de Acordo Com o Sistema Op;
 void Carregamento();
-int simOUnao(void);                                                        // 8. Scaneia e Verifica Resposta de SIM ou NAO, caso a resposta seja 'SIM', a funçao retorna 1, se a resposta for 'NAO' a funçao retorna 0;
-int DesejaInformaçoes(int informaçao);                                     // 10. Seleciona e Administra as funçoes: 'Explicaçoes' e 'Exemplos' de Acordo com o Codigo de Cada Explicaçao e Cada Exemplo, Tudo isso em Relaçao a Opçao que he Deseja, Entre '{ 1 } - Explicaçao' e '{ 2 } - Exemplo';
-void Explicaçoes(int informaçao);                                          // 11. Seleciona o Tipo de Explicaçao De Acordo Com o Codigo Recebido da Funçao 'DesejaInformaçoes';
-void Exemplos(int informaçao);                                             // 12. Seleciona o Tipo de Exemplo De Acordo Com o Codigo Recebido da Funçao 'DesejaInformaçoes';
+int simOUnao(void);                                                        // 8. Scaneia e Verifica Resposta de SIM ou NAO, caso a resposta seja 'SIM', a funçao retorna 1, se a resposta for 'NAO' a funçao retorna 0;                                       // 12. Seleciona o Tipo de Exemplo De Acordo Com o Codigo Recebido da Funçao 'DesejaInformaçoes';
 void SelecionaStatus(int Opçao, char StrAux[100]);                         // 13. Seleciona o Status da Missao de Acordo com o Numero Recebido da Funçao 'VereficaQuantia'
 void SelecionaPatente(int Opçao, char StrAux[100]);                        // 14. Seleciona a Patente da Missao de Acordo com o Numero Recebido da Funçao 'VereficaQuantia'
 void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade); // 15. Seleciona e Imprime o Relatorio de Acordo Com o Contexto(Shinobi,Cla,Jutsu,Missao), E Administra as Variaveis Globais de Acordo Com a Opçao Selecionada Na Funçao 'Imprime';
@@ -3401,20 +3398,32 @@ void VerificaNivelDeDificuldade(char StrAuX[100])
 
 void VerificadorDeTexto(char Texto[100])
 {
-    int i, ctt, vereificar = 1;
+    char TextoAux[100];
+    int i, ctt, vereificar = 1, cttSpaces = 0, TamanhoDaString = 0;
     while (vereificar)
     {
         ctt = 1;
-        gets(Texto);
+        gets(TextoAux);
         fflush(stdin);
-        if (strlen(Texto) == 0)
+        if (strlen(TextoAux) == 0)
         {
-            printf("\nErro! Voce Deve Digitar Algo.\nDigite Novamnete: ");
+            printf("\nErro! Voce Deve Digitar Algo.\nDigite Novamente: ");
             continue;
         }
-        for (i = 0; Texto[i] != '\0'; i++)
+        for (i = 0; isspace(TextoAux[i]); i++)
         {
-            if ((!isalpha(Texto[i])) && Texto[i] != ' ')
+            cttSpaces++;
+        }
+        TamanhoDaString = strlen(TextoAux);
+        if (TamanhoDaString == cttSpaces)
+        {
+            printf("\nErro! Voce Nao Pode Digitar Apenas Espaços.\nDigite Novamente: ");
+            continue;
+        }
+
+        for (i = 0; TextoAux[cttSpaces + i] != '\0'; i++)
+        {
+            if ((!isalpha(TextoAux[cttSpaces + i])) && TextoAux[cttSpaces + i] != ' ')
             {
                 ctt = 0;
                 break;
@@ -3422,7 +3431,7 @@ void VerificadorDeTexto(char Texto[100])
         }
         if (!ctt)
         {
-            printf("\nErro! Apenas Letras.\nDigite Novamnete: ");
+            printf("\nErro! Digite Apenas Letras.\nDigite Novamente: ");
             continue;
         }
         else
@@ -3430,6 +3439,16 @@ void VerificadorDeTexto(char Texto[100])
             break;
         }
     }
+
+    int j = 0;
+    while (TextoAux[cttSpaces] != '\0')
+    {
+        TextoAux[j++] = TextoAux[cttSpaces++];
+    }
+
+    TextoAux[j] = '\0';
+
+    strcpy(Texto, TextoAux);
 
     for (i = 0; Texto[i] != '\0'; i++)
     {
