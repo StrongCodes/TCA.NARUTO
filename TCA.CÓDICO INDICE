@@ -1014,7 +1014,6 @@ tMissao CriarMissao()
                 continue;
             }
         }
-
         CadastroDeMissao.NinjasDaMissao[i] = OpçaoDeShinobi - 1;
     }
 
@@ -2750,23 +2749,19 @@ void Alterar(int TipoDeContexto)
             {
             case 1: // SHINOBI
                 printf("{ 1 } - Alterar Nome\n{ 2 } - Alterar Patente\n{ 3 } - Alterar Reserva de Chakra\n{ 4 } - Alterar Elemento Principal\n{ 5 } - Alterar/Remover Clã\n{ 6 } - Gerenciar Jutsus Dominados\n{ 7 } - Voltar\n");
-                maxOpcao = 7;
-                break;
+                maxOpcao = 7;break;
 
             case 2: // CLÃ
                 printf("{ 1 } - Alterar Nome do Clã\n{ 2 } - Gerenciar Jutsus Hereditários\n{ 3 } - Gerenciar Jutsus Tradicionais\n{ 4 } - Voltar\n");
-                maxOpcao = 4;
-                break;
+                maxOpcao = 4;break;
 
             case 3: // JUTSU
                 printf("{ 1 } - Alterar Nome do Jutsu\n{ 2 } - Alterar Tipo do Jutsu\n{ 3 } - Gerenciar Elementos\n{ 4 } - Alterar Custo de Chakra\n{ 5 } - Alterar Poder de Ataque\n{ 6 } - Voltar\n");
-                maxOpcao = 6;
-                break;
+                maxOpcao = 6;break;
 
             case 4: // MISSÃO
                 printf("{ 1 } - Alterar Título da Missão\n{ 2 } - Alterar Líder da Missão\n{ 3 } - Alterar Nível de Dificuldade\n{ 4 } - Alterar Status da Missão\n{ 5 } - Gerenciar Shinobis da Missão\n{ 6 } - Voltar\n");
-                maxOpcao = 6;
-                break;
+                maxOpcao = 6;break;
             }
 
             printf("\nOpção: ");
@@ -3304,32 +3299,25 @@ void SelecionaPatente(int Opçao, char StrAux[100])
     switch (Opçao)
     {
     case 1:
-        strcpy(StrAux, "Estudante da Academia");
-        break;
+        strcpy(StrAux, "Estudante da Academia");break;
 
     case 2:
-        strcpy(StrAux, "Genin");
-        break;
+        strcpy(StrAux, "Genin");break;
 
     case 3:
-        strcpy(StrAux, "Chunin");
-        break;
+        strcpy(StrAux, "Chunin");break;
 
     case 4:
-        strcpy(StrAux, "Tokubetsu Jounin");
-        break;
+        strcpy(StrAux, "Tokubetsu Jounin");break;
 
     case 5:
-        strcpy(StrAux, "Jounin");
-        break;
+        strcpy(StrAux, "Jounin");break;
 
     case 6:
-        strcpy(StrAux, "ANBU");
-        break;
+        strcpy(StrAux, "ANBU");break;
 
     case 7:
-        strcpy(StrAux, "Kage");
-        break;
+        strcpy(StrAux, "Kage");break;
     }
 }
 
@@ -3338,24 +3326,19 @@ void SelecionaStatus(int Opçao, char StrAux[100])
     switch (Opçao)
     {
     case 1:
-        strcpy(StrAux, "Pendente");
-        break;
+        strcpy(StrAux, "Pendente");break;
 
     case 2:
-        strcpy(StrAux, "Em Andamento");
-        break;
+        strcpy(StrAux, "Em Andamento");break;
 
     case 3:
-        strcpy(StrAux, "Concluida");
-        break;
+        strcpy(StrAux, "Concluida");break;
 
     case 4:
-        strcpy(StrAux, "Falha");
-        break;
+        strcpy(StrAux, "Falha");break;
 
     case 5:
-        strcpy(StrAux, "Cancelada");
-        break;
+        strcpy(StrAux, "Cancelada");break;
     }
 }
 
@@ -3484,7 +3467,6 @@ int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima)
                 continue;
             }
         }
-
         break;
     }
     return NumAux;
@@ -3499,23 +3481,19 @@ int EscolheOpçao(int Contexto)
     {
     case 1:
         VariavelDeContexto = _NumeroDoShinobi;
-        strcpy(TipoDeContexto, "SHINOBI");
-        break;
+        strcpy(TipoDeContexto, "SHINOBI");break;
 
     case 2:
         VariavelDeContexto = _NumeroDoCla;
-        strcpy(TipoDeContexto, "CLA");
-        break;
+        strcpy(TipoDeContexto, "CLA");break;
 
     case 3:
         VariavelDeContexto = _NumeroDoJutsu;
-        strcpy(TipoDeContexto, "JUTSU");
-        break;
+        strcpy(TipoDeContexto, "JUTSU");break;
 
     case 4:
         VariavelDeContexto = _NumeroDaMissao;
-        strcpy(TipoDeContexto, "MISSAO");
-        break;
+        strcpy(TipoDeContexto, "MISSAO");break;
     }
 
     while (1)
@@ -3572,24 +3550,19 @@ void SelecionadorDeMenu(int TipoDeMenu)
     switch (TipoDeMenu)
     {
     case 0:
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                MENU              \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar\n{ 2 } Exibir\n{ 3 } Alterar\n{ 4 } Deletar\n{ 5 } Sair\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n                MENU              \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar\n{ 2 } Exibir\n{ 3 } Alterar\n{ 4 } Deletar\n{ 5 } Sair\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
 
     case 1:
-        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n           MENU CADASTRAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar Shinobi\n{ 2 } Cadastrar Clã\n{ 3 } Cadastrar Jutsu\n{ 4 } Cadastrar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
+        printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n           MENU CADASTRAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Cadastrar Shinobi\n{ 2 } Cadastrar Clã\n{ 3 } Cadastrar Jutsu\n{ 4 } Cadastrar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
 
     case 2:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU EXIBIR             \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Exibir Shinobi\n{ 2 } Exibir Clã\n{ 3 } Exibir Jutsu\n{ 4 } Exibir Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU EXIBIR             \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Exibir Shinobi\n{ 2 } Exibir Clã\n{ 3 } Exibir Jutsu\n{ 4 } Exibir Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
 
     case 3:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU ALTERAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Alterar Shinobi\n{ 2 } Alterar Clã\n{ 3 } Alterar Jutsu\n{ 4 } Alterar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU ALTERAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Alterar Shinobi\n{ 2 } Alterar Clã\n{ 3 } Alterar Jutsu\n{ 4 } Alterar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
 
     case 4:
-        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU DELETAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Deletar Shinobi\n{ 2 } Deletar Clã\n{ 3 } Deletar Jutsu\n{ 4 } Deletar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        break;
+        printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n             MENU DELETAR            \n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n{ 1 } Deletar Shinobi\n{ 2 } Deletar Clã\n{ 3 } Deletar Jutsu\n{ 4 } Deletar Missão\n{ 5 } Voltar\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");break;
     }
 }
 
@@ -3625,7 +3598,7 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";");
+            fprintf(Dados, ";\n");
         }
 
         if (_NumeroDoCla > 0)
@@ -3652,7 +3625,7 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";");
+            fprintf(Dados, ";\n");
         }
 
         if (_NumeroDoShinobi > 0)
@@ -3675,7 +3648,7 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";");
+            fprintf(Dados, ";\n");
         }
 
         if (_NumeroDaMissao > 0)
@@ -3694,7 +3667,7 @@ void SalvaDados()
                     fprintf(Dados, "%d,", _ConjuntoDeMissoes[i].NinjasDaMissao[j]);
                 }
             }
-            fprintf(Dados, ";");
+            fprintf(Dados, ";\n");
         }
     }
     fclose(Dados);
@@ -3711,14 +3684,9 @@ void RecuperaDados()
 
     while ((fgets(LinhaDeDados, sizeof(LinhaDeDados), Dados)))
     {
-        DadosDoJutsu = strtok(LinhaDeDados, ";");
-        DadosDoCla = strtok(NULL, ";");
-        DadoosDoShinobi = strtok(NULL, ";");
-        DadosDeMissao = strtok(NULL, ";");
-        while (1)
-        {
-            if (SeparadorDeContexto == 0)
+        if (SeparadorDeContexto == 0)
             {
+                DadosDoJutsu = strtok(LinhaDeDados, ";");
                 _NumeroDoJutsu = 0;
 
                 AuxTok = strtok(DadosDoJutsu, ",");
@@ -3765,6 +3733,7 @@ void RecuperaDados()
             }
             else if (SeparadorDeContexto == 1)
             {
+                DadosDoCla = strtok(LinhaDeDados, ";");
                 _NumeroDoCla = 0;
 
                 AuxTok = strtok(DadosDoCla, ",");
@@ -3811,6 +3780,7 @@ void RecuperaDados()
             }
             else if (SeparadorDeContexto == 2)
             {
+                DadoosDoShinobi = strtok(LinhaDeDados, ";");
                 _NumeroDoShinobi = 0;
 
                 AuxTok = strtok(DadoosDoShinobi, ",");
@@ -3856,6 +3826,7 @@ void RecuperaDados()
             }
             else if (SeparadorDeContexto == 3)
             {
+                DadosDeMissao = strtok(LinhaDeDados, ";");
                 _NumeroDaMissao = 0;
 
                 AuxTok = strtok(DadosDeMissao, ",");
@@ -3895,7 +3866,6 @@ void RecuperaDados()
                 SeparadorDeContexto = 0;
                 break;
             }
-        }
     }
     fclose(Dados);
 }
