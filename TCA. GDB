@@ -101,8 +101,7 @@ int _NumeroDaMissao = 0;
 //~~~(main)~~~//
 int main()
 {
-    int op = 1;
-    int Inicial = 0;
+    int op = 1, Inicial = 0;
     RecuperaDados();
     while (1)
     {
@@ -142,10 +141,6 @@ void SelecionarContexto(int TipoDeContexto)
 
 void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao)
 {
-    if (OpçaoDaAçao == 5)
-    {
-        return;
-    }
     switch (TipoDeContexto)
     {
     case 1:
@@ -162,6 +157,10 @@ void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao)
 
     case 4:
         Remover(OpçaoDaAçao);
+        break;
+
+    case 5:
+        return;
         break;
     }
 }
@@ -205,8 +204,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
             else if (TipoDeCaso == 2)
             {
-                int OpçaoDeShinobi;
-                int NovoShinobi = 0;
+                int OpçaoDeShinobi, NovoShinobi = 0;
                 printf("\n{ 0 } - Cadastrar Novo Shinobi\nEscolha uma opção: ");
                 OpçaoDeShinobi = VereficaQuantia(NovoShinobi, (_NumeroDoShinobi));
                 if (OpçaoDeShinobi == NovoShinobi)
@@ -260,8 +258,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
             else if (TipoDeCaso == 2)
             {
-                int OpçaoDeCla;
-                int NovoCla = 0;
+                int OpçaoDeCla, NovoCla = 0;
                 printf("\n{ 0 } - Cadastrar Novo Cla\nEscolha uma opção: ");
                 OpçaoDeCla = VereficaQuantia(NovoCla, (_NumeroDoCla));
                 if (OpçaoDeCla == NovoCla)
@@ -315,8 +312,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
             else if (TipoDeCaso == 2)
             {
-                int OpçaoDeJutsu;
-                int NovoJutsu = 0;
+                int OpçaoDeJutsu, NovoJutsu = 0;
                 printf("\n{ 0 } - Cadastrar Novo Jutsu\nEscolha uma opção: ");
                 OpçaoDeJutsu = VereficaQuantia(NovoJutsu, _NumeroDoJutsu);
                 if (OpçaoDeJutsu == NovoJutsu)
@@ -370,8 +366,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
             else if (TipoDeCaso == 2)
             {
-                int OpçaoDeMissao;
-                int NovaMissao = 0;
+                int OpçaoDeMissao, NovaMissao = 0;
                 printf("\n{ 0 } - Cadastrar Nova Missao\nEscolha uma opção: ");
                 OpçaoDeMissao = VereficaQuantia(NovaMissao, _NumeroDaMissao);
                 if (OpçaoDeMissao == NovaMissao)
@@ -397,10 +392,9 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
 tNinja CriarShinobi()
 {
     tNinja CadastroDeShinobi;
-    int i, OpçaoDeJutsu, OpçaoDeCla, NumDeJutsus;
+    int i, OpçaoDeJutsu, OpçaoDeCla, NumDeJutsus, DesejaInformacoes = 0;
     char StrAux[100];
 
-    int DesejaInformacoes = 0;
     limpar_tela();
     printf("\n<~==[ CADASTRO DE SHINOBI ]==~>\n\nDeseja Informacoes Auxiliares Durante o Cadastro?(s/n) ");
     if (simOUnao())
@@ -535,9 +529,8 @@ tCla CriarCla()
 {
     tCla CadastroDeCla;
     char StrAux[100];
-    int i, OpçaoDeJutsu = 0;
+    int i, OpçaoDeJutsu = 0, DesejaInformacoes = 0;
 
-    int DesejaInformacoes = 0;
     limpar_tela();
     printf("\n<~==[ CADASTRO DE CLA ]==~>\n\nDeseja Informacoes Auxiliares Durante o Cadastro?(s/n) ");
     if (simOUnao())
@@ -587,9 +580,8 @@ tCla CriarCla()
     printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
     if (simOUnao() == 1)
     {
-        int NumDeJutsusHereditarios;
+        int NumDeJutsusHereditarios = 1;
 
-        NumDeJutsusHereditarios = 1;
         CadastroDeCla.JutsusHereditarios = malloc(NumDeJutsusHereditarios * sizeof(int));
 
         while (1)
@@ -691,9 +683,8 @@ tJutsu CriarJutsu()
 {
     tJutsu CadastroDeJutsu;
     char StrAuX[100];
-    int i;
+    int i, DesejaInformacoes = 0;
 
-    int DesejaInformacoes = 0;
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU ]==~>\n\nDeseja Informacoes Auxiliares Durante o Cadastro?(s/n) ");
     if (simOUnao())
@@ -805,9 +796,8 @@ tMissao CriarMissao()
 {
     tMissao CadastroDeMissao;
     char StrAuX[100];
-    int i;
+    int i, DesejaInformacoes = 0;
 
-    int DesejaInformacoes = 0;
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU ]==~>\n\nDeseja Informacoes Auxiliares Durante o Cadastro?(s/n) ");
     if (simOUnao())
@@ -863,8 +853,7 @@ tMissao CriarMissao()
 
     //=======================================================================================================================================================================================//
 
-    int *aux = calloc(101, sizeof(int));
-    int OpçaoDeShinobi = 0;
+    int *aux = calloc(101, sizeof(int)), OpçaoDeShinobi = 0, QuantiaAux;
 
     DesejaInformaçoes(DesejaInformacoes, 11);
     limpar_tela();
@@ -918,7 +907,6 @@ tMissao CriarMissao()
 
     //=======================================================================================================================================================================================//
 
-    int QuantiaAux;
     limpar_tela();
     printf("\n<~==[ CADASTRO DE MISSAO: QUANTIDADE DE NINJAS ]==~>\n");
     if (strcmp(CadastroDeMissao.NivelDificuldade, "D") == 0)
@@ -954,7 +942,6 @@ tMissao CriarMissao()
     for (i = 0; i < QuantiaAux; i++)
     {
         limpar_tela();
-
         OpçaoDeShinobi = EscolheOpçao(1);
         aux[i + 1] = OpçaoDeShinobi;
 
@@ -1138,8 +1125,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\n\n[ 0 ] - Listar Todos");
-                    printf("\n\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
+                    printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Shinobi Que Deseja: ");
@@ -1213,8 +1199,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\n\n[ 0 ] - Listar Todos");
-                    printf("\n\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Cla Que Deseja: ");
@@ -1288,8 +1273,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\n\n[ 0 ] - Listar Todos");
-                    printf("\n\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Jutsu Que Deseja: ");
@@ -1364,8 +1348,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
 
                 if (CasoDeImpressao == 1)
                 {
-                    printf("\n\n[ 0 ] - Listar Todas");
-                    printf("\n\nDeseja Ver Alguma de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\n[ 0 ] - Listar Todas\n\nDeseja Ver Alguma de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero da Missao Que Deseja: ");
@@ -1435,8 +1418,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         // Verificação extra de segurança
         if (OpçaoDeContexto - 1 < 0 || OpçaoDeContexto - 1 >= _NumeroDoShinobi)
         {
-            printf("\nErro: Shinobi invalido ou nao encontrado!");
-            printf("\n=================================\n");
+            printf("\nErro: Shinobi invalido ou nao encontrado!\n=================================\n");
             break;
         }
 
@@ -1487,15 +1469,12 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
             printf("\nDeseja Ver O Cla Ou Algum Jutsu de Maneira Mais Detalhada?(s/n) ");
             if (simOUnao() == 1)
             {
-                int i;
-                int OpçaoDeJutsu;
-                int OpçaoEscolhida;
+                int i, OpçaoDeJutsu, OpçaoEscolhida;
 
                 while (1)
                 {
                     limpar_tela();
-                    printf("\n<~==[ EXIBIR: INFORMAÇOES DO SHINOBI ]==~>\n");
-                    printf("\nEscolha Uma Opcao:\n\n{ 1 } - Cla\n{ 2 } - Jutsu\n{ 3 } - Voltar\nOpcao: ");
+                    printf("\n<~==[ EXIBIR: INFORMAÇOES DO SHINOBI ]==~>\n\nEscolha Uma Opcao:\n\n{ 1 } - Cla\n{ 2 } - Jutsu\n{ 3 } - Voltar\n\nOpcao: ");
                     OpçaoEscolhida = VereficaQuantia(1, 3);
                     if (OpçaoEscolhida == 1)
                     {
@@ -1545,8 +1524,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         // Verificação extra de segurança
         if (OpçaoDeContexto - 1 < 0 || OpçaoDeContexto - 1 >= _NumeroDoCla)
         {
-            printf("\nErro: Cla invalido ou nao encontrado!");
-            printf("\n=================================\n");
+            printf("\nErro: Cla invalido ou nao encontrado!\n=================================\n");
             break;
         }
 
@@ -1600,15 +1578,12 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
             printf("\nDeseja Ver os Membros ou os Jutsus De Maneira Mais Detalhada?(s/n) ");
             if (simOUnao() == 1)
             {
-                int OpçaoEscolhida;
-                int OpçaoDeJutsu;
-                int i;
+                int OpçaoEscolhida, OpçaoDeJutsu, i;
 
                 while (1)
                 {
                     limpar_tela();
-                    printf("\n<~==[ EXIBIR: INFORMAÇOES DO CLA ]==~>\n");
-                    printf("\nEscolha Uma Opcao:\n\n{ 1 } - Jutsus Hereditarios\n{ 2 } - Jutsus Tradicionais\n{ 3 } - Membros\n{ 4 } - Voltar\nOpcao: ");
+                    printf("\n<~==[ EXIBIR: INFORMAÇOES DO CLA ]==~>\n\nEscolha Uma Opcao:\n\n{ 1 } - Jutsus Hereditarios\n{ 2 } - Jutsus Tradicionais\n{ 3 } - Membros\n{ 4 } - Voltar\n\nOpcao: ");
                     OpçaoEscolhida = VereficaQuantia(1, 4);
                     if (OpçaoEscolhida == 1)
                     {
@@ -1662,9 +1637,8 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                     }
                     else if (OpçaoEscolhida == 3)
                     {
-                        int *aux = calloc(101, sizeof(int));
-                        int ctt = 0;
-                        int OpçaoDeMembro;
+                        int *aux = calloc(101, sizeof(int)), ctt = 0, OpçaoDeMembro;
+
                         if (_NumeroDoShinobi > 0)
                         {
                             int sinal = 0;
@@ -1685,8 +1659,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                                 if (ctt == 0)
                                 {
                                     limpar_tela();
-                                    printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
-                                    printf("\nNao ha Shinobis Que Tenham Parentesco Com Este Cla Cadastrados!");
+                                    printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n\nNao ha Shinobis Que Tenham Parentesco Com Este Cla Cadastrados!");
                                     congelar_tela();
                                     sinal = 1;
                                     break;
@@ -1720,8 +1693,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         else
                         {
                             limpar_tela();
-                            printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
-                            printf("\nNao ha Shinobis Cadastrados no Momento!");
+                            printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n\nNao ha Shinobis Cadastrados no Momento!");
                             congelar_tela();
                             break;
                         }
@@ -1741,8 +1713,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         // Verificação extra de segurança
         if (OpçaoDeContexto - 1 < 0 || OpçaoDeContexto - 1 >= _NumeroDoJutsu)
         {
-            printf("\nErro: Jutsu invalido ou nao encontrado!");
-            printf("\n=================================\n");
+            printf("\nErro: Jutsu invalido ou nao encontrado!\n=================================\n");
             break;
         }
 
@@ -1774,8 +1745,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
             printf("\nElementos Presentes: (Nenhum Elemento)");
         }
         printf("\nCusto de Chakra do Jutsu: (%d)", _ConjuntoDeJutsus[OpçaoDeContexto - 1].CustodeChakra);
-        printf("\nPoder de Ataque do Jutsu: (%d)", _ConjuntoDeJutsus[OpçaoDeContexto - 1].PoderdeAtaque);
-        printf("\n=================================\n");
+        printf("\nPoder de Ataque do Jutsu: (%d)\n=================================\n", _ConjuntoDeJutsus[OpçaoDeContexto - 1].PoderdeAtaque);
         break;
 
     case 4:
@@ -1784,8 +1754,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         // Verificação extra de segurança
         if (OpçaoDeContexto - 1 < 0 || OpçaoDeContexto - 1 >= _NumeroDaMissao)
         {
-            printf("\nErro: Missao invalida ou nao encontrada!");
-            printf("\n=================================\n");
+            printf("\nErro: Missao invalida ou nao encontrada!\n=================================\n");
             break;
         }
 
@@ -1823,8 +1792,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         {
             printf("\nShinobi Presentes: (Nenhum Shinobi)");
         }
-        printf("\nQuantidade de Ninjas da Missao: (%d)", _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas);
-        printf("\n=================================\n");
+        printf("\nQuantidade de Ninjas da Missao: (%d)\n=================================\n", _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas);
 
         if (Necessidade == 2)
         {
@@ -1833,13 +1801,10 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
             {
                 while (1)
                 {
-                    int OpçaoEscolhida;
-                    int OpçaoDeShinobi;
-                    int i;
+                    int OpçaoEscolhida, OpçaoDeShinobi, i;
 
                     limpar_tela();
-                    printf("\n<~==[ EXIBIR: INFORMAÇOES DA MISSAO ]==~>\n");
-                    printf("\nEscolha Uma Opcao:\n\n{ 1 } - Lider Da Missao\n{ 2 } - Shinobis Da Missao\n{ 3 } - Voltar\nOpcao: ");
+                    printf("\n<~==[ EXIBIR: INFORMAÇOES DA MISSAO ]==~>\n\nEscolha Uma Opcao:\n\n{ 1 } - Lider Da Missao\n{ 2 } - Shinobis Da Missao\n{ 3 } - Voltar\nOpcao: ");
                     OpçaoEscolhida = VereficaQuantia(1, 3);
 
                     if (OpçaoEscolhida == 1)
@@ -2465,10 +2430,29 @@ void AlterarShinobiEspecifico(int indiceShinobi)
                     printf("\n=== ADICIONAR JUTSU ===\n");
                     Imprime(2, 3);
                     int OpçaoDeJutsu = NovoCadastro(3, 2);
-                    _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu, (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus + 1) * sizeof(int));
-                    _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[_ConjuntoDeShinobis[idx].QuantidadeDeJutsus] = OpçaoDeJutsu - 1;
-                    _ConjuntoDeShinobis[idx].QuantidadeDeJutsus++;
-                    printf("\nJutsu criado!\n");
+
+                    // VERIFICAÇÃO SE JUTSU JÁ É DOMINADO PELO SHINOBI
+                    int jutsuJaExiste = 0;
+                    for (int i = 0; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus; i++)
+                    {
+                        if (_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i] == OpçaoDeJutsu - 1)
+                        {
+                            jutsuJaExiste = 1;
+                            break;
+                        }
+                    }
+
+                    if (jutsuJaExiste)
+                    {
+                        printf("\nErro! Este shinobi já domina este jutsu!\n");
+                    }
+                    else
+                    {
+                        _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu, (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus + 1) * sizeof(int));
+                        _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[_ConjuntoDeShinobis[idx].QuantidadeDeJutsus] = OpçaoDeJutsu - 1;
+                        _ConjuntoDeShinobis[idx].QuantidadeDeJutsus++;
+                        printf("\nJutsu adicionado!\n");
+                    }
                 }
                 break;
 
@@ -2488,9 +2472,28 @@ void AlterarShinobiEspecifico(int indiceShinobi)
                     while (1)
                     {
                         limpar_tela();
-                        printf("=== SELECIONAR ===\n");
+                        printf("=== SELECIONAR NOVO JUTSU ===\n");
                         Imprime(2, 3);
                         int OpçaoDeJutsu = NovoCadastro(3, 2);
+
+                        // SE JUTSU JÁ É DOMINADO (exceto o atual)
+                        int jutsuJaExiste = 0;
+                        for (int i = 0; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus; i++)
+                        {
+                            if (i != jutsuIdx && _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i] == OpçaoDeJutsu - 1)
+                            {
+                                jutsuJaExiste = 1;
+                                break;
+                            }
+                        }
+
+                        if (jutsuJaExiste)
+                        {
+                            printf("\nErro! Este shinobi já domina este jutsu!\n");
+                            congelar_tela();
+                            continue;
+                        }
+
                         RelatorioDaOpçao(3, OpçaoDeJutsu, 1);
                         printf("Este Seria o Jutsu Desejado?(s/n) ");
                         if (simOUnao())
@@ -2742,10 +2745,29 @@ void Alterar(int TipoDeContexto)
                             printf("\n=== ADICIONA JUTSU ===\n");
                             Imprime(2, 3);
                             int OpçaoDeJutsu = NovoCadastro(3, 2);
-                            _ConjuntoDeClas[idx].JutsusHereditarios = realloc(_ConjuntoDeClas[idx].JutsusHereditarios, (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios + 1) * sizeof(int));
-                            _ConjuntoDeClas[idx].JutsusHereditarios[_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios] = OpçaoDeJutsu - 1;
-                            _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios++;
-                            printf("\nJutsu criado!\n");
+
+                            // VERIFICAÇÃO SE JUTSU JÁ ESTÁ NOS HEREDITÁRIOS
+                            int jutsuJaExiste = 0;
+                            for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++)
+                            {
+                                if (_ConjuntoDeClas[idx].JutsusHereditarios[i] == OpçaoDeJutsu - 1)
+                                {
+                                    jutsuJaExiste = 1;
+                                    break;
+                                }
+                            }
+
+                            if (jutsuJaExiste)
+                            {
+                                printf("\nErro! Este jutsu já está nos jutsus hereditários do clã!\n");
+                            }
+                            else
+                            {
+                                _ConjuntoDeClas[idx].JutsusHereditarios = realloc(_ConjuntoDeClas[idx].JutsusHereditarios, (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios + 1) * sizeof(int));
+                                _ConjuntoDeClas[idx].JutsusHereditarios[_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios] = OpçaoDeJutsu - 1;
+                                _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios++;
+                                printf("\nJutsu criado!\n");
+                            }
                         }
                         break;
 
@@ -2768,6 +2790,40 @@ void Alterar(int TipoDeContexto)
                                 printf("=== SELECIONAR ===\n");
                                 Imprime(2, 3);
                                 int OpçaoDeJutsu = NovoCadastro(3, 2);
+
+                                // VERIFICAÇÃO COMPLETA
+                                int jutsuJaExiste = 0;
+
+                                // Verifica nos jutsus hereditários (exceto o atual)
+                                for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++)
+                                {
+                                    if (i != jutsuIdx && _ConjuntoDeClas[idx].JutsusHereditarios[i] == OpçaoDeJutsu - 1)
+                                    {
+                                        jutsuJaExiste = 1;
+                                        break;
+                                    }
+                                }
+
+                                // Verifica nos jutsus tradicionais (TODOS)
+                                if (!jutsuJaExiste && _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0)
+                                {
+                                    for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais; i++)
+                                    {
+                                        if (_ConjuntoDeClas[idx].JutsusTradicionais[i] == OpçaoDeJutsu - 1)
+                                        {
+                                            jutsuJaExiste = 1;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (jutsuJaExiste)
+                                {
+                                    printf("\nErro! Este jutsu já está nos jutsus hereditários OU tradicionais do clã!\n");
+                                    congelar_tela();
+                                    continue;
+                                }
+
                                 RelatorioDaOpçao(3, OpçaoDeJutsu, 1);
                                 printf("Este Seria o Jutsu Desejado?(s/n) ");
                                 if (simOUnao())
@@ -2844,10 +2900,29 @@ void Alterar(int TipoDeContexto)
                             printf("\n=== ADICIONA JUTSU ===\n");
                             Imprime(2, 3);
                             int OpçaoDeJutsu = NovoCadastro(3, 2);
-                            _ConjuntoDeClas[idx].JutsusTradicionais = realloc(_ConjuntoDeClas[idx].JutsusTradicionais, (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais + 1) * sizeof(int));
-                            _ConjuntoDeClas[idx].JutsusTradicionais[_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais] = OpçaoDeJutsu - 1;
-                            _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais++;
-                            printf("\nJutsu criado!\n");
+
+                            // VERIFICAÇÃO SE JUTSU JÁ ESTÁ NOS TRADICIONAIS
+                            int jutsuJaExiste = 0;
+                            for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais; i++)
+                            {
+                                if (_ConjuntoDeClas[idx].JutsusTradicionais[i] == OpçaoDeJutsu - 1)
+                                {
+                                    jutsuJaExiste = 1;
+                                    break;
+                                }
+                            }
+
+                            if (jutsuJaExiste)
+                            {
+                                printf("\nErro! Este jutsu já está nos jutsus tradicionais do clã!\n");
+                            }
+                            else
+                            {
+                                _ConjuntoDeClas[idx].JutsusTradicionais = realloc(_ConjuntoDeClas[idx].JutsusTradicionais, (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais + 1) * sizeof(int));
+                                _ConjuntoDeClas[idx].JutsusTradicionais[_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais] = OpçaoDeJutsu - 1;
+                                _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais++;
+                                printf("\nJutsu criado!\n");
+                            }
                         }
                         break;
 
@@ -2870,6 +2945,40 @@ void Alterar(int TipoDeContexto)
                                 printf("=== SELECIONAR ===\n");
                                 Imprime(2, 3);
                                 int OpçaoDeJutsu = NovoCadastro(3, 2);
+
+                                // VERIFICAÇÃO COMPLETA
+                                int jutsuJaExiste = 0;
+
+                                // Verifica nos jutsus tradicionais (exceto o atual)
+                                for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais; i++)
+                                {
+                                    if (i != jutsuIdx && _ConjuntoDeClas[idx].JutsusTradicionais[i] == OpçaoDeJutsu - 1)
+                                    {
+                                        jutsuJaExiste = 1;
+                                        break;
+                                    }
+                                }
+
+                                // Verifica nos jutsus hereditários (TODOS)
+                                if (!jutsuJaExiste && _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0)
+                                {
+                                    for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++)
+                                    {
+                                        if (_ConjuntoDeClas[idx].JutsusHereditarios[i] == OpçaoDeJutsu - 1)
+                                        {
+                                            jutsuJaExiste = 1;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (jutsuJaExiste)
+                                {
+                                    printf("\nErro! Este jutsu já está nos jutsus tradicionais OU hereditários do clã!\n");
+                                    congelar_tela();
+                                    continue;
+                                }
+
                                 RelatorioDaOpçao(3, OpçaoDeJutsu, 1);
                                 printf("Este Seria o Jutsu Desejado?(s/n) ");
                                 if (simOUnao())
@@ -3089,6 +3198,30 @@ void Alterar(int TipoDeContexto)
                             printf("Opção: ");
                             int novoShinobi = VereficaQuantia(1, _NumeroDoShinobi);
 
+                            // VERIFICAÇÃO SE SHINOBI JÁ ESTÁ NA MISSÃO
+                            int jaExiste = 0;
+                            for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
+                            {
+                                if (_ConjuntoDeMissoes[idx].NinjasDaMissao[i] == novoShinobi - 1)
+                                {
+                                    jaExiste = 1;
+                                    break;
+                                }
+                            }
+
+                            if (jaExiste)
+                            {
+                                printf("\nErro! %s já está designado para esta missão!\n", _ConjuntoDeShinobis[novoShinobi - 1].Nome);
+                                break;
+                            }
+
+                            // VERIFICAÇÃO SE É O LÍDER DA MISSÃO
+                            if (_ConjuntoDeMissoes[idx].LiderResponsavel == novoShinobi - 1)
+                            {
+                                printf("\nErro! %s já é o líder desta missão!\n", _ConjuntoDeShinobis[novoShinobi - 1].Nome);
+                                break;
+                            }
+
                             int podeAdicionar = 1;
                             char *patenteNovo = _ConjuntoDeShinobis[novoShinobi - 1].Patente;
                             char *nivelMissao = _ConjuntoDeMissoes[idx].NivelDificuldade;
@@ -3117,27 +3250,10 @@ void Alterar(int TipoDeContexto)
 
                             if (podeAdicionar)
                             {
-                                int jaExiste = 0;
-                                for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
-                                {
-                                    if (_ConjuntoDeMissoes[idx].NinjasDaMissao[i] == novoShinobi - 1)
-                                    {
-                                        jaExiste = 1;
-                                        break;
-                                    }
-                                }
-
-                                if (jaExiste)
-                                {
-                                    printf("\nErro! Já está!\n");
-                                }
-                                else
-                                {
-                                    _ConjuntoDeMissoes[idx].NinjasDaMissao = realloc(_ConjuntoDeMissoes[idx].NinjasDaMissao, (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas + 1) * sizeof(int));
-                                    _ConjuntoDeMissoes[idx].NinjasDaMissao[_ConjuntoDeMissoes[idx].QuantidadeDeNinjas] = novoShinobi - 1;
-                                    _ConjuntoDeMissoes[idx].QuantidadeDeNinjas++;
-                                    printf("\nShinobi adicionado!\n");
-                                }
+                                _ConjuntoDeMissoes[idx].NinjasDaMissao = realloc(_ConjuntoDeMissoes[idx].NinjasDaMissao, (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas + 1) * sizeof(int));
+                                _ConjuntoDeMissoes[idx].NinjasDaMissao[_ConjuntoDeMissoes[idx].QuantidadeDeNinjas] = novoShinobi - 1;
+                                _ConjuntoDeMissoes[idx].QuantidadeDeNinjas++;
+                                printf("\nShinobi adicionado!\n");
                             }
                         }
                         break;
@@ -3146,7 +3262,7 @@ void Alterar(int TipoDeContexto)
                         printf("Alterar (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
                         int shinobiIdxAlt = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
                         limpar_tela();
-                        printf("=== PREFERENCIAS NA ALTERACAO ===\nDeseja Alterar Atribuos ou Selecionar Outro Ninja?\n\n1-Atributos\n2-Selecionar\n3-Voltar\n\nOpçao: ");
+                        printf("=== PREFERENCIAS NA ALTERACAO ===\nDeseja Alterar Atributos ou Selecionar Outro Ninja?\n\n1-Atributos\n2-Selecionar\n3-Voltar\n\nOpçao: ");
                         int op = VereficaQuantia(1, 3);
                         if (op == 1)
                         {
@@ -3160,12 +3276,45 @@ void Alterar(int TipoDeContexto)
                                 limpar_tela();
                                 printf("=== SELECIONAR ===\n");
                                 Imprime(2, 1);
-                                int OpçaoDeJutsu = NovoCadastro(1, 2);
-                                RelatorioDaOpçao(3, OpçaoDeJutsu, 1);
-                                printf("Este Seria o Jutsu Desejado?(s/n) ");
+                                int OpçaoDeShinobi = NovoCadastro(1, 2);
+
+                                // VERIFICAÇÃO SE SHINOBI JÁ ESTÁ NA MISSÃO (exceto o atual)
+                                int shinobiJaExiste = 0;
+                                for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
+                                {
+                                    if (i != shinobiIdxAlt && _ConjuntoDeMissoes[idx].NinjasDaMissao[i] == OpçaoDeShinobi - 1)
+                                    {
+                                        shinobiJaExiste = 1;
+                                        break;
+                                    }
+                                }
+
+                                // VERIFICAÇÃO SE É O LÍDER DA MISSÃO
+                                int ehLider = 0;
+                                if (_ConjuntoDeMissoes[idx].LiderResponsavel == OpçaoDeShinobi - 1)
+                                {
+                                    ehLider = 1;
+                                }
+
+                                if (shinobiJaExiste)
+                                {
+                                    printf("\nErro! Este shinobi já está na missão!\n");
+                                    congelar_tela();
+                                    continue;
+                                }
+
+                                if (ehLider)
+                                {
+                                    printf("\nErro! Este shinobi já é o líder da missão!\n");
+                                    congelar_tela();
+                                    continue;
+                                }
+
+                                RelatorioDaOpçao(1, OpçaoDeShinobi, 1);
+                                printf("Este Seria o Shinobi Desejado?(s/n) ");
                                 if (simOUnao())
                                 {
-                                    _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdxAlt] = OpçaoDeJutsu - 1;
+                                    _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdxAlt] = OpçaoDeShinobi - 1;
                                     break;
                                 }
                                 else
