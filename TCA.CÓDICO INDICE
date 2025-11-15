@@ -2298,11 +2298,13 @@ void Remover(int TipoDeContexto)
     }
 }
 
-void AlterarShinobiEspecifico(int indiceShinobi) {
+void AlterarShinobiEspecifico(int indiceShinobi)
+{
     char strAux[100];
     int opcao;
-   
-    do {
+
+    while (1)
+    {
         limpar_tela();
         printf("\n=== ALTERAR SHINOBI ===\n");
         RelatorioDaOpçao(1, indiceShinobi, 1);
@@ -2312,658 +2314,778 @@ void AlterarShinobiEspecifico(int indiceShinobi) {
         {
             break;
         }
-       
+
         int idx = indiceShinobi - 1;
-       
-        switch (opcao) {
+
+        switch (opcao)
+        {
+        case 1:
+            printf("\n--- Alterar Nome ---\nAtual: %s\nNovo: ", _ConjuntoDeShinobis[idx].Nome);
+            VerificadorDeTexto(strAux);
+
+            int nomeExiste = 0;
+            for (int i = 0; i < _NumeroDoShinobi; i++)
+            {
+                if (i != idx && strcmp(strAux, _ConjuntoDeShinobis[i].Nome) == 0)
+                {
+                    nomeExiste = 1;
+                    break;
+                }
+            }
+
+            if (nomeExiste)
+            {
+                printf("\nErro! Nome já existe!\n");
+            }
+            else
+            {
+                free(_ConjuntoDeShinobis[idx].Nome);
+                _ConjuntoDeShinobis[idx].Nome = malloc(strlen(strAux) + 1);
+                strcpy(_ConjuntoDeShinobis[idx].Nome, strAux);
+                printf("\nNome alterado!\n");
+            }
+            break;
+
+        case 2:
+            printf("\n--- Alterar Patente ---\nAtual: %s\n1-Academia\n2-Genin\n3-Chunin\n4-Tokubetsu\n5-Jounin\n6-ANBU\n7-Kage\nOpção: ", _ConjuntoDeShinobis[idx].Patente);
+            SelecionaPatente(VereficaQuantia(1, 7), strAux);
+
+            int conflitoMissao = 0;
+            for (int i = 0; i < _NumeroDaMissao; i++)
+            {
+                if (_ConjuntoDeMissoes[i].LiderResponsavel == (idx + 1))
+                {
+                    if ((strcmp(strAux, "Estudante da Academia") == 0 || strcmp(strAux, "Genin") == 0) &&
+                        (strcmp(_ConjuntoDeMissoes[i].NivelDificuldade, "A") == 0 || strcmp(_ConjuntoDeMissoes[i].NivelDificuldade, "S") == 0))
+                    {
+                        printf("\nErro! Líder da missão %s (Rank %s)!\n", _ConjuntoDeMissoes[i].Titulo, _ConjuntoDeMissoes[i].NivelDificuldade);
+                        conflitoMissao = 1;
+                        break;
+                    }
+                }
+            }
+
+            if (!conflitoMissao)
+            {
+                free(_ConjuntoDeShinobis[idx].Patente);
+                _ConjuntoDeShinobis[idx].Patente = malloc(strlen(strAux) + 1);
+                strcpy(_ConjuntoDeShinobis[idx].Patente, strAux);
+                printf("\nPatente alterada!\n");
+            }
+            break;
+
+        case 3:
+            printf("\n--- Alterar Chakra ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeShinobis[idx].QuantidadeDeChakra);
+            _ConjuntoDeShinobis[idx].QuantidadeDeChakra = VereficaQuantia(1, 100);
+            printf("\nChakra alterado!\n");
+            break;
+
+        case 4:
+            printf("\n--- Alterar Elemento ---\nAtual: %s\nNovo: ", _ConjuntoDeShinobis[idx].ElementoPrincipal);
+            VerificadorDeTexto(strAux);
+            free(_ConjuntoDeShinobis[idx].ElementoPrincipal);
+            _ConjuntoDeShinobis[idx].ElementoPrincipal = malloc(strlen(strAux) + 1);
+            strcpy(_ConjuntoDeShinobis[idx].ElementoPrincipal, strAux);
+            printf("\nElemento alterado!\n");
+            break;
+
+        case 5:
+            printf("\n--- Gerenciar Clã ---\n");
+            if (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != -1)
+            {
+                printf("Atual: %s\n", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla].NomeDoCla);
+            }
+            else
+            {
+                printf("Atual: Nenhum\n");
+            }
+
+            printf("\n1-Alterar\n");
+            if (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != -1)
+                printf("2-Remover\n");
+            printf("3-Voltar\nOpção: ");
+
+            int maxOpCla = (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != -1) ? 3 : 2;
+            int opCla = VereficaQuantia(1, maxOpCla);
+
+            switch (opCla)
+            {
             case 1:
-                printf("\n--- Alterar Nome ---\nAtual: %s\nNovo: ", _ConjuntoDeShinobis[idx].Nome);
-                VerificadorDeTexto(strAux);
-               
-                int nomeExiste = 0;
-                for (int i = 0; i < _NumeroDoShinobi; i++) {
-                    if (i != idx && strcmp(strAux, _ConjuntoDeShinobis[i].Nome) == 0) {
-                        nomeExiste = 1;
-                        break;
-                    }
-                }
-               
-                if (nomeExiste) {
-                    printf("\nErro! Nome já existe!\n");
-                } else {
-                    free(_ConjuntoDeShinobis[idx].Nome);
-                    _ConjuntoDeShinobis[idx].Nome = malloc(strlen(strAux) + 1);
-                    strcpy(_ConjuntoDeShinobis[idx].Nome, strAux);
-                    printf("\nNome alterado!\n");
-                }
+                printf("\nNovo clã:\n");
+                for (int i = 0; i < _NumeroDoCla; i++)
+                    printf("%d-%s\n", i + 1, _ConjuntoDeClas[i].NomeDoCla);
+                printf("Opção: ");
+                int novoClaIdx = VereficaQuantia(1, _NumeroDoCla);
+                _ConjuntoDeShinobis[idx].CaracteristicasDoCla = novoClaIdx - 1;
+                printf("\nClã alterado!\n");
                 break;
-               
+
             case 2:
-                printf("\n--- Alterar Patente ---\nAtual: %s\n1-Academia\n2-Genin\n3-Chunin\n4-Tokubetsu\n5-Jounin\n6-ANBU\n7-Kage\nOpção: ", _ConjuntoDeShinobis[idx].Patente);
-                SelecionaPatente(VereficaQuantia(1, 7), strAux);
-               
-                int conflitoMissao = 0;
-                for (int i = 0; i < _NumeroDaMissao; i++) {
-                    if (_ConjuntoDeMissoes[i].LiderResponsavel == (idx + 1)) {
-                        if ((strcmp(strAux, "Estudante da Academia") == 0 || strcmp(strAux, "Genin") == 0) &&
-                            (strcmp(_ConjuntoDeMissoes[i].NivelDificuldade, "A") == 0 || strcmp(_ConjuntoDeMissoes[i].NivelDificuldade, "S") == 0)) {
-                            printf("\nErro! Líder da missão %s (Rank %s)!\n", _ConjuntoDeMissoes[i].Titulo, _ConjuntoDeMissoes[i].NivelDificuldade);
-                            conflitoMissao = 1;
-                            break;
-                        }
-                    }
+                printf("\nRemover %s de %s? (s/n): ", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla - 1].NomeDoCla, _ConjuntoDeShinobis[idx].Nome);
+                if (simOUnao() == 1)
+                {
+                    printf("\nClã removido! Renegado!\n");
+                    _ConjuntoDeShinobis[idx].CaracteristicasDoCla = 0;
                 }
-               
-                if (!conflitoMissao) {
-                    free(_ConjuntoDeShinobis[idx].Patente);
-                    _ConjuntoDeShinobis[idx].Patente = malloc(strlen(strAux) + 1);
-                    strcpy(_ConjuntoDeShinobis[idx].Patente, strAux);
-                    printf("\nPatente alterada!\n");
+                else
+                    printf("\nCancelado.\n");
+                break;
+            }
+            break;
+
+        case 6:
+            printf("\n=== GERENCIAR JUTSUS ===\n");
+            if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0)
+            {
+                printf("Jutsus atuais:\n");
+                for (int i = 0; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus; i++)
+                {
+                    int jutsuIdx = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i];
+                    printf("%d-%s\n", i + 1, _ConjuntoDeJutsus[jutsuIdx].Nome);
+                }
+            }
+            else
+                printf("Nenhum jutsu.\n");
+
+            printf("\n1-Adicionar\n");
+            if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0)
+                printf("2-Alterar\n3-Remover\n");
+            printf("4-Voltar\nOpção: ");
+            int maxOp = (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0) ? 4 : 2;
+            int opJutsu = VereficaQuantia(1, maxOp);
+
+            switch (opJutsu)
+            {
+            case 1:
+                if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus >= 100)
+                    printf("\nErro! Limite máximo!\n");
+                else
+                {
+                    printf("\n=== CRIAR JUTSU ===\n");
+                    _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
+                    _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
+                    _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu, (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus + 1) * sizeof(int));
+                    _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[_ConjuntoDeShinobis[idx].QuantidadeDeJutsus] = _NumeroDoJutsu;
+                    _ConjuntoDeShinobis[idx].QuantidadeDeJutsus++;
+                    _NumeroDoJutsu++; 
+                    printf("\nJutsu criado!\n");
                 }
                 break;
-               
+
+            case 2:
+                printf("Alterar jutsu (1-%d): ", _ConjuntoDeShinobis[idx].QuantidadeDeJutsus);
+                int jutsuIdx = VereficaQuantia(1, _ConjuntoDeShinobis[idx].QuantidadeDeJutsus) - 1;
+                int jutsuGlobalIdx = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[jutsuIdx] + 1;
+                AlterarJutsuEspecifico(jutsuGlobalIdx);
+                break;
+
             case 3:
-                printf("\n--- Alterar Chakra ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeShinobis[idx].QuantidadeDeChakra);
-                _ConjuntoDeShinobis[idx].QuantidadeDeChakra = VereficaQuantia(1, 100);
-                printf("\nChakra alterado!\n");
-                break;
-               
-            case 4:
-                printf("\n--- Alterar Elemento ---\nAtual: %s\nNovo: ", _ConjuntoDeShinobis[idx].ElementoPrincipal);
-                VerificadorDeTexto(strAux);
-                free(_ConjuntoDeShinobis[idx].ElementoPrincipal);
-                _ConjuntoDeShinobis[idx].ElementoPrincipal = malloc(strlen(strAux) + 1);
-                strcpy(_ConjuntoDeShinobis[idx].ElementoPrincipal, strAux);
-                printf("\nElemento alterado!\n");
-                break;
-               
-            case 5:
-                printf("\n--- Gerenciar Clã ---\n");
-                if (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != 0) {
-                    printf("Atual: %s\n", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla - 1].NomeDoCla);
-                } else {
-                    printf("Atual: Nenhum\n");
-                }
-               
-                printf("\n1-Alterar\n");
-                if (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != 0) printf("2-Remover\n");
-                printf("3-Voltar\nOpção: ");
-               
-                int maxOpCla = (_ConjuntoDeShinobis[idx].CaracteristicasDoCla != 0) ? 3 : 2;
-                int opCla = VereficaQuantia(1, maxOpCla);
-               
-                switch(opCla) {
-                    case 1:
-                        printf("\nNovo clã:\n");
-                        for (int i = 0; i < _NumeroDoCla; i++) printf("%d-%s\n", i+1, _ConjuntoDeClas[i].NomeDoCla);
-                        printf("Opção: ");
-                        int novoClaIdx = VereficaQuantia(1, _NumeroDoCla);
-                        _ConjuntoDeShinobis[idx].CaracteristicasDoCla = novoClaIdx;
-                        printf("\nClã alterado!\n");
-                        break;
-                       
-                    case 2:
-                        printf("\nRemover %s de %s? (s/n): ", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla - 1].NomeDoCla, _ConjuntoDeShinobis[idx].Nome);
-                        if (simOUnao() == 1) {
-                            printf("\nClã removido! Renegado!\n");
-                            _ConjuntoDeShinobis[idx].CaracteristicasDoCla = 0;  
-                        } else printf("\nCancelado.\n");
-                        break;
-                }
-                break;
-               
-            case 6:
-                printf("\n=== GERENCIAR JUTSUS ===\n");
-                if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0) {
-                    printf("Jutsus atuais:\n");
-                    for (int i = 0; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus; i++) {
-                        int jutsuIdx = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i];
-                        printf("%d-%s\n", i+1, _ConjuntoDeJutsus[jutsuIdx].Nome);
+                printf("Remover jutsu (1-%d): ", _ConjuntoDeShinobis[idx].QuantidadeDeJutsus);
+                int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeShinobis[idx].QuantidadeDeJutsus) - 1;
+                int jutsuParaRemover = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[jutsuIdxRem];
+                printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover].Nome);
+                if (simOUnao() == 1)
+                {
+                    for (int i = jutsuIdxRem; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus - 1; i++)
+                    {
+                        _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i] = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i + 1];
                     }
-                } else printf("Nenhum jutsu.\n");
-               
-                printf("\n1-Adicionar\n");
-                if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0) printf("2-Alterar\n3-Remover\n");
-                printf("4-Voltar\nOpção: ");
-                int maxOp = (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0) ? 4 : 2;
-                int opJutsu = VereficaQuantia(1, maxOp);
-               
-                switch(opJutsu) {
-                    case 1:
-                        if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus >= 100) printf("\nErro! Limite máximo!\n");
-                        else {
-                            printf("\n=== CRIAR JUTSU ===\n");
-                            _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
-                            _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
-                            _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu, (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus + 1) * sizeof(int));
-                            _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[_ConjuntoDeShinobis[idx].QuantidadeDeJutsus] = _NumeroDoJutsu;
-                            _ConjuntoDeShinobis[idx].QuantidadeDeJutsus++;
-                            _NumeroDoJutsu++;
-                            printf("\nJutsu criado!\n");
-                        }
-                        break;
-                       
-                    case 2:
-                        printf("Alterar jutsu (1-%d): ", _ConjuntoDeShinobis[idx].QuantidadeDeJutsus);
-                        int jutsuIdx = VereficaQuantia(1, _ConjuntoDeShinobis[idx].QuantidadeDeJutsus) - 1;
-                        int jutsuGlobalIdx = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[jutsuIdx] + 1;
-                        AlterarJutsuEspecifico(jutsuGlobalIdx);
-                        break;
-                       
-                    case 3:
-                        printf("Remover jutsu (1-%d): ", _ConjuntoDeShinobis[idx].QuantidadeDeJutsus);
-                        int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeShinobis[idx].QuantidadeDeJutsus) - 1;
-                        int jutsuParaRemover = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[jutsuIdxRem];
-                        printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover].Nome);
-                        if (simOUnao() == 1) {
-                            for (int i = jutsuIdxRem; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus - 1; i++) {
-                                _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i] = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[i + 1];
-                            }
-                            _ConjuntoDeShinobis[idx].QuantidadeDeJutsus--;
-                            printf("\nJutsu removido!\n");
-                        }
-                        break;
+                    _ConjuntoDeShinobis[idx].QuantidadeDeJutsus--;
+                    printf("\nJutsu removido!\n");
                 }
                 break;
+            }
+            break;
         }
         congelar_tela();
-    } while (1);
+    }
 }
 
-void Alterar(int TipoDeContexto) {
+void Alterar(int TipoDeContexto)
+{
     int indice;
     char strAux[100];
 
-    while (1) {
+    while (1)
+    {
         limpar_tela();
         printf("\n=== ALTERAR ===\n\n");
 
         int quantidade;
-        char* tipoNome;
-       
-        switch (TipoDeContexto) {
-            case 1:
-                quantidade = _NumeroDoShinobi;
-                tipoNome = "SHINOBI";
-                if (quantidade == 0) {
-                    printf("Nenhum shinobi!\n");
-                    congelar_tela();
-                    return;
-                }
-                printf("Shinobis:\n");
-                for (int i = 0; i < quantidade; i++) {
-                    printf("%d-%s\n", i+1, _ConjuntoDeShinobis[i].Nome);
-                }
-                break;
+        char *tipoNome;
 
-            case 2:
-                quantidade = _NumeroDoCla;
-                tipoNome = "CLÃ";
-                if (quantidade == 0) {
-                    printf("Nenhum clã!\n");
-                    congelar_tela();
-                    return;
-                }
-                printf("Clãs:\n");
-                for (int i = 0; i < quantidade; i++) {
-                    printf("%d-%s\n", i+1, _ConjuntoDeClas[i].NomeDoCla);
-                }
-                break;
+        switch (TipoDeContexto)
+        {
+        case 1:
+            quantidade = _NumeroDoShinobi;
+            tipoNome = "SHINOBI";
+            if (quantidade == 0)
+            {
+                printf("Nenhum shinobi!\n");
+                congelar_tela();
+                return;
+            }
+            printf("Shinobis:\n");
+            for (int i = 0; i < quantidade; i++)
+            {
+                printf("%d-%s\n", i + 1, _ConjuntoDeShinobis[i].Nome);
+            }
+            break;
 
-            case 3:
-                quantidade = _NumeroDoJutsu;
-                tipoNome = "JUTSU";
-                if (quantidade == 0) {
-                    printf("Nenhum jutsu!\n");
-                    congelar_tela();
-                    return;
-                }
-                printf("Jutsus:\n");
-                for (int i = 0; i < quantidade; i++) {
-                    printf("%d-%s: %s\n", i+1, _ConjuntoDeJutsus[i].TipoJutsu, _ConjuntoDeJutsus[i].Nome);
-                }
-                break;
+        case 2:
+            quantidade = _NumeroDoCla;
+            tipoNome = "CLÃ";
+            if (quantidade == 0)
+            {
+                printf("Nenhum clã!\n");
+                congelar_tela();
+                return;
+            }
+            printf("Clãs:\n");
+            for (int i = 0; i < quantidade; i++)
+            {
+                printf("%d-%s\n", i + 1, _ConjuntoDeClas[i].NomeDoCla);
+            }
+            break;
 
-            case 4:
-                quantidade = _NumeroDaMissao;
-                tipoNome = "MISSÃO";
-                if (quantidade == 0) {
-                    printf("Nenhuma missão!\n");
-                    congelar_tela();
-                    return;
-                }
-                printf("Missões:\n");
-                for (int i = 0; i < quantidade; i++) {
-                    printf("%d-%s (Nível: %s)\n", i+1, _ConjuntoDeMissoes[i].Titulo, _ConjuntoDeMissoes[i].NivelDificuldade);
-                }
-                break;
+        case 3:
+            quantidade = _NumeroDoJutsu;
+            tipoNome = "JUTSU";
+            if (quantidade == 0)
+            {
+                printf("Nenhum jutsu!\n");
+                congelar_tela();
+                return;
+            }
+            printf("Jutsus:\n");
+            for (int i = 0; i < quantidade; i++)
+            {
+                printf("%d-%s: %s\n", i + 1, _ConjuntoDeJutsus[i].TipoJutsu, _ConjuntoDeJutsus[i].Nome);
+            }
+            break;
+
+        case 4:
+            quantidade = _NumeroDaMissao;
+            tipoNome = "MISSÃO";
+            if (quantidade == 0)
+            {
+                printf("Nenhuma missão!\n");
+                congelar_tela();
+                return;
+            }
+            printf("Missões:\n");
+            for (int i = 0; i < quantidade; i++)
+            {
+                printf("%d-%s (Nível: %s)\n", i + 1, _ConjuntoDeMissoes[i].Titulo, _ConjuntoDeMissoes[i].NivelDificuldade);
+            }
+            break;
         }
 
         printf("\nQual %s? (0=Voltar): ", tipoNome);
         indice = VereficaQuantia(0, quantidade);
-        if (indice == 0) {
+        if (indice == 0)
+        {
             return;
         }
 
         int idx = indice - 1;
 
         int opcaoAlterar;
-        do {
+        do
+        {
             limpar_tela();
             printf("\n=== ALTERAR %s ===\n", tipoNome);
             RelatorioDaOpçao(TipoDeContexto, indice, 1);
-           
+
             printf("\nO que alterar?\n\n");
-           
+
             int maxOpcao;
-            switch (TipoDeContexto) {
-                case 1:
-                    printf("1-Nome\n2-Patente\n3-Chakra\n4-Elemento\n5-Clã\n6-Jutsus\n7-Voltar\n");
-                    maxOpcao = 7;
-                    break;
-                   
-                case 2:
-                    printf("1-Nome\n2-Jutsus Hereditários\n3-Jutsus Tradicionais\n4-Voltar\n");
-                    maxOpcao = 4;
-                    break;
-                   
-                case 3:
-                    printf("1-Nome\n2-Tipo\n3-Elementos\n4-Custo\n5-Poder\n6-Voltar\n");
-                    maxOpcao = 6;
-                    break;
-                   
-                case 4:
-                    printf("1-Título\n2-Líder\n3-Nível\n4-Status\n5-Shinobis\n6-Voltar\n");
-                    maxOpcao = 6;
-                    break;
-            }
-           
-            printf("\nOpção: ");
-            opcaoAlterar = VereficaQuantia(1, maxOpcao);
-           
-            if (opcaoAlterar == maxOpcao) {
+            switch (TipoDeContexto)
+            {
+            case 1:
+                printf("1-Nome\n2-Patente\n3-Chakra\n4-Elemento\n5-Clã\n6-Jutsus\n7-Voltar\n");
+                maxOpcao = 7;
+                break;
+
+            case 2:
+                printf("1-Nome\n2-Jutsus Hereditários\n3-Jutsus Tradicionais\n4-Voltar\n");
+                maxOpcao = 4;
+                break;
+
+            case 3:
+                printf("1-Nome\n2-Tipo\n3-Elementos\n4-Custo\n5-Poder\n6-Voltar\n");
+                maxOpcao = 6;
+                break;
+
+            case 4:
+                printf("1-Título\n2-Líder\n3-Nível\n4-Status\n5-Shinobis\n6-Voltar\n");
+                maxOpcao = 6;
                 break;
             }
 
-            switch (TipoDeContexto) {
-                case 1:
-                    AlterarShinobiEspecifico(indice);
-                    break;
-                   
-                case 2:
-                    switch (opcaoAlterar) {
-                        case 1:
-                            printf("\n--- Nome Clã ---\nAtual: %s\nNovo: ", _ConjuntoDeClas[idx].NomeDoCla);
-                            VerificadorDeTexto(strAux);
-                           
-                            int nomeExiste = 0;
-                            for (int i = 0; i < _NumeroDoCla; i++) {
-                                if (i != idx && strcmp(strAux, _ConjuntoDeClas[i].NomeDoCla) == 0) {
-                                    nomeExiste = 1;
-                                    break;
-                                }
-                            }
-                           
-                            if (nomeExiste) {
-                                printf("\nErro! Nome já existe!\n");
-                            } else {
-                                free(_ConjuntoDeClas[idx].NomeDoCla);
-                                _ConjuntoDeClas[idx].NomeDoCla = malloc(strlen(strAux) + 1);
-                                strcpy(_ConjuntoDeClas[idx].NomeDoCla, strAux);
-                                printf("\nNome alterado!\n");
-                            }
-                            break;
-                           
-                        case 2:
-                            printf("\n=== JUTSUS HEREDITÁRIOS ===\n");
-                            if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0) {
-                                printf("Atuais:\n");
-                                for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++) {
-                                    int jutsuIdx = _ConjuntoDeClas[idx].JutsusHereditarios[i] - 1;
-                                    printf("%d-%s\n", i+1, _ConjuntoDeJutsus[jutsuIdx].Nome);
-                                }
-                            } else {
-                                printf("Nenhum.\n");
-                            }
-                           
-                            printf("\n1-Adicionar\n");
-                            if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0) {
-                                printf("2-Alterar\n3-Remover\n");
-                            }
-                            printf("4-Voltar\nOpção: ");
-                            int maxOpH = (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0) ? 4 : 2;
-                            int opHereditario = VereficaQuantia(1, maxOpH);
-                           
-                            switch(opHereditario) {
-                                case 1:
-                                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios >= 100) {
-                                        printf("\nErro! Limite!\n");
-                                    } else {
-                                        printf("\n=== CRIAR JUTSU ===\n");
-                                        _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
-                                        _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
-                                        _ConjuntoDeClas[idx].JutsusHereditarios = realloc(_ConjuntoDeClas[idx].JutsusHereditarios, (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios + 1) * sizeof(int));
-                                        _ConjuntoDeClas[idx].JutsusHereditarios[_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios] = _NumeroDoJutsu + 1;
-                                        _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios++;
-                                        _NumeroDoJutsu++;
-                                        printf("\nJutsu criado!\n");
-                                    }
-                                    break;
-                                   
-                                case 2:
-                                    printf("Alterar (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios);
-                                    int jutsuIdx = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios) - 1;
-                                    int jutsuGlobalIdx = _ConjuntoDeClas[idx].JutsusHereditarios[jutsuIdx];
-                                    AlterarJutsuEspecifico(jutsuGlobalIdx);
-                                    break;
-                                   
-                                case 3:
-                                    printf("Remover (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios);
-                                    int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios) - 1;
-                                    int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusHereditarios[jutsuIdxRem];
-                                    printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
-                                    if (simOUnao() == 1) {
-                                        for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios - 1; i++) {
-                                            _ConjuntoDeClas[idx].JutsusHereditarios[i] = _ConjuntoDeClas[idx].JutsusHereditarios[i + 1];
-                                        }
-                                        _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios--;
-                                        printf("\nJutsu removido!\n");
-                                    }
-                                    break;
-                            }
-                            break;
-                           
-                        case 3:
-                            printf("\n=== JUTSUS TRADICIONAIS ===\n");
-                            if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0) {
-                                printf("Atuais:\n");
-                                for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais; i++) {
-                                    int jutsuIdx = _ConjuntoDeClas[idx].JutsusTradicionais[i] - 1;
-                                    printf("%d-%s\n", i+1, _ConjuntoDeJutsus[jutsuIdx].Nome);
-                                }
-                            } else {
-                                printf("Nenhum.\n");
-                            }
-                           
-                            printf("\n1-Adicionar\n");
-                            if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0) {
-                                printf("2-Alterar\n3-Remover\n");
-                            }
-                            printf("4-Voltar\nOpção: ");
-                            int maxOpT = (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0) ? 4 : 2;
-                            int opTradicional = VereficaQuantia(1, maxOpT);
-                           
-                            switch(opTradicional) {
-                                case 1:
-                                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais >= 100) {
-                                        printf("\nErro! Limite!\n");
-                                    } else {
-                                        printf("\n=== CRIAR JUTSU ===\n");
-                                        _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
-                                        _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
-                                        _ConjuntoDeClas[idx].JutsusTradicionais = realloc(_ConjuntoDeClas[idx].JutsusTradicionais, (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais + 1) * sizeof(int));
-                                        _ConjuntoDeClas[idx].JutsusTradicionais[_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais] = _NumeroDoJutsu + 1;
-                                        _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais++;
-                                        _NumeroDoJutsu++;
-                                        printf("\nJutsu criado!\n");
-                                    }
-                                    break;
-                                   
-                                case 2:
-                                    printf("Alterar (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais);
-                                    int jutsuIdx = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais) - 1;
-                                    int jutsuGlobalIdx = _ConjuntoDeClas[idx].JutsusTradicionais[jutsuIdx];
-                                    AlterarJutsuEspecifico(jutsuGlobalIdx);
-                                    break;
-                                   
-                                case 3:
-                                    printf("Remover (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais);
-                                    int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais) - 1;
-                                    int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusTradicionais[jutsuIdxRem];
-                                    printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
-                                    if (simOUnao() == 1) {
-                                        for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais - 1; i++) {
-                                            _ConjuntoDeClas[idx].JutsusTradicionais[i] = _ConjuntoDeClas[idx].JutsusTradicionais[i + 1];
-                                        }
-                                        _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais--;
-                                        printf("\nJutsu removido!\n");
-                                    }
-                                    break;
-                            }
-                            break;
-                    }
-                    congelar_tela();
-                    break;
-                   
-                case 3:
-                    AlterarJutsuEspecifico(indice);
-                    break;
-                   
-                case 4:
-                    switch (opcaoAlterar) {
-                        case 1:
-                            printf("\n--- Título Missão ---\nAtual: %s\nNovo: ", _ConjuntoDeMissoes[idx].Titulo);
-                            VerificadorDeTexto(strAux);
-                           
-                            int tituloExiste = 0;
-                            for (int i = 0; i < _NumeroDaMissao; i++) {
-                                if (i != idx && strcmp(strAux, _ConjuntoDeMissoes[i].Titulo) == 0) {
-                                    tituloExiste = 1;
-                                    break;
-                                }
-                            }
-                           
-                            if (tituloExiste) {
-                                printf("\nErro! Título já existe!\n");
-                            } else {
-                                free(_ConjuntoDeMissoes[idx].Titulo);
-                                _ConjuntoDeMissoes[idx].Titulo = malloc(strlen(strAux) + 1);
-                                strcpy(_ConjuntoDeMissoes[idx].Titulo, strAux);
-                                printf("\nTítulo alterado!\n");
-                            }
-                            break;
+            printf("\nOpção: ");
+            opcaoAlterar = VereficaQuantia(1, maxOpcao);
 
-                        case 2:
-                            printf("\n--- Líder Missão ---\nAtual: %s\nNovo líder:\n", _ConjuntoDeShinobis[_ConjuntoDeMissoes[idx].LiderResponsavel - 1].Nome);
-                            for (int i = 0; i < _NumeroDoShinobi; i++) {
-                                printf("%d-%s (%s)\n", i+1, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeShinobis[i].Patente);
+            if (opcaoAlterar == maxOpcao)
+            {
+                break;
+            }
+
+            switch (TipoDeContexto)
+            {
+            case 1:
+                AlterarShinobiEspecifico(indice);
+                break;
+
+            case 2:
+                switch (opcaoAlterar)
+                {
+                case 1:
+                    printf("\n--- Nome Clã ---\nAtual: %s\nNovo: ", _ConjuntoDeClas[idx].NomeDoCla);
+                    VerificadorDeTexto(strAux);
+
+                    int nomeExiste = 0;
+                    for (int i = 0; i < _NumeroDoCla; i++)
+                    {
+                        if (i != idx && strcmp(strAux, _ConjuntoDeClas[i].NomeDoCla) == 0)
+                        {
+                            nomeExiste = 1;
+                            break;
+                        }
+                    }
+
+                    if (nomeExiste)
+                    {
+                        printf("\nErro! Nome já existe!\n");
+                    }
+                    else
+                    {
+                        free(_ConjuntoDeClas[idx].NomeDoCla);
+                        _ConjuntoDeClas[idx].NomeDoCla = malloc(strlen(strAux) + 1);
+                        strcpy(_ConjuntoDeClas[idx].NomeDoCla, strAux);
+                        printf("\nNome alterado!\n");
+                    }
+                    break;
+
+                case 2:
+                    printf("\n=== JUTSUS HEREDITÁRIOS ===\n");
+                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0)
+                    {
+                        printf("Atuais:\n");
+                        for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++)
+                        {
+                            int jutsuIdx = _ConjuntoDeClas[idx].JutsusHereditarios[i];
+                            printf("%d-%s\n", i + 1, _ConjuntoDeJutsus[jutsuIdx].Nome);
+                        }
+                    }
+                    else
+                    {
+                        printf("Nenhum.\n");
+                    }
+
+                    printf("\n1-Adicionar\n");
+                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0)
+                    {
+                        printf("2-Alterar\n3-Remover\n");
+                    }
+                    printf("4-Voltar\nOpção: ");
+                    int maxOpH = (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0) ? 4 : 2;
+                    int opHereditario = VereficaQuantia(1, maxOpH);
+
+                    switch (opHereditario)
+                    {
+                    case 1:
+                        if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios >= 100)
+                        {
+                            printf("\nErro! Limite!\n");
+                        }
+                        else
+                        {
+                            printf("\n=== CRIAR JUTSU ===\n");
+                            _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
+                            _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
+                            _ConjuntoDeClas[idx].JutsusHereditarios = realloc(_ConjuntoDeClas[idx].JutsusHereditarios, (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios + 1) * sizeof(int));
+                            _ConjuntoDeClas[idx].JutsusHereditarios[_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios] = _NumeroDoJutsu;
+                            _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios++;
+                            _NumeroDoJutsu++;
+                            printf("\nJutsu criado!\n");
+                        } 
+                        break;
+
+                    case 2:
+                        printf("Alterar (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios);
+                        int jutsuIdx = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios) - 1;
+                        int jutsuGlobalIdx = _ConjuntoDeClas[idx].JutsusHereditarios[jutsuIdx];
+                        AlterarJutsuEspecifico(jutsuGlobalIdx + 1);
+                        break;
+
+                    case 3:
+                        printf("Remover (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios);
+                        int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios) - 1;
+                        int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusHereditarios[jutsuIdxRem] + 1;
+                        printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
+                        if (simOUnao() == 1)
+                        {
+                            for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios - 1; i++)
+                            {
+                                _ConjuntoDeClas[idx].JutsusHereditarios[i] = _ConjuntoDeClas[idx].JutsusHereditarios[i + 1];
+                            }
+                            _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios--;
+                            printf("\nJutsu removido!\n");
+                        }
+                        break;
+                    }
+                    break;
+
+                case 3:
+                    printf("\n=== JUTSUS TRADICIONAIS ===\n");
+                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0)
+                    {
+                        printf("Atuais:\n");
+                        for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais; i++)
+                        {
+                            int jutsuIdx = _ConjuntoDeClas[idx].JutsusTradicionais[i];
+                            printf("%d-%s\n", i + 1, _ConjuntoDeJutsus[jutsuIdx].Nome);
+                        }
+                    }
+                    else
+                    {
+                        printf("Nenhum.\n");
+                    }
+
+                    printf("\n1-Adicionar\n");
+                    if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0)
+                    {
+                        printf("2-Alterar\n3-Remover\n");
+                    }
+                    printf("4-Voltar\nOpção: ");
+                    int maxOpT = (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais > 0) ? 4 : 2;
+                    int opTradicional = VereficaQuantia(1, maxOpT);
+
+                    switch (opTradicional)
+                    {
+                    case 1:
+                        if (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais >= 100)
+                        {
+                            printf("\nErro! Limite!\n");
+                        }
+                        else
+                        {
+                            printf("\n=== CRIAR JUTSU ===\n");
+                            _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
+                            _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
+                            _ConjuntoDeClas[idx].JutsusTradicionais = realloc(_ConjuntoDeClas[idx].JutsusTradicionais, (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais + 1) * sizeof(int));
+                            _ConjuntoDeClas[idx].JutsusTradicionais[_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais] = _NumeroDoJutsu;
+                            _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais++;
+                            _NumeroDoJutsu++;
+                            printf("\nJutsu criado!\n");
+                        }
+                        break;
+
+                    case 2:
+                        printf("Alterar (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais);
+                        int jutsuIdx = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais) - 1;
+                        int jutsuGlobalIdx = _ConjuntoDeClas[idx].JutsusTradicionais[jutsuIdx];
+                        AlterarJutsuEspecifico(jutsuGlobalIdx + 1);
+                        break;
+
+                    case 3:
+                        printf("Remover (1-%d): ", _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais);
+                        int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais) - 1;
+                        int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusTradicionais[jutsuIdxRem] + 1;
+                        printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
+                        if (simOUnao() == 1)
+                        {
+                            for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais - 1; i++)
+                            {
+                                _ConjuntoDeClas[idx].JutsusTradicionais[i] = _ConjuntoDeClas[idx].JutsusTradicionais[i + 1];
+                            }
+                            _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais--;
+                            printf("\nJutsu removido!\n");
+                        }
+                        break;
+                    }
+                    break;
+                }
+                congelar_tela();
+                break;
+
+            case 3:
+                AlterarJutsuEspecifico(indice);
+                break;
+
+            case 4:
+                switch (opcaoAlterar)
+                {
+                case 1:
+                    printf("\n--- Título Missão ---\nAtual: %s\nNovo: ", _ConjuntoDeMissoes[idx].Titulo);
+                    VerificadorDeTexto(strAux);
+
+                    int tituloExiste = 0;
+                    for (int i = 0; i < _NumeroDaMissao; i++)
+                    {
+                        if (i != idx && strcmp(strAux, _ConjuntoDeMissoes[i].Titulo) == 0)
+                        {
+                            tituloExiste = 1;
+                            break;
+                        }
+                    }
+
+                    if (tituloExiste)
+                    {
+                        printf("\nErro! Título já existe!\n");
+                    }
+                    else
+                    {
+                        free(_ConjuntoDeMissoes[idx].Titulo);
+                        _ConjuntoDeMissoes[idx].Titulo = malloc(strlen(strAux) + 1);
+                        strcpy(_ConjuntoDeMissoes[idx].Titulo, strAux);
+                        printf("\nTítulo alterado!\n");
+                    }
+                    break;
+
+                case 2:
+                    printf("\n--- Líder Missão ---\nAtual: %s\nNovo líder:\n", _ConjuntoDeShinobis[_ConjuntoDeMissoes[idx].LiderResponsavel].Nome);
+                    for (int i = 0; i < _NumeroDoShinobi; i++)
+                    {
+                        printf("%d-%s (%s)\n", i + 1, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeShinobis[i].Patente);
+                    }
+                    printf("Opção: ");
+                    int novoLiderIdx = VereficaQuantia(1, _NumeroDoShinobi);
+
+                    int podeSerLider = 1;
+                    char *patenteNovoLider = _ConjuntoDeShinobis[novoLiderIdx - 1].Patente;
+
+                    if (strcmp(patenteNovoLider, "Estudante da Academia") == 0)
+                    {
+                        printf("\nErro! Estudante não lidera!\n");
+                        podeSerLider = 0;
+                    }
+                    else if (strcmp(patenteNovoLider, "Genin") == 0)
+                    {
+                        printf("\nErro! Genin não lidera!\n");
+                        podeSerLider = 0;
+                    }
+                    else if (strcmp(patenteNovoLider, "Chunin") == 0)
+                    {
+                        if (strcmp(_ConjuntoDeMissoes[idx].NivelDificuldade, "A") == 0 || strcmp(_ConjuntoDeMissoes[idx].NivelDificuldade, "S") == 0)
+                        {
+                            printf("\nErro! Chunin só lidera C ou B!\n");
+                            podeSerLider = 0;
+                        }
+                    }
+
+                    if (podeSerLider)
+                    {
+                        _ConjuntoDeMissoes[idx].LiderResponsavel = novoLiderIdx - 1;
+                        printf("\nLíder alterado!\n");
+                    }
+                    break;
+
+                case 3:
+                    printf("\n--- Nível Missão ---\nAtual: %s\nNovo (D/C/B/A/S): ", _ConjuntoDeMissoes[idx].NivelDificuldade);
+                    VerificaNivelDeDificuldade(strAux);
+
+                    int nivelCompativel = 1;
+                    int indiceLider = _ConjuntoDeMissoes[idx].LiderResponsavel;
+                    char *patenteLider = _ConjuntoDeShinobis[indiceLider].Patente;
+
+                    if (strcmp(patenteLider, "Chunin") == 0)
+                    {
+                        if (strcmp(strAux, "A") == 0 || strcmp(strAux, "S") == 0)
+                        {
+                            printf("\nErro! %s é Chunin!\n", _ConjuntoDeShinobis[indiceLider].Nome);
+                            nivelCompativel = 0;
+                        }
+                    }
+
+                    if (nivelCompativel && _ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0)
+                    {
+                        for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
+                        {
+                            int ninjaIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[i];
+                            char *patenteNinja = _ConjuntoDeShinobis[ninjaIdx].Patente;
+
+                            if (strcmp(patenteNinja, "Genin") == 0)
+                            {
+                                if (strcmp(strAux, "B") == 0 || strcmp(strAux, "A") == 0 || strcmp(strAux, "S") == 0)
+                                {
+                                    printf("\nErro! %s é Genin!\n", _ConjuntoDeShinobis[ninjaIdx].Nome);
+                                    nivelCompativel = 0;
+                                    break;
+                                }
+                            }
+                            else if (strcmp(patenteNinja, "Chunin") == 0)
+                            {
+                                if (strcmp(strAux, "S") == 0)
+                                {
+                                    printf("\nErro! %s é Chunin!\n", _ConjuntoDeShinobis[ninjaIdx].Nome);
+                                    nivelCompativel = 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (nivelCompativel)
+                    {
+                        free(_ConjuntoDeMissoes[idx].NivelDificuldade);
+                        _ConjuntoDeMissoes[idx].NivelDificuldade = malloc((strlen(strAux) + 1) * sizeof(char));
+                        strcpy(_ConjuntoDeMissoes[idx].NivelDificuldade, strAux);
+                        printf("\nNível alterado!\n");
+                    }
+                    break;
+
+                case 4:
+                    printf("\n--- Status Missão ---\nAtual: %s\n1-Pendente\n2-Andamento\n3-Concluída\n4-Falha\n5-Cancelada\nOpção: ", _ConjuntoDeMissoes[idx].Status);
+                    SelecionaStatus(VereficaQuantia(1, 5), strAux);
+                    free(_ConjuntoDeMissoes[idx].Status);
+                    _ConjuntoDeMissoes[idx].Status = malloc(strlen(strAux) + 1);
+                    strcpy(_ConjuntoDeMissoes[idx].Status, strAux);
+                    printf("\nStatus alterado!\n");
+                    break;
+
+                case 5:
+                    printf("\n=== SHINOBIS MISSÃO ===\n");
+                    if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0)
+                    {
+                        printf("Atuais:\n");
+                        for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
+                        {
+                            int shinobiIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[i];
+                            printf("%d-%s (%s)\n", i + 1, _ConjuntoDeShinobis[shinobiIdx].Nome, _ConjuntoDeShinobis[shinobiIdx].Patente);
+                        }
+                    }
+                    else
+                    {
+                        printf("Nenhum.\n");
+                    }
+
+                    printf("\n1-Adicionar\n");
+                    if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0)
+                    {
+                        printf("2-Alterar\n3-Remover\n");
+                    }
+                    printf("4-Voltar\nOpção: ");
+                    int maxOpM = (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0) ? 4 : 2;
+                    int opMissao = VereficaQuantia(1, maxOpM);
+
+                    switch (opMissao)
+                    {
+                    case 1:
+                        if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas >= 6)
+                        {
+                            printf("\nErro! Limite!\n");
+                        }
+                        else
+                        {
+                            printf("\nAdicionar shinobi:\n");
+                            for (int i = 0; i < _NumeroDoShinobi; i++)
+                            {
+                                printf("%d-%s (%s)\n", i + 1, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeShinobis[i].Patente);
                             }
                             printf("Opção: ");
-                            int novoLiderIdx = VereficaQuantia(1, _NumeroDoShinobi);
-                           
-                            int podeSerLider = 1;
-                            char* patenteNovoLider = _ConjuntoDeShinobis[novoLiderIdx - 1].Patente;
-                           
-                            if (strcmp(patenteNovoLider, "Estudante da Academia") == 0) {
-                                printf("\nErro! Estudante não lidera!\n");
-                                podeSerLider = 0;
-                            }
-                            else if (strcmp(patenteNovoLider, "Genin") == 0) {
-                                printf("\nErro! Genin não lidera!\n");
-                                podeSerLider = 0;
-                            }
-                            else if (strcmp(patenteNovoLider, "Chunin") == 0) {
-                                if (strcmp(_ConjuntoDeMissoes[idx].NivelDificuldade, "A") == 0 || strcmp(_ConjuntoDeMissoes[idx].NivelDificuldade, "S") == 0) {
-                                    printf("\nErro! Chunin só lidera C ou B!\n");
-                                    podeSerLider = 0;
-                                }
-                            }
-                           
-                            if (podeSerLider) {
-                                _ConjuntoDeMissoes[idx].LiderResponsavel = novoLiderIdx;
-                                printf("\nLíder alterado!\n");
-                            }
-                            break;
+                            int novoShinobi = VereficaQuantia(1, _NumeroDoShinobi);
 
-                        case 3:
-                            printf("\n--- Nível Missão ---\nAtual: %s\nNovo (D/C/B/A/S): ", _ConjuntoDeMissoes[idx].NivelDificuldade);
-                            VerificaNivelDeDificuldade(strAux);
-                           
-                            int nivelCompativel = 1;
-                            int indiceLider = _ConjuntoDeMissoes[idx].LiderResponsavel - 1;
-                            char* patenteLider = _ConjuntoDeShinobis[indiceLider].Patente;
-                           
-                            if (strcmp(patenteLider, "Chunin") == 0) {
-                                if (strcmp(strAux, "A") == 0 || strcmp(strAux, "S") == 0) {
-                                    printf("\nErro! %s é Chunin!\n", _ConjuntoDeShinobis[indiceLider].Nome);
-                                    nivelCompativel = 0;
-                                }
-                            }
-                           
-                            if (nivelCompativel && _ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0) {
-                                for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++) {
-                                    int ninjaIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[i] - 1;
-                                    char* patenteNinja = _ConjuntoDeShinobis[ninjaIdx].Patente;
-                                   
-                                    if (strcmp(patenteNinja, "Genin") == 0) {
-                                        if (strcmp(strAux, "B") == 0 || strcmp(strAux, "A") == 0 || strcmp(strAux, "S") == 0) {
-                                            printf("\nErro! %s é Genin!\n", _ConjuntoDeShinobis[ninjaIdx].Nome);
-                                            nivelCompativel = 0;
-                                            break;
-                                        }
-                                    }
-                                    else if (strcmp(patenteNinja, "Chunin") == 0) {
-                                        if (strcmp(strAux, "S") == 0) {
-                                            printf("\nErro! %s é Chunin!\n", _ConjuntoDeShinobis[ninjaIdx].Nome);
-                                            nivelCompativel = 0;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                           
-                            if (nivelCompativel) {
-                                free(_ConjuntoDeMissoes[idx].NivelDificuldade);
-                                _ConjuntoDeMissoes[idx].NivelDificuldade = malloc(strlen(strAux) + 1);
-                                strcpy(_ConjuntoDeMissoes[idx].NivelDificuldade, strAux);
-                                printf("\nNível alterado!\n");
-                            }
-                            break;
+                            int podeAdicionar = 1;
+                            char *patenteNovo = _ConjuntoDeShinobis[novoShinobi - 1].Patente;
+                            char *nivelMissao = _ConjuntoDeMissoes[idx].NivelDificuldade;
 
-                        case 4:
-                            printf("\n--- Status Missão ---\nAtual: %s\n1-Pendente\n2-Andamento\n3-Concluída\n4-Falha\n5-Cancelada\nOpção: ", _ConjuntoDeMissoes[idx].Status);
-                            SelecionaStatus(VereficaQuantia(1, 5), strAux);
-                            free(_ConjuntoDeMissoes[idx].Status);
-                            _ConjuntoDeMissoes[idx].Status = malloc(strlen(strAux) + 1);
-                            strcpy(_ConjuntoDeMissoes[idx].Status, strAux);
-                            printf("\nStatus alterado!\n");
-                            break;
-
-                        case 5:
-                            printf("\n=== SHINOBIS MISSÃO ===\n");
-                            if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0) {
-                                printf("Atuais:\n");
-                                for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++) {
-                                    int shinobiIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[i] - 1;
-                                    printf("%d-%s (%s)\n", i+1, _ConjuntoDeShinobis[shinobiIdx].Nome, _ConjuntoDeShinobis[shinobiIdx].Patente);
+                            if (strcmp(patenteNovo, "Estudante da Academia") == 0)
+                            {
+                                printf("\nErro! Estudante não vai!\n");
+                                podeAdicionar = 0;
+                            }
+                            else if (strcmp(patenteNovo, "Genin") == 0)
+                            {
+                                if (strcmp(nivelMissao, "B") == 0 || strcmp(nivelMissao, "A") == 0 || strcmp(nivelMissao, "S") == 0)
+                                {
+                                    printf("\nErro! Genin só D ou C!\n");
+                                    podeAdicionar = 0;
                                 }
-                            } else {
-                                printf("Nenhum.\n");
                             }
-                           
-                            printf("\n1-Adicionar\n");
-                            if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0) {
-                                printf("2-Alterar\n3-Remover\n");
+                            else if (strcmp(patenteNovo, "Chunin") == 0)
+                            {
+                                if (strcmp(nivelMissao, "S") == 0)
+                                {
+                                    printf("\nErro! Chunin não vai S!\n");
+                                    podeAdicionar = 0;
+                                }
                             }
-                            printf("4-Voltar\nOpção: ");
-                            int maxOpM = (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas > 0) ? 4 : 2;
-                            int opMissao = VereficaQuantia(1, maxOpM);
-                           
-                            switch(opMissao) {
-                                case 1:
-                                    if (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas >= 6) {
-                                        printf("\nErro! Limite!\n");
-                                    } else {
-                                        printf("\nAdicionar shinobi:\n");
-                                        for (int i = 0; i < _NumeroDoShinobi; i++) {
-                                            printf("%d-%s (%s)\n", i+1, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeShinobis[i].Patente);
-                                        }
-                                        printf("Opção: ");
-                                        int novoShinobi = VereficaQuantia(1, _NumeroDoShinobi);
-                                       
-                                        int podeAdicionar = 1;
-                                        char* patenteNovo = _ConjuntoDeShinobis[novoShinobi - 1].Patente;
-                                        char* nivelMissao = _ConjuntoDeMissoes[idx].NivelDificuldade;
-                                       
-                                        if (strcmp(patenteNovo, "Estudante da Academia") == 0) {
-                                            printf("\nErro! Estudante não vai!\n");
-                                            podeAdicionar = 0;
-                                        }
-                                        else if (strcmp(patenteNovo, "Genin") == 0) {
-                                            if (strcmp(nivelMissao, "B") == 0 || strcmp(nivelMissao, "A") == 0 || strcmp(nivelMissao, "S") == 0) {
-                                                printf("\nErro! Genin só D ou C!\n");
-                                                podeAdicionar = 0;
-                                            }
-                                        }
-                                        else if (strcmp(patenteNovo, "Chunin") == 0) {
-                                            if (strcmp(nivelMissao, "S") == 0) {
-                                                printf("\nErro! Chunin não vai S!\n");
-                                                podeAdicionar = 0;
-                                            }
-                                        }
-                                       
-                                        if (podeAdicionar) {
-                                            int jaExiste = 0;
-                                            for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++) {
-                                                if (_ConjuntoDeMissoes[idx].NinjasDaMissao[i] == novoShinobi) {
-                                                    jaExiste = 1;
-                                                    break;
-                                                }
-                                            }
-                                           
-                                            if (jaExiste) {
-                                                printf("\nErro! Já está!\n");
-                                            } else {
-                                                _ConjuntoDeMissoes[idx].NinjasDaMissao = realloc(_ConjuntoDeMissoes[idx].NinjasDaMissao, (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas + 1) * sizeof(int));
-                                                _ConjuntoDeMissoes[idx].NinjasDaMissao[_ConjuntoDeMissoes[idx].QuantidadeDeNinjas] = novoShinobi;
-                                                _ConjuntoDeMissoes[idx].QuantidadeDeNinjas++;
-                                                printf("\nShinobi adicionado!\n");
-                                            }
-                                        }
+
+                            if (podeAdicionar)
+                            {
+                                int jaExiste = 0;
+                                for (int i = 0; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas; i++)
+                                {
+                                    if (_ConjuntoDeMissoes[idx].NinjasDaMissao[i] == novoShinobi - 1)
+                                    {
+                                        jaExiste = 1;
+                                        break;
                                     }
-                                    break;
-                                   
-                                case 2:
-                                    printf("Alterar (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
-                                    int shinobiIdxAlt = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
-                                    int shinobiGlobalIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdxAlt];
-                                    AlterarShinobiEspecifico(shinobiGlobalIdx);
-                                    break;
-                                   
-                                case 3:
-                                    printf("Remover (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
-                                    int shinobiIdx = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
-                                    int shinobiParaRemover = _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdx];
-                                    printf("Remover %s? (s/n): ", _ConjuntoDeShinobis[shinobiParaRemover - 1].Nome);
-                                    if (simOUnao() == 1) {
-                                        for (int i = shinobiIdx; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas - 1; i++) {
-                                            _ConjuntoDeMissoes[idx].NinjasDaMissao[i] = _ConjuntoDeMissoes[idx].NinjasDaMissao[i + 1];
-                                        }
-                                        _ConjuntoDeMissoes[idx].QuantidadeDeNinjas--;
-                                        printf("\nShinobi removido!\n");
-                                    }
-                                    break;
+                                }
+
+                                if (jaExiste)
+                                {
+                                    printf("\nErro! Já está!\n");
+                                }
+                                else
+                                {
+                                    _ConjuntoDeMissoes[idx].NinjasDaMissao = realloc(_ConjuntoDeMissoes[idx].NinjasDaMissao, (_ConjuntoDeMissoes[idx].QuantidadeDeNinjas + 1) * sizeof(int));
+                                    _ConjuntoDeMissoes[idx].NinjasDaMissao[_ConjuntoDeMissoes[idx].QuantidadeDeNinjas] = novoShinobi - 1;
+                                    _ConjuntoDeMissoes[idx].QuantidadeDeNinjas++;
+                                    printf("\nShinobi adicionado!\n");
+                                }
                             }
-                            break;
+                        }
+                        break;
+
+                    case 2:
+                        printf("Alterar (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
+                        int shinobiIdxAlt = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
+                        int shinobiGlobalIdx = _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdxAlt];
+                        AlterarShinobiEspecifico(shinobiGlobalIdx + 1);
+                        break;
+
+                    case 3:
+                        printf("Remover (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
+                        int shinobiIdx = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
+                        int shinobiParaRemover = _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdx];
+                        printf("Remover %s? (s/n): ", _ConjuntoDeShinobis[shinobiParaRemover].Nome);
+                        if (simOUnao() == 1)
+                        {
+                            for (int i = shinobiIdx; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas - 1; i++)
+                            {
+                                _ConjuntoDeMissoes[idx].NinjasDaMissao[i] = _ConjuntoDeMissoes[idx].NinjasDaMissao[i + 1];
+                            }
+                            _ConjuntoDeMissoes[idx].QuantidadeDeNinjas--;
+                            printf("\nShinobi removido!\n");
+                        }
+                        break;
                     }
-                    congelar_tela();
                     break;
+                }
+                congelar_tela();
+                break;
             }
-           
+
         } while (1);
-       
+
         printf("\nAlterar outro %s? (s/n): ", tipoNome);
-        if (simOUnao() == 0) {
+        if (simOUnao() == 0)
+        {
             break;
         }
     }
 }
 
-void AlterarJutsuEspecifico(int indiceJutsu) {
+void AlterarJutsuEspecifico(int indiceJutsu)
+{
     char strAux[100];
     int opcao;
-   
-    do {
+
+    do
+    {
         limpar_tela();
         printf("\n=== ALTERAR JUTSU ===\n");
         RelatorioDaOpçao(3, indiceJutsu, 1);
@@ -2973,117 +3095,128 @@ void AlterarJutsuEspecifico(int indiceJutsu) {
         {
             break;
         }
-       
+
         int idx = indiceJutsu - 1;
-       
-        switch (opcao) {
+
+        switch (opcao)
+        {
+        case 1:
+            printf("\n--- Alterar Nome ---\nAtual: %s\nNovo: ", _ConjuntoDeJutsus[idx].Nome);
+            VerificadorDeTexto(strAux);
+
+            int nomeExiste = 0;
+            for (int i = 0; i < _NumeroDoJutsu; i++)
+            {
+                if (i != idx && strcmp(strAux, _ConjuntoDeJutsus[i].Nome) == 0)
+                {
+                    nomeExiste = 1;
+                    break;
+                }
+            }
+
+            if (nomeExiste)
+            {
+                printf("\nErro! Nome já existe!\n");
+            }
+            else
+            {
+                free(_ConjuntoDeJutsus[idx].Nome);
+                _ConjuntoDeJutsus[idx].Nome = malloc(strlen(strAux) + 1);
+                strcpy(_ConjuntoDeJutsus[idx].Nome, strAux);
+                printf("\nNome alterado!\n");
+            }
+            break;
+
+        case 2:
+            printf("\n--- Alterar Tipo ---\nAtual: %s\nNovo: ", _ConjuntoDeJutsus[idx].TipoJutsu);
+            VerificadorDeTexto(strAux);
+            free(_ConjuntoDeJutsus[idx].TipoJutsu);
+            _ConjuntoDeJutsus[idx].TipoJutsu = malloc(strlen(strAux) + 1);
+            strcpy(_ConjuntoDeJutsus[idx].TipoJutsu, strAux);
+            printf("\nTipo alterado!\n");
+            break;
+
+        case 3:
+            printf("\n=== ELEMENTOS ===\n");
+            if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0)
+            {
+                printf("Atuais:\n");
+                for (int i = 0; i < _ConjuntoDeJutsus[idx].QuantidadeDeElementos; i++)
+                    printf("%d-%s\n", i + 1, _ConjuntoDeJutsus[idx].Elementos[i]);
+            }
+            else
+            {
+                printf("Nenhum.\n");
+            }
+
+            printf("\n1-Adicionar\n");
+            if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0)
+            {
+                printf("2-Alterar\n3-Remover\n");
+            }
+            printf("4-Voltar\nOpção: ");
+            int maxOpE = (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0) ? 4 : 2;
+            int opElemento = VereficaQuantia(1, maxOpE);
+
+            switch (opElemento)
+            {
             case 1:
-                printf("\n--- Alterar Nome ---\nAtual: %s\nNovo: ", _ConjuntoDeJutsus[idx].Nome);
-                VerificadorDeTexto(strAux);
-               
-                int nomeExiste = 0;
-                for (int i = 0; i < _NumeroDoJutsu; i++) {
-                    if (i != idx && strcmp(strAux, _ConjuntoDeJutsus[i].Nome) == 0) {
-                        nomeExiste = 1;
-                        break;
-                    }
-                }
-               
-                if (nomeExiste)
+                if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos >= 20)
                 {
-                    printf("\nErro! Nome já existe!\n");
+                    printf("\nErro! Limite!\n");
                 }
-                else {
-                    free(_ConjuntoDeJutsus[idx].Nome);
-                    _ConjuntoDeJutsus[idx].Nome = malloc(strlen(strAux) + 1);
-                    strcpy(_ConjuntoDeJutsus[idx].Nome, strAux);
-                    printf("\nNome alterado!\n");
+                else
+                {
+                    printf("\nNovo elemento: ");
+                    VerificadorDeTexto(strAux);
+                    _ConjuntoDeJutsus[idx].Elementos = realloc(_ConjuntoDeJutsus[idx].Elementos, (_ConjuntoDeJutsus[idx].QuantidadeDeElementos + 1) * sizeof(char *));
+                    _ConjuntoDeJutsus[idx].Elementos[_ConjuntoDeJutsus[idx].QuantidadeDeElementos] = malloc(strlen(strAux) + 1);
+                    strcpy(_ConjuntoDeJutsus[idx].Elementos[_ConjuntoDeJutsus[idx].QuantidadeDeElementos], strAux);
+                    _ConjuntoDeJutsus[idx].QuantidadeDeElementos++;
+                    printf("\nElemento adicionado!\n");
                 }
                 break;
-               
+
             case 2:
-                printf("\n--- Alterar Tipo ---\nAtual: %s\nNovo: ", _ConjuntoDeJutsus[idx].TipoJutsu);
+                printf("Alterar elemento (1-%d): ", _ConjuntoDeJutsus[idx].QuantidadeDeElementos);
+                int elemIdx = VereficaQuantia(1, _ConjuntoDeJutsus[idx].QuantidadeDeElementos) - 1;
+                printf("Novo nome: ");
                 VerificadorDeTexto(strAux);
-                free(_ConjuntoDeJutsus[idx].TipoJutsu);
-                _ConjuntoDeJutsus[idx].TipoJutsu = malloc(strlen(strAux) + 1);
-                strcpy(_ConjuntoDeJutsus[idx].TipoJutsu, strAux);
-                printf("\nTipo alterado!\n");
+                free(_ConjuntoDeJutsus[idx].Elementos[elemIdx]);
+                _ConjuntoDeJutsus[idx].Elementos[elemIdx] = malloc(strlen(strAux) + 1);
+                strcpy(_ConjuntoDeJutsus[idx].Elementos[elemIdx], strAux);
+                printf("\nElemento alterado!\n");
                 break;
-               
+
             case 3:
-                printf("\n=== ELEMENTOS ===\n");
-                if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0) {
-                    printf("Atuais:\n");
-                    for (int i = 0; i < _ConjuntoDeJutsus[idx].QuantidadeDeElementos; i++) printf("%d-%s\n", i+1, _ConjuntoDeJutsus[idx].Elementos[i]);
-                } else
+                printf("Remover elemento (1-%d): ", _ConjuntoDeJutsus[idx].QuantidadeDeElementos);
+                int elemIdxRem = VereficaQuantia(1, _ConjuntoDeJutsus[idx].QuantidadeDeElementos) - 1;
+                printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
+                if (simOUnao() == 1)
                 {
-                    printf("Nenhum.\n");
-                }
-               
-                printf("\n1-Adicionar\n");
-                if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0)
-                {
-                    printf("2-Alterar\n3-Remover\n");
-                }
-                printf("4-Voltar\nOpção: ");
-                int maxOpE = (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0) ? 4 : 2;
-                int opElemento = VereficaQuantia(1, maxOpE);
-               
-                switch(opElemento) {
-                    case 1:
-                        if (_ConjuntoDeJutsus[idx].QuantidadeDeElementos >= 20)
-                        {
-                            printf("\nErro! Limite!\n");
-                        }
-                        else {
-                            printf("\nNovo elemento: ");
-                            VerificadorDeTexto(strAux);
-                            _ConjuntoDeJutsus[idx].Elementos = realloc(_ConjuntoDeJutsus[idx].Elementos, (_ConjuntoDeJutsus[idx].QuantidadeDeElementos + 1) * sizeof(char*));
-                            _ConjuntoDeJutsus[idx].Elementos[_ConjuntoDeJutsus[idx].QuantidadeDeElementos] = malloc(strlen(strAux) + 1);
-                            strcpy(_ConjuntoDeJutsus[idx].Elementos[_ConjuntoDeJutsus[idx].QuantidadeDeElementos], strAux);
-                            _ConjuntoDeJutsus[idx].QuantidadeDeElementos++;
-                            printf("\nElemento adicionado!\n");
-                        }
-                        break;
-                       
-                    case 2:
-                        printf("Alterar elemento (1-%d): ", _ConjuntoDeJutsus[idx].QuantidadeDeElementos);
-                        int elemIdx = VereficaQuantia(1, _ConjuntoDeJutsus[idx].QuantidadeDeElementos) - 1;
-                        printf("Novo nome: ");
-                        VerificadorDeTexto(strAux);
-                        free(_ConjuntoDeJutsus[idx].Elementos[elemIdx]);
-                        _ConjuntoDeJutsus[idx].Elementos[elemIdx] = malloc(strlen(strAux) + 1);
-                        strcpy(_ConjuntoDeJutsus[idx].Elementos[elemIdx], strAux);
-                        printf("\nElemento alterado!\n");
-                        break;
-                       
-                    case 3:
-                        printf("Remover elemento (1-%d): ", _ConjuntoDeJutsus[idx].QuantidadeDeElementos);
-                        int elemIdxRem = VereficaQuantia(1, _ConjuntoDeJutsus[idx].QuantidadeDeElementos) - 1;
-                        printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
-                        if (simOUnao() == 1) {
-                            free(_ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
-                            for (int i = elemIdxRem; i < _ConjuntoDeJutsus[idx].QuantidadeDeElementos - 1; i++) {
-                                _ConjuntoDeJutsus[idx].Elementos[i] = _ConjuntoDeJutsus[idx].Elementos[i + 1];
-                            }
-                            _ConjuntoDeJutsus[idx].QuantidadeDeElementos--;
-                            printf("\nElemento removido!\n");
-                        }
-                        break;
+                    free(_ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
+                    for (int i = elemIdxRem; i < _ConjuntoDeJutsus[idx].QuantidadeDeElementos - 1; i++)
+                    {
+                        _ConjuntoDeJutsus[idx].Elementos[i] = _ConjuntoDeJutsus[idx].Elementos[i + 1];
+                    }
+                    _ConjuntoDeJutsus[idx].QuantidadeDeElementos--;
+                    printf("\nElemento removido!\n");
                 }
                 break;
-               
-            case 4:
-                printf("\n--- Alterar Custo ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeJutsus[idx].CustodeChakra);
-                _ConjuntoDeJutsus[idx].CustodeChakra = VereficaQuantia(1, 100);
-                printf("\nCusto alterado!\n");
-                break;
-               
-            case 5:
-                printf("\n--- Alterar Poder ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeJutsus[idx].PoderdeAtaque);
-                _ConjuntoDeJutsus[idx].PoderdeAtaque = VereficaQuantia(1, 100);
-                printf("\nPoder alterado!\n");
-                break;
+            }
+            break;
+
+        case 4:
+            printf("\n--- Alterar Custo ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeJutsus[idx].CustodeChakra);
+            _ConjuntoDeJutsus[idx].CustodeChakra = VereficaQuantia(1, 100);
+            printf("\nCusto alterado!\n");
+            break;
+
+        case 5:
+            printf("\n--- Alterar Poder ---\nAtual: %d\nNovo (1-100): ", _ConjuntoDeJutsus[idx].PoderdeAtaque);
+            _ConjuntoDeJutsus[idx].PoderdeAtaque = VereficaQuantia(1, 100);
+            printf("\nPoder alterado!\n");
+            break;
         }
         congelar_tela();
     } while (1);
