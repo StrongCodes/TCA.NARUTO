@@ -2308,7 +2308,7 @@ void AlterarShinobiEspecifico(int indiceShinobi)
         limpar_tela();
         printf("\n=== ALTERAR SHINOBI ===\n");
         RelatorioDaOpçao(1, indiceShinobi, 1);
-        printf("\nO que alterar?\n1-Nome\n2-Patente\n3-Chakra\n4-Elemento\n5-Clã\n6-Jutsus\n7-Voltar\nOpção: ");
+        printf("\nO que alterar?\n\n1-Nome\n2-Patente\n3-Chakra\n4-Elemento\n5-Clã\n6-Jutsus\n7-Voltar\n\nOpção: ");
         opcao = VereficaQuantia(1, 7);
         if (opcao == 7)
         {
@@ -2626,18 +2626,19 @@ void Alterar(int TipoDeContexto)
         int opcaoAlterar;
         do
         {
-            limpar_tela();
-            printf("\n=== ALTERAR %s ===\n", tipoNome);
-            RelatorioDaOpçao(TipoDeContexto, indice, 1);
+            if (TipoDeContexto != 1 && TipoDeContexto != 3)
+            {
+                limpar_tela();
+                printf("\n=== ALTERAR %s ===\n", tipoNome);
+                RelatorioDaOpçao(TipoDeContexto, indice, 1);
+            }
 
             printf("\nO que alterar?\n\n");
 
             int maxOpcao;
             switch (TipoDeContexto)
             {
-            case 1:
-                printf("1-Nome\n2-Patente\n3-Chakra\n4-Elemento\n5-Clã\n6-Jutsus\n7-Voltar\n");
-                maxOpcao = 7;
+                case 1:AlterarJutsuEspecifico(indice);
                 break;
 
             case 2:
@@ -2645,9 +2646,7 @@ void Alterar(int TipoDeContexto)
                 maxOpcao = 4;
                 break;
 
-            case 3:
-                printf("1-Nome\n2-Tipo\n3-Elementos\n4-Custo\n5-Poder\n6-Voltar\n");
-                maxOpcao = 6;
+                case 3: AlterarJutsuEspecifico(indice);
                 break;
 
             case 4:
@@ -2656,8 +2655,11 @@ void Alterar(int TipoDeContexto)
                 break;
             }
 
-            printf("\nOpção: ");
-            opcaoAlterar = VereficaQuantia(1, maxOpcao);
+            if (TipoDeContexto != 1 && TipoDeContexto != 3)
+            {
+                printf("\nOpção: ");
+                opcaoAlterar = VereficaQuantia(1, maxOpcao);
+            }
 
             if (opcaoAlterar == maxOpcao)
             {
@@ -3223,7 +3225,7 @@ void AlterarJutsuEspecifico(int indiceJutsu)
         limpar_tela();
         printf("\n=== ALTERAR JUTSU ===\n");
         RelatorioDaOpçao(3, indiceJutsu, 1);
-        printf("\nO que alterar?\n1-Nome\n2-Tipo\n3-Elementos\n4-Custo\n5-Poder\n6-Voltar\nOpção: ");
+        printf("\nO que alterar?\n\n1-Nome\n2-Tipo\n3-Elementos\n4-Custo\n5-Poder\n6-Voltar\n\nOpção: ");
         opcao = VereficaQuantia(1, 6);
         if (opcao == 6)
         {
