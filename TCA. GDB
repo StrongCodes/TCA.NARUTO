@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <windows.h>
 #ifdef _WIN32
 #else
 #endif
@@ -1136,7 +1137,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n{ 0 } - Listar Todos");
-                    printf("\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
+                    printf("\n\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Shinobi Que Deseja: ");
@@ -1155,7 +1156,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                             {
                                 if (_ConjuntoDeShinobis[i].Nome != NULL)
                                 {
-                                    printf("%d - SHINOBI", i + 1);
+                                    printf("(%d) - SHINOBI", i + 1);
                                     RelatorioDaOpçao(1, i + 1, 1);
                                     printf("\n\n");
                                     i++;
@@ -1211,7 +1212,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n{ 0 } - Listar Todos");
-                    printf("\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Cla Que Deseja: ");
@@ -1230,7 +1231,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                             {
                                 if (_ConjuntoDeClas[i].NomeDoCla != NULL)
                                 {
-                                    printf("%d - CLA", i + 1);
+                                    printf("(%d) - CLA", i + 1);
                                     RelatorioDaOpçao(2, i + 1, 1);
                                     printf("\n\n");
                                     i++;
@@ -1286,7 +1287,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n{ 0 } - Listar Todos");
-                    printf("\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero do Jutsu Que Deseja: ");
@@ -1306,7 +1307,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                             {
                                 if (_ConjuntoDeJutsus[i].Nome != NULL)
                                 {
-                                    printf("%d - JUTSU", i + 1);
+                                    printf("(%d) - JUTSU", i + 1);
                                     RelatorioDaOpçao(3, i + 1, 1);
                                     printf("\n\n");
                                     i++;
@@ -1362,7 +1363,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n{ 0 } - Listar Todas");
-                    printf("\nDeseja Ver Alguma de Maneira Mais Detalhada?(s/n) ");
+                    printf("\n\nDeseja Ver Alguma de Maneira Mais Detalhada?(s/n) ");
                     if (simOUnao() == 1)
                     {
                         printf("Digite o Numero da Missao Que Deseja: ");
@@ -1382,7 +1383,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                             {
                                 if (_ConjuntoDeMissoes[i].Titulo != NULL)
                                 {
-                                    printf("%d - MISSAO", i + 1);
+                                    printf("(%d) - MISSAO", i + 1);
                                     RelatorioDaOpçao(4, i + 1, 1);
                                     printf("\n\n");
                                     i++;
@@ -2638,7 +2639,7 @@ void Alterar(int TipoDeContexto)
             switch (TipoDeContexto)
             {
             case 1:
-                AlterarJutsuEspecifico(indice);
+                AlterarShinobiEspecifico(indice);
                 break;
 
             case 2:
@@ -3147,7 +3148,7 @@ void Alterar(int TipoDeContexto)
                         printf("Alterar (1-%d): ", _ConjuntoDeMissoes[idx].QuantidadeDeNinjas);
                         int shinobiIdxAlt = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
                         limpar_tela();
-                        printf("=== PREFERENCIAS NA ALTERACAO ===\nDeseja Alterar Atribuos ou Selecionar Outro Jutsu?\n\n1-Atributos\n2-Selecionar\n3-Voltar\n\nOpçao: ");
+                        printf("=== PREFERENCIAS NA ALTERACAO ===\nDeseja Alterar Atribuos ou Selecionar Outro Ninja?\n\n1-Atributos\n2-Selecionar\n3-Voltar\n\nOpçao: ");
                         int op = VereficaQuantia(1, 3);
                         if (op == 1)
                         {
