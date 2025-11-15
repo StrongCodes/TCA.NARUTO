@@ -50,7 +50,7 @@ typedef struct
 } tMissao;
 
 void SalvaDados();
-int RecuperaDados();
+void RecuperaDados();
 
 //~~~(protótipos / assinaturas de função)~~~//
 void SelecionadorDeMenu(int TipoDeMenu);                  // 1. Seleciona o Tipo de Menu Que Sera Impresso;
@@ -205,7 +205,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             else if (TipoDeCaso == 2)
             {
                 int OpçaoDeShinobi, NovoShinobi = 0;
-                printf("\n{ 0 } - Cadastrar Novo Shinobi\nEscolha uma opção: ");
+                printf("\n\n[ 0 ] - Cadastrar Novo Shinobi\n\nEscolha uma opção: ");
                 OpçaoDeShinobi = VereficaQuantia(NovoShinobi, (_NumeroDoShinobi));
                 if (OpçaoDeShinobi == NovoShinobi)
                 {
@@ -259,7 +259,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             else if (TipoDeCaso == 2)
             {
                 int OpçaoDeCla, NovoCla = 0;
-                printf("\n{ 0 } - Cadastrar Novo Cla\nEscolha uma opção: ");
+                printf("\n\n[ 0 ] - Cadastrar Novo Cla\n\nEscolha uma opção: ");
                 OpçaoDeCla = VereficaQuantia(NovoCla, (_NumeroDoCla));
                 if (OpçaoDeCla == NovoCla)
                 {
@@ -313,7 +313,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             else if (TipoDeCaso == 2)
             {
                 int OpçaoDeJutsu, NovoJutsu = 0;
-                printf("\n{ 0 } - Cadastrar Novo Jutsu\nEscolha uma opção: ");
+                printf("\n\n[ 0 ] - Cadastrar Novo Jutsu\n\nEscolha uma opção: ");
                 OpçaoDeJutsu = VereficaQuantia(NovoJutsu, _NumeroDoJutsu);
                 if (OpçaoDeJutsu == NovoJutsu)
                 {
@@ -367,7 +367,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             else if (TipoDeCaso == 2)
             {
                 int OpçaoDeMissao, NovaMissao = 0;
-                printf("\n{ 0 } - Cadastrar Nova Missao\nEscolha uma opção: ");
+                printf("\n\n[ 0 ] - Cadastrar Nova Missao\n\nEscolha uma opção: ");
                 OpçaoDeMissao = VereficaQuantia(NovaMissao, _NumeroDaMissao);
                 if (OpçaoDeMissao == NovaMissao)
                 {
@@ -4151,7 +4151,7 @@ void SalvaDados()
     fclose(Dados);
 }
 
-int RecuperaDados()
+void RecuperaDados()
 {
     // int Separador = 0;
     int SeparadorDeContexto = 0;
@@ -4161,7 +4161,7 @@ int RecuperaDados()
     Dados = fopen("Dados TCA", "r");
     if (Dados == NULL)
     {
-        return 1;
+        return;
     }
 
     while ((fgets(LinhaDeDados, sizeof(LinhaDeDados), Dados)))
@@ -4350,5 +4350,4 @@ int RecuperaDados()
         }
     }
     fclose(Dados);
-    return 0;
 }
