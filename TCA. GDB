@@ -1519,7 +1519,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                             OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeShinobis[OpçaoDeContexto - 1].QuantidadeDeJutsus));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: JUTSU ESPECIFICO DO SHINOBI ]==~>\n");
-                            RelatorioDaOpçao(3, (OpçaoDeJutsu) + 1, 1);
+                            RelatorioDaOpçao(3, (_ConjuntoDeShinobis[OpçaoDeContexto - 1].CaracteristicasDoJutsu[OpçaoDeJutsu - 1]) + 1, 1);
                             congelar_tela();
                             continue;
                         }
@@ -1624,7 +1624,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                             OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusHereditarios));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: JUTSU HEREDITARIO ESPECIFICO DO CLA ]==~>\n");
-                            RelatorioDaOpçao(3, (OpçaoDeJutsu), 1);
+                            RelatorioDaOpçao(3, ((_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusHereditarios[OpçaoDeJutsu - 1] + 1)), 1);
                             congelar_tela();
                             continue;
                         }
@@ -1643,13 +1643,13 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         {
                             for (i = 0; i < _ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais; i++)
                             {
-                                printf("\n{ %d } - %s: %s", i + 1, _ConjuntoDeJutsus[_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[i]].Nome, _ConjuntoDeJutsus[_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[i]].Nome);
+                                printf("\n{ %d } - %s: %s", i + 1, _ConjuntoDeJutsus[_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[i]].TipoJutsu, _ConjuntoDeJutsus[_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[i]].Nome);
                             }
                             printf("\nDigite o Numero do Jutsu Que Deseja: ");
                             OpçaoDeJutsu = VereficaQuantia(1, (_ConjuntoDeClas[OpçaoDeContexto - 1].QuantidadeDeJutsusTradicionais));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: JUTSU TRADICIONAL ESPECIFICO DO CLA ]==~>\n");
-                            RelatorioDaOpçao(3, (OpçaoDeJutsu), 1);
+                            RelatorioDaOpçao(3, ((_ConjuntoDeClas[OpçaoDeContexto - 1].JutsusTradicionais[OpçaoDeJutsu - 1] + 1)), 1);
                             congelar_tela();
                             continue;
                         }
@@ -2030,8 +2030,7 @@ void Remover(int TipoDeContexto)
                             _ConjuntoDeMissoes[i].QuantidadeDeNinjas--;
                             if (_ConjuntoDeMissoes[i].QuantidadeDeNinjas > 0)
                             {
-                                _ConjuntoDeMissoes[i].NinjasDaMissao = realloc(_ConjuntoDeMissoes[i].NinjasDaMissao,
-                                                                               _ConjuntoDeMissoes[i].QuantidadeDeNinjas * sizeof(int));
+                                _ConjuntoDeMissoes[i].NinjasDaMissao = realloc(_ConjuntoDeMissoes[i].NinjasDaMissao, _ConjuntoDeMissoes[i].QuantidadeDeNinjas * sizeof(int));
                             }
                             else
                             {
@@ -2469,7 +2468,6 @@ void AlterarShinobiEspecifico(int indiceShinobi)
                     _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[idx].CaracteristicasDoJutsu, (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus + 1) * sizeof(int));
                     _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[_ConjuntoDeShinobis[idx].QuantidadeDeJutsus] = OpçaoDeJutsu - 1;
                     _ConjuntoDeShinobis[idx].QuantidadeDeJutsus++;
-                    _NumeroDoJutsu++;
                     printf("\nJutsu criado!\n");
                 }
                 break;
@@ -2747,7 +2745,6 @@ void Alterar(int TipoDeContexto)
                             _ConjuntoDeClas[idx].JutsusHereditarios = realloc(_ConjuntoDeClas[idx].JutsusHereditarios, (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios + 1) * sizeof(int));
                             _ConjuntoDeClas[idx].JutsusHereditarios[_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios] = OpçaoDeJutsu - 1;
                             _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios++;
-                            _NumeroDoJutsu++;
                             printf("\nJutsu criado!\n");
                         }
                         break;
@@ -2850,7 +2847,6 @@ void Alterar(int TipoDeContexto)
                             _ConjuntoDeClas[idx].JutsusTradicionais = realloc(_ConjuntoDeClas[idx].JutsusTradicionais, (_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais + 1) * sizeof(int));
                             _ConjuntoDeClas[idx].JutsusTradicionais[_ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais] = OpçaoDeJutsu - 1;
                             _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais++;
-                            _NumeroDoJutsu++;
                             printf("\nJutsu criado!\n");
                         }
                         break;
