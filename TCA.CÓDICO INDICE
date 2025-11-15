@@ -958,7 +958,7 @@ tMissao CriarMissao()
 
         if (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Estudante da Academia") != 0)
         {
-            if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Genin") == 0) && (((strcmp(CadastroDeMissao.NivelDificuldade, "D") != 0) && (strcmp(CadastroDeMissao.NivelDificuldade, "C") != 0))) && ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel - 1].Patente, "Jounin") != 0) && ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel - 1].Patente, "Chunin") != 0))))
+            if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Genin") == 0) && (((strcmp(CadastroDeMissao.NivelDificuldade, "D") != 0) && (strcmp(CadastroDeMissao.NivelDificuldade, "C") != 0))) && ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Jounin") != 0) && ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Chunin") != 0))))
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Os Genins só Podem participar de missões D ou C, e deve estar acompanhados por um Chunin ou um Jounin!");
@@ -976,7 +976,7 @@ tMissao CriarMissao()
             }
             else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Jounin") == 0) || (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Tokubetsu Jounin") == 0)))
             {
-                if ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel - 1].Patente, "Chunin") == 0))
+                if ((strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Chunin") == 0))
                 {
                     limpar_tela();
                     printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Um Jounin Não Segue Ordens De Um Chunin. Isso Fere A Hierarquia Ninja!");
@@ -993,7 +993,7 @@ tMissao CriarMissao()
                     continue;
                 }
             }
-            else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "ANBU") == 0)) && (strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel - 1].Patente, "Kage") != 0 && strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel - 1].Patente, "Kage") != 0) && strcmp(CadastroDeMissao.NivelDificuldade, "A") != 0 && strcmp(CadastroDeMissao.NivelDificuldade, "S") != 0)
+            else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "ANBU") == 0)) && (strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Kage") != 0 && strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Kage") != 0) && strcmp(CadastroDeMissao.NivelDificuldade, "A") != 0 && strcmp(CadastroDeMissao.NivelDificuldade, "S") != 0)
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Os ANBU só atuam em missões Rank A e S, sob ordens diretas do Hokage!");
@@ -1036,7 +1036,7 @@ tMissao CriarMissao()
                 sinal = 0;
                 for (k = 0; k < _ConjuntoDeMissoes[j].QuantidadeDeNinjas; k++)
                 {
-                    if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].NinjasDaMissao[k] - 1].Nome) == 0))
+                    if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].NinjasDaMissao[k]].Nome) == 0))
                     {
                         if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0))
                         {
@@ -2421,11 +2421,11 @@ void AlterarShinobiEspecifico(int indiceShinobi)
                 break;
 
             case 2:
-                printf("\nRemover %s de %s? (s/n): ", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla - 1].NomeDoCla, _ConjuntoDeShinobis[idx].Nome);
+                printf("\nRemover %s de %s? (s/n): ", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla].NomeDoCla, _ConjuntoDeShinobis[idx].Nome);
                 if (simOUnao() == 1)
                 {
                     printf("\nClã removido! Renegado!\n");
-                    _ConjuntoDeShinobis[idx].CaracteristicasDoCla = 0;
+                    _ConjuntoDeShinobis[idx].CaracteristicasDoCla = -1;
                 }
                 else
                     printf("\nCancelado.\n");
@@ -2671,12 +2671,14 @@ void Alterar(int TipoDeContexto)
                     printf("\n=== JUTSUS HEREDITÁRIOS ===\n");
                     if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0)
                     {
+                        
                         printf("Atuais:\n");
                         for (int i = 0; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios; i++)
                         {
                             int jutsuIdx = _ConjuntoDeClas[idx].JutsusHereditarios[i];
                             printf("%d-%s\n", i + 1, _ConjuntoDeJutsus[jutsuIdx].Nome);
                         }
+                        
                     }
                     else
                     {
@@ -2749,7 +2751,7 @@ void Alterar(int TipoDeContexto)
                         }
                     }
                     else
-                    {
+                    { 
                         printf("Nenhum.\n");
                     }
 
