@@ -141,6 +141,10 @@ void SelecionarContexto(int TipoDeContexto)
 
 void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao)
 {
+    if (OpçaoDaAçao == 5)
+    {
+        return;
+    }
     switch (TipoDeContexto)
     {
     case 1:
@@ -157,10 +161,6 @@ void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao)
 
     case 4:
         Remover(OpçaoDaAçao);
-        break;
-
-    case 5:
-        return;
         break;
     }
 }
@@ -4048,7 +4048,7 @@ void SalvaDados()
 {
     FILE *Dados;
 
-    Dados = fopen("DadosTCA", "w");
+    Dados = fopen("Dados TCA", "w");
 
     if (Dados == NULL)
     {
@@ -4076,8 +4076,8 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";\n");
         }
+        fprintf(Dados, ";\n");
 
         if (_NumeroDoCla > 0)
         {
@@ -4103,8 +4103,8 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";\n");
         }
+        fprintf(Dados, ";\n");
 
         if (_NumeroDoShinobi > 0)
         {
@@ -4126,8 +4126,8 @@ void SalvaDados()
                     }
                 }
             }
-            fprintf(Dados, ";\n");
         }
+        fprintf(Dados, ";\n");
 
         if (_NumeroDaMissao > 0)
         {
@@ -4145,8 +4145,8 @@ void SalvaDados()
                     fprintf(Dados, "%d,", _ConjuntoDeMissoes[i].NinjasDaMissao[j]);
                 }
             }
-            fprintf(Dados, ";\n");
         }
+        fprintf(Dados, ";\n");
     }
     fclose(Dados);
 }
