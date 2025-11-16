@@ -49,41 +49,41 @@ typedef struct
     int *NinjasDaMissao;
 } tMissao;
 
-void SalvaDados();                                                                                      // 1. Salva todos os dados em arquivo
-void RecuperaDados();                                                                                   // 2. Recupera os dados salvos do arquivo
+void SalvaDados();    // 1. Salva todos os dados em arquivo
+void RecuperaDados(); // 2. Recupera os dados salvos do arquivo
 
-void SelecionadorDeMenu(int TipoDeMenu);                                                                // 3. Seleciona qual menu será exibido
-void SelecionarContexto(int TipoDeContexto);                                                            // 4. Abre o submenu do contexto (Shinobi/Clã/Jutsu/Missão)
-void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao);                                               // 5. Executa a ação dentro do contexto selecionado
-int EscolheOpçao(int Contexto);                                                                         // 6. Lê e retorna a opção escolhida no menu
+void SelecionadorDeMenu(int TipoDeMenu);                  // 3. Seleciona qual menu será exibido
+void SelecionarContexto(int TipoDeContexto);              // 4. Abre o submenu do contexto (Shinobi/Clã/Jutsu/Missão)
+void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao); // 5. Executa a ação dentro do contexto selecionado
+int EscolheOpçao(int Contexto);                           // 6. Lê e retorna a opção escolhida no menu
 
-int NovoCadastro(int TipoDeCadastro, int TipoDeCaso);                                                   // 7. Direciona para o tipo correto de criação
-tNinja CriarShinobi(void);                                                                              // 8. Cria um Shinobi
-tCla CriarCla(void);                                                                                    // 9. Cria um Clã
-tJutsu CriarJutsu(void);                                                                                // 10. Cria um Jutsu
-tMissao CriarMissao(void);                                                                              // 11. Cria uma missão
+int NovoCadastro(int TipoDeCadastro, int TipoDeCaso); // 7. Direciona para o tipo correto de criação
+tNinja CriarShinobi(void);                            // 8. Cria um Shinobi
+tCla CriarCla(void);                                  // 9. Cria um Clã
+tJutsu CriarJutsu(void);                              // 10. Cria um Jutsu
+tMissao CriarMissao(void);                            // 11. Cria uma missão
 
-void Alterar(int TipoDeContexto);                                                                       // 12. Gerencia alteração conforme o contexto
-void AlterarShinobiEspecifico(int indiceShinobi);                                                       // 13. Altera um Shinobi específico
-void AlterarJutsuEspecifico(int indiceJutsu);                                                           // 14. Altera um Jutsu específico
-void Remover(int TipoDeContexto);                                                                       // 15. Remove Shinobi/Clã/Jutsu/Missão
+void Alterar(int TipoDeContexto);                 // 12. Gerencia alteração conforme o contexto
+void AlterarShinobiEspecifico(int indiceShinobi); // 13. Altera um Shinobi específico
+void AlterarJutsuEspecifico(int indiceJutsu);     // 14. Altera um Jutsu específico
+void Remover(int TipoDeContexto);                 // 15. Remove Shinobi/Clã/Jutsu/Missão
 
-void Imprime(int CasoDeImpressao, int TipoDeImpressao);                                                 // 16. Seleciona o tipo de impressão
-void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade);                              // 17. Gera relatórios
-int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao);                                            // 18. Pergunta se deseja ver mais detalhes
-void Informaçoes(int informaçao, int TipoDeInformaçao);                                                 // 19. Imprime informações adicionais
+void Imprime(int CasoDeImpressao, int TipoDeImpressao);                    // 16. Seleciona o tipo de impressão
+void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade); // 17. Gera relatórios
+int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao);               // 18. Pergunta se deseja ver mais detalhes
+void Informaçoes(int informaçao, int TipoDeInformaçao);                    // 19. Imprime informações adicionais
 
-void VerificaNivelDeDificuldade(char StrAuX[100]);                                                      // 20. Valida nível da missão (S/A/B/C/D)
-void VerificadorDeTexto(char Texto[100]);                                                               // 21. Garante que o texto não tem números
-int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                              // 22. Verifica número dentro de intervalo
-int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado);       // 23. Evita repetição
-void SelecionaStatus(int Opçao, char StrAux[100]);                                                      // 24. Converte número em status da missão
-void SelecionaPatente(int Opçao, char StrAux[100]);                                                     // 25. Converte número em patente da missão
+void VerificaNivelDeDificuldade(char StrAuX[100]);                                                // 20. Valida nível da missão (S/A/B/C/D)
+void VerificadorDeTexto(char Texto[100]);                                                         // 21. Garante que o texto não tem números
+int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                        // 22. Verifica número dentro de intervalo
+int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado); // 23. Evita repetição
+void SelecionaStatus(int Opçao, char StrAux[100]);                                                // 24. Converte número em status da missão
+void SelecionaPatente(int Opçao, char StrAux[100]);                                               // 25. Converte número em patente da missão
 
-void limpar_tela(void);                                                                                 // 26. Limpa o terminal
-void congelar_tela(void);                                                                               // 27. Pausa o terminal
-void Carregamento(void);                                                                                // 28. Exibe animação de carregamento
-int simOUnao(void);                                                                                     // 29. Retorna 1 (sim) ou 0 (não)
+void limpar_tela(void);   // 26. Limpa o terminal
+void congelar_tela(void); // 27. Pausa o terminal
+void Carregamento(void);  // 28. Exibe animação de carregamento
+int simOUnao(void);       // 29. Retorna 1 (sim) ou 0 (não)
 //~~~(variáveis globais)~~~//
 tNinja *_ConjuntoDeShinobis;
 int _NumeroDoShinobi = 0;
@@ -166,8 +166,6 @@ void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao)
 
 int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
 {
-    //  1 - Para Cadastros Padrao;
-    //  2 - Para Cadastros Que Cadastra Um Novo Contexto QUando o Ususario Digita { 0 } em Opçoes;
     switch (TipoDeCadastro)
     {
     case 1:
@@ -438,7 +436,7 @@ tNinja CriarShinobi()
 
     //=======================================================================================================================================================================================//
 
-    DesejaInformaçoes(DesejaInformacoes, 1);
+    DesejaInformaçoes(DesejaInformacoes, 0);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE SHINOBI: CLA DO SHINOBI ]==~>\n\nSelecione o Cla Desejado...");
     congelar_tela();
@@ -574,7 +572,7 @@ tCla CriarCla()
     //=======================================================================================================================================================================================//
 
     int *aux = calloc(101, sizeof(int));
-    DesejaInformaçoes(DesejaInformacoes, 2);
+    DesejaInformaçoes(DesejaInformacoes, 1);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
     if (simOUnao() == 1)
@@ -626,7 +624,7 @@ tCla CriarCla()
 
     OpçaoDeJutsu = 0;
 
-    DesejaInformaçoes(DesejaInformacoes, 4);
+    DesejaInformaçoes(DesejaInformacoes, 3);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Tradicional?(s/n) ");
     if (simOUnao() == 1)
@@ -727,7 +725,7 @@ tJutsu CriarJutsu()
 
     //=======================================================================================================================================================================================//
 
-    DesejaInformaçoes(DesejaInformacoes, 5);
+    DesejaInformaçoes(DesejaInformacoes, 4);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU: TIPO DE JUTSU ]==~>\n\nDigite o Tipo do Jutsu: ");
     VerificadorDeTexto(StrAuX);
@@ -737,7 +735,7 @@ tJutsu CriarJutsu()
 
     //=======================================================================================================================================================================================//
 
-    DesejaInformaçoes(DesejaInformacoes, 3);
+    DesejaInformaçoes(DesejaInformacoes, 2);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nO Jutsu Tem Relaçao Com Algum Elemento?(s/n) ");
     if (simOUnao() == 1)
@@ -774,7 +772,7 @@ tJutsu CriarJutsu()
 
     //=======================================================================================================================================================================================//
 
-    DesejaInformaçoes(DesejaInformacoes, 7);
+    DesejaInformaçoes(DesejaInformacoes, 5);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU: CUSTO DE CHAKRA DO JUTSU ]==~>\n\nDigite o Custo de Chakra do Jutsu(0/100): ");
     CadastroDeJutsu.CustodeChakra = VereficaQuantia(1, 100);
@@ -3864,26 +3862,29 @@ int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao)
         limpar_tela();
         switch (informaçao)
         {
-        case 1:
+        case 0:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Clas em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
-        case 2:
+        case 1:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Jutsus Hereditarios em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
-        case 3:
+        case 2:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Elementos em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
-        case 4:
+        case 3:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Jutsus Tradicionais em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
-        case 5:
+        case 4:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Tipos de Jutsus em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
+            break;
+        case 5:
+            printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Custo de Chakra em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         case 6:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Dano de Jutsus em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         case 7:
-            printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Reserva de Chakra em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
+            printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Reserva De Chakra em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         case 8:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Elemento Principal de um Shinobi em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
@@ -3895,7 +3896,7 @@ int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao)
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Lider das Missoes em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         case 12:
-            printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Nivel de Dificuldade Nas Missoes em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
+            printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Nivel de Dificuldade Das Missoes em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         case 13:
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Patentes de Shinobi em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
@@ -3943,103 +3944,187 @@ void Informaçoes(int informaçao, int TipoDeInformaçao)
     printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\n");
     switch (informaçao)
     {
-    case 0: // EXEMPLO: Clas em Naruto;
+    case 0:
+    { // EXEMPLO: Clãs em Naruto
         if (TipoDeInformaçao == 1)
+        {
             printf("Clas em Naruto:\nFamilia ou linhagem de ninjas com sangue compartilhado\nPossuem habilidades ou tecnicas unicas, passadas de geracao em geracao\nPodem ter tracos geneticos caracteristicos, como o Sharingan\nDefinem status social e politico dentro da vila ninja\nReforcam tradicao, cultura e lacos familiares\n");
-        else
+        }
+        else if (TipoDeInformaçao == 2)
+        {
             printf("Exemplos de clas em Naruto:\n1. Uchiha\n2. Hyuuga\n3. Senju\n4. Aburame\n5. Nara\n");
+        }
         break;
+    }
 
-    case 1: // EXEMPLO: Jutsus Hereditarios em Naruto;
+    case 1:
+    { // EXEMPLO: Jutsus Hereditários
         if (TipoDeInformaçao == 1)
+        {
             printf("Jutsus Hereditarios em Naruto:\nTecnicas ou poderes passados geneticamente de pais para filhos\nPodem incluir doujutsus, estilos de luta ou afinidades elementares\nNem todo membro de um cla possui a mesma habilidade ao nascer\nSao sinais de linhagem e fortalecem a identidade do cla\nPermitem que geracoes mantenham vantagens unicas no combate\n");
-        else
-            printf("Exemplos de jutsus hereditarios de clas em Naruto:\n1. Cla Uchiha: Sharingan (percepcao ocular avancada)\n2. Cla Hyuga: Byakugan (visao de 360 graus e percepcao de chakra)\n3. Cla Aburame: Controle de insetos venenosos\n4. Cla Nara: Tecnica de manipulacao de sombras\n5. Cla Akimichi: Aumento de tamanho corporal e forca\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos de jutsus hereditarios:\n1. Sharingan (Uchiha)\n2. Byakugan (Hyuga)\n3. Controle de insetos (Aburame)\n4. Sombra (Nara)\n5. Aumento corporal (Akimichi)\n");
+        }
         break;
+    }
 
-    case 2: // EXEMPLO: Elementos em Naruto;
+    case 2:
+    { // EXEMPLO: Elementos
         if (TipoDeInformaçao == 1)
-            printf("Elementos em Naruto:\nUm elemento eh uma forca da natureza que o ninja pode controlar usando chakra\nCada ninja geralmente tem afinidade com um ou mais elementos, determinando seus ataques\nElementos basicos incluem Fogo (Katon), Agua (Suiton), Terra (Doton), Vento (Fuuton) e Raio (Raiton)\nAlguns elementos podem ser combinados, criando formas avancadas como Lava ou Madeira\nDominar elementos aumenta a forca, defesa e versatilidade do ninja em combate\n");
-        else
-            printf("Exemplos de elementos em Naruto:\n1. Fogo (Katon) [火]\n2. Agua (Suiton) [水]\n3. Terra (Doton) [土]\n4. Vento (Fuuton) [風]\n5. Raio (Raiton) [雷]\n");
+        {
+            printf("Elementos em Naruto:\nUm elemento eh uma forca da natureza que o ninja pode controlar usando chakra\nCada ninja geralmente tem afinidade com um ou mais elementos\nElementos basicos: Fogo, Agua, Terra, Vento e Raio\nAlguns elementos podem ser combinados em avancados\nDominar elementos aumenta poder e versatilidade\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Elementos:\n1. Fogo\n2. Agua\n3. Terra\n4. Vento\n5. Raio\n");
+        }
         break;
+    }
 
-    case 3: // EXEMPLO: Jutsus Tradicionais em Naruto;
+    case 3:
+    { // EXEMPLO: Jutsus Tradicionais
         if (TipoDeInformaçao == 1)
-            printf("Jutsus Tradicionais em Naruto:\nJutsus Tradicionais sao tecnicas especificas de um cla, passadas de geracao em geracao\nEles refletem a historia, habilidades e estilo de combate do cla\nApenas membros do cla conseguem aprender e usar essas tecnicas com eficacia\nExemplos incluem o Byakugan do cla Hyuuga e os jutsus de selamento do cla Uzumaki\nDominar um Jutsu Tradicional eh uma prova de habilidade e heranca dentro do cla\n");
-        else
-            printf("Exemplos de Jutsus Tradicionais de Clas em Naruto:\n1. Cla Uchiha: Jutsu Bola de Fogo (Katon: Gokakyu no Jutsu)\n2. Cla Hyuga: Rotacao da Palma dos Oito Trigramas (Hakke Kusho)\n3. Cla Senju: Estilo Madeira: Surgimento da Floresta Profunda (Mokuton: Shin Sussenju)\n4. Cla Aburame: Enxame de Insetos Parasitas (Mushi Bunshin)\n5. Cla Nara: Tecnica do Estrangulamento das Sombras (Kage Kubi Shibari no Jutsu)\n");
+        {
+            printf("Jutsus Tradicionais:\nTecnicas especificas de um cla\nPassadas por geracoes\nSomente membros do cla usam plenamente\nEx.: Byakugan, jutsus de selamento Uzumaki\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Fireball (Uchiha)\n2. Rotacao Hyuga\n3. Madeira Senju\n4. Insetos Aburame\n5. Sombra Nara\n");
+        }
         break;
+    }
 
-    case 4: // EXEMPLO: Tipos de Jutsu em Naruto;
+    case 4:
+    { // EXEMPLO: Tipos de Jutsu
         if (TipoDeInformaçao == 1)
-            printf("Tipos de Jutsus em Naruto:\nSao diferentes categorias de tecnicas usadas pelos ninjas em combate\nCada tipo de jutsu representa uma forma distinta de manipular chakra\nEles variam entre ataques fisicos, ilusoes, tecnicas proibidas e especiais\nCada ninja se especializa em um ou mais tipos, conforme seu treinamento\nEssas classificacoes ajudam a definir o estilo e a forca de um shinobi\n");
-        else
-            printf("Exemplos de Tipos de Jutsus em Naruto:\n1. Ninjutsu\n2. Taijutsu\n3. Genjutsu\n4. Kenjutsu\n5. Fuinjutsu\n");
+        {
+            printf("Tipos de Jutsus:\nCategorias de tecnicas ninja\nVariedade entre ataques, ilusoes e proibidos\nCada ninja domina alguns tipos\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Tipos:\n1. Ninjutsu\n2. Taijutsu\n3. Genjutsu\n4. Kenjutsu\n5. Fuinjutsu\n");
+        }
         break;
+    }
 
-    case 5: // EXEMPLO: Custo de Chakra em Naruto
+    case 5:
+    { // EXEMPLO: Custo de Chakra
         if (TipoDeInformaçao == 1)
-            printf("Chakra em Naruto:\nCombinacao de energia fisica (corpo) e espiritual (mente) usada para jutsus\nCircula pelos canais internos do corpo, precisa ser bem controlada\nAfinidades elementais: Fogo [Katon], Agua [Suiton], Terra [Doton], Vento [Fuuton], Raio [Raiton]\nUsado para ataques, selamentos, clones e fortalecimentos, mais chakra = mais tecnicas\nO controle de chakra permite executar tecnicas mais poderosas e economizar energia\n");
-        else
-            printf("Exemplos de Custo de Chakra (0 a 100) em Naruto:\n1. Custo: 20/100 - jutsus simples, baixo consumo (ex.: Clone Basico)\n2. Custo: 40/100 - tecnicas moderadas (ex.: Fireball Jutsu)\n3. Custo: 60/100 - jutsus avançados (ex.: Chidori, Water Dragon)\n4. Custo: 80/100 - tecnicas de alto nivel (ex.: Rasenshuriken)\n5. Custo: 100/100 - jutsus extremos, consomem todo o chakra (ex.: Invocacoes ou Modos Especiais)\n");
+        {
+            printf("Chakra:\nEnergia fisica + espiritual\nUsado para jutsus, fortalecimentos, clones etc.\nMais chakra = mais tecnicas\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Custos (0–100):\n1. 20 - jutsus simples\n2. 40 - tecnicas moderadas\n3. 60 - avancados\n4. 80 - alto nivel\n5. 100 - extremos\n");
+        }
         break;
+    }
 
-    case 6: // EXEMPLO: Dano em Naruto;
+    case 6:
+    { // EXEMPLO: Dano
         if (TipoDeInformaçao == 1)
-            printf("Dano de Jutsus em Naruto:\nO dano eh causado pelo impacto do jutsu no inimigo, seja fisico ou elemental\nQuanto mais chakra e controle o ninja aplica, maior o dano\nAfinidades elementais podem aumentar ou reduzir o dano (Ex: Fogo > Madeira)\nEfeitos secundarios como queimaduras, paralisia ou destruicao de terreno tambem contribuem para o dano total\nJutsus combinados ou ataques consecutivos podem multiplicar o dano infligido\n");
-        else
-            printf("Exemplos de Dano (0 a 100) em Naruto:\n1. Dano: 20/100 - leve arranhao\n2. Dano: 40/100 - corte superficial\n3. Dano: 60/100 - ferida moderada, causa dor\n4. Dano: 80/100 - golpe forte, quase incapacita\n5. Dano: 100/100 - dano maximo, incapacita totalmente\n");
+        {
+            printf("Dano:\nCausado por impacto fisico ou elemental\nMais chakra = mais dano\nAfinidades influenciam eficiencia\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Dano (0–100):\n1. 20 - leve\n2. 40 - corte superficial\n3. 60 - ferida moderada\n4. 80 - golpe forte\n5. 100 - total\n");
+        }
         break;
+    }
 
-    case 7: // EXEMPLO: Reserva de Chakra em Naruto;
+    case 7:
+    { // EXEMPLO: Reserva de Chakra
         if (TipoDeInformaçao == 1)
-            printf("Reserva de Chakra em Naruto:\nEh a quantidade total de energia espiritual e fisica acumulada por um ninja\nDetermina quanto tempo ele pode lutar e quantos jutsus consegue realizar\nUma reserva alta permite tecnicas poderosas e batalhas prolongadas\nUma reserva baixa limita o uso de jutsus e exige melhor controle de chakra\nPode ser aumentada com treinamento intenso, disciplina e heranca genetica\n");
-        else
-            printf("Exemplos de Reserva de Chakra (0 a 100) em Naruto:\n1. Chakra: 20/100 - nivel baixo, jutsus simples apenas\n2. Chakra: 40/100 - nivel medio-baixo, tecnicas curtas e limitadas\n3. Chakra: 60/100 - nivel medio, bom equilibrio entre poder e resistencia\n4. Chakra: 80/100 - nivel alto, jutsus poderosos e combates prolongados\n5. Chakra: 100/100 - nivel lendario, chakra quase ilimitado (nivel Kage)\n");
+        {
+            printf("Reserva de Chakra:\nQuantidade total de energia ninja\nDetermina quanto tempo luta\nPode ser treinada\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Reserva (0–100):\n1. 20 - baixa\n2. 40 - media\n3. 60 - equilibrada\n4. 80 - alta\n5. 100 - lendaria\n");
+        }
         break;
+    }
 
-    case 8: // EXEMPLO: Elemento Principal de um Shinobi em Naruto
+    case 8:
+    { // EXEMPLO: Elemento Principal
         if (TipoDeInformaçao == 1)
-            printf("Elemento Principal de um Shinobi em Naruto:\nEh o tipo de chakra que um ninja manipula naturalmente, determinado pelo seu DNA ou afinidade\nDefine a natureza das tecnicas que ele consegue aprender e dominar mais facilmente\nUm elemento principal forte permite jutsus mais potentes e eficientes\nUm elemento principal fraco limita o poder e a versatilidade das tecnicas\nPode ser treinado e melhorado, mas a afinidade inata influencia muito o potencial final\n");
-        else
-            printf("Exemplos de Elemento Principal de um Shinobi em Naruto:\n1. Fogo [火] - tecnicas ofensivas com chamas, cortam e queimam o inimigo\n2. Agua [水] - tecnicas flexiveis e de longo alcance, podem congelar ou controlar fluxo\n3. Terra [土] - jutsus defensivos ou de ataque pesado, manipulacao do solo\n4. Vento [風] - cortes precisos e rapidos, aumentam poder de projetiles\n5. Raio [雷] - ataques velozes e penetrantes, eficaz contra certos elementos\n");
+        {
+            printf("Elemento Principal:\nTipo de chakra predominante\nDefine tecnicas mais faceis de aprender\nAfinidade influencia potencial\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Fogo\n2. Agua\n3. Terra\n4. Vento\n5. Raio\n");
+        }
         break;
+    }
 
-    case 9: // EXEMPLO: Jutsus Famosos em Naruto
+    case 9:
+    { // EXEMPLO: Jutsus Famosos
         if (TipoDeInformaçao == 1)
-            printf("Jutsus em Geral em Naruto:\nSao tecnicas ninjas que utilizam chakra moldado e liberado de diferentes formas\nCada jutsu exige controle preciso de energia fisica e espiritual, combinadas em proporcoes especificas\nOs jutsus se dividem em tres categorias principais: Ninjutsu, Genjutsu e Taijutsu\nPodem variar de simples tecnicas basicas ate habilidades proibidas e destrutivas\nO dominio de um jutsu depende de treino, concentracao e da natureza do chakra do shinobi\n");
-        else
-            printf("Exemplos de Jutsus Famosos em Naruto:\n1. Rasengan [螺旋丸] - esfera de chakra giratoria criada por Minato, exige alto controle\n2. Chidori [千鳥] - tecnica de relampago criada por Kakashi, foco em velocidade e perfuracao\n3. Amaterasu [天照] - chamas negras inextinguiveis controladas pelo Sharingan de Itachi\n4. Susano'o [須佐能乎] - manifestacao espiritual gigantesca que defende e ataque\n5. Edo Tensei [穢土転生] - jutsu proibido que reencarna shinobis mortos para a batalha\n");
+        {
+            printf("Jutsus:\nTecnicas que usam chakra moldado\nVariam entre basicos e proibidos\nDomino exige treino intenso\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Famosos:\n1. Rasengan\n2. Chidori\n3. Amaterasu\n4. Susano'o\n5. Edo Tensei\n");
+        }
         break;
+    }
 
-    case 11: // EXEMPLO: Lideres de Missoes em Naruto
+    case 11:
+    { // EXEMPLO: Líderes de Missões
         if (TipoDeInformaçao == 1)
-            printf("Lider das Missoes em Naruto:\nE a pessoa responsavel por designar e supervisionar as missoes dos ninjas\nGeralmente e um ninja experiente que conhece bem as habilidades de sua equipe\nEle avalia os riscos, distribui tarefas e garante que as missoes sejam cumpridas com seguranca\nTambem decide a classificacao da missao (D, C, B, A, S) e quais shinobis estao aptos para executa-la\nUm bom lider de missoes e essencial para o sucesso da vila e a seguranca dos ninjas\n");
-        else
-            printf("Exemplos de Lideres de Missoes e seus Times em Naruto:\n1. Kakashi Hatake - Lider do Time 7 (Naruto, Sasuke e Sakura)\n2. Asuma Sarutobi - Lider do Time 10 (Shikamaru, Choji e Ino)\n3. Might Guy - Lider do Time Guy (Rock Lee, Neji e Tenten)\n4. Yamato - Lider temporario do Time 7 (Naruto, Sakura e Sai)\n5. Minato Namikaze - Lider do Time Minato (Kakashi, Obito e Rin)\n");
+        {
+            printf("Lider de Missoes:\nResponsavel por organizar e supervisionar missoes\nAvalia riscos e monta equipes\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Kakashi - Time 7\n2. Asuma - Time 10\n3. Guy - Time Guy\n4. Yamato - Time 7\n5. Minato - Time Minato\n");
+        }
         break;
+    }
 
-    case 12: // EXEMPLO: Nivel de Dificuldade das Missoes
+    case 12:
+    { // EXEMPLO: Níveis de Missão
         if (TipoDeInformaçao == 1)
-            printf("Nivel de Dificuldade (D, C, B, A, S) em Naruto:\nD - Missao facil, baixo risco e pouca complexidade\nC - Missao comum, com desafios moderados\nB - Missao dificil, exige estrategia e habilidade\nA - Missao muito dificil, risco alto de falha\nS - Missao especial, exige ninjas fortes e experiencia\n");
-        else
-            printf("Exemplos de Nivel de Missao em Naruto:\n1. Resgate de Hokage - Nivel: S\n2. Patrulha da Vila - Nivel: C\n3. Investigacao de Akatsuki - Nivel: A\n4. Entrega de Mensagem Secreta - Nivel: D\n5. Protecao de Diplomata - Nivel: B\n");
+        {
+            printf("Niveis:\nD - facil\nC - moderada\nB - dificil\nA - muito dificil\nS - especial\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Hokage - S\n2. Patrulha - C\n3. Akatsuki - A\n4. Mensagem - D\n5. Diplomata - B\n");
+        }
         break;
+    }
 
-    case 13: // EXEMPLO: Patentes de Shinobi
+    case 13:
+    { // EXEMPLO: Patentes
         if (TipoDeInformaçao == 1)
-            printf("Patentes de Shinobi em Naruto:\nGenin  - Nivel inicial; missoes basicas e aprendizado\nChunin - Ninja intermediario; lidera pequenos times\nJonin  - Ninja de elite; alto dominio e missoes perigosas\nANBU   - Forcas especiais; operacoes secretas e arriscadas\nKage   - Lider da Vila; maior autoridade e poder\n");
-        else
-            printf("Exemplos de Patentes em Naruto:\n1. Naruto Uzumaki - Genin (no inicio)\n2. Shikamaru Nara - Chunin\n3. Kakashi Hatake - Jonin\n4. Itachi Uchiha - ANBU\n5. Minato Namikaze - Hokage\n");
+        {
+            printf("Patentes:\nGenin - iniciante\nChunin - intermediario\nJonin - elite\nANBU - especial\nKage - lider\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Naruto - Genin\n2. Shikamaru - Chunin\n3. Kakashi - Jonin\n4. Itachi - ANBU\n5. Minato - Hokage\n");
+        }
         break;
+    }
 
-    case 14: // EXEMPLO: Status de Missao
+    case 14:
+    { // EXEMPLO: Status das Missões
         if (TipoDeInformaçao == 1)
-            printf("Status de Missoes em Naruto:\nPendente - Missao foi registrada mas ainda nao iniciou\nEm Andamento - Ninja ja iniciou a execucao da missao\nConcluida - Missao finalizada com sucesso\nFalha - Missao nao cumprida ou objetivo perdido\nCancelada - Missao encerrada antes de ser concluida\n");
-        else
-            printf("Exemplos de Status de Missoes:\n1. Resgate de Refem - Em Andamento\n2. Patrulha da Fronteira - Concluida\n3. Transporte de Suprimentos - Pendente\n4. Captura de Nukenin - Falha\n5. Escolta de Mercador - Cancelada\n");
+        {
+            printf("Status:\nPendente\nEm andamento\nConcluida\nFalha\nCancelada\n");
+        }
+        else if (TipoDeInformaçao == 2)
+        {
+            printf("Exemplos:\n1. Refem - Em andamento\n2. Fronteira - Concluida\n3. Suprimentos - Pendente\n4. Nukenin - Falha\n5. Mercador - Cancelada\n");
+        }
         break;
+    }
     }
 }
 
