@@ -3947,182 +3947,140 @@ void Informaçoes(int informaçao, int TipoDeInformaçao)
     case 0:
     { // EXEMPLO: Clãs em Naruto
         if (TipoDeInformaçao == 1)
-        {
             printf("Clas em Naruto:\nFamilia ou linhagem de ninjas com sangue compartilhado\nPossuem habilidades ou tecnicas unicas, passadas de geracao em geracao\nPodem ter tracos geneticos caracteristicos, como o Sharingan\nDefinem status social e politico dentro da vila ninja\nReforcam tradicao, cultura e lacos familiares\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos de clas em Naruto:\n1. Uchiha\n2. Hyuuga\n3. Senju\n4. Aburame\n5. Nara\n");
-        }
+
         break;
     }
 
     case 1:
     { // EXEMPLO: Jutsus Hereditários
         if (TipoDeInformaçao == 1)
-        {
             printf("Jutsus Hereditarios em Naruto:\nTecnicas ou poderes passados geneticamente de pais para filhos\nPodem incluir doujutsus, estilos de luta ou afinidades elementares\nNem todo membro de um cla possui a mesma habilidade ao nascer\nSao sinais de linhagem e fortalecem a identidade do cla\nPermitem que geracoes mantenham vantagens unicas no combate\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos de jutsus hereditarios:\n1. Sharingan (Uchiha)\n2. Byakugan (Hyuga)\n3. Controle de insetos (Aburame)\n4. Sombra (Nara)\n5. Aumento corporal (Akimichi)\n");
-        }
+
         break;
     }
 
     case 2:
     { // EXEMPLO: Elementos
         if (TipoDeInformaçao == 1)
-        {
             printf("Elementos em Naruto:\nUm elemento eh uma forca da natureza que o ninja pode controlar usando chakra\nCada ninja geralmente tem afinidade com um ou mais elementos\nElementos basicos: Fogo, Agua, Terra, Vento e Raio\nAlguns elementos podem ser combinados em avancados\nDominar elementos aumenta poder e versatilidade\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Elementos:\n1. Fogo\n2. Agua\n3. Terra\n4. Vento\n5. Raio\n");
-        }
+
         break;
     }
 
     case 3:
     { // EXEMPLO: Jutsus Tradicionais
         if (TipoDeInformaçao == 1)
-        {
             printf("Jutsus Tradicionais:\nTecnicas especificas de um cla\nPassadas por geracoes\nSomente membros do cla usam plenamente\nEx.: Byakugan, jutsus de selamento Uzumaki\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Fireball (Uchiha)\n2. Rotacao Hyuga\n3. Madeira Senju\n4. Insetos Aburame\n5. Sombra Nara\n");
-        }
+
         break;
     }
 
     case 4:
     { // EXEMPLO: Tipos de Jutsu
         if (TipoDeInformaçao == 1)
-        {
             printf("Tipos de Jutsus:\nCategorias de tecnicas ninja\nVariedade entre ataques, ilusoes e proibidos\nCada ninja domina alguns tipos\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Tipos:\n1. Ninjutsu\n2. Taijutsu\n3. Genjutsu\n4. Kenjutsu\n5. Fuinjutsu\n");
-        }
+
         break;
     }
 
     case 5:
     { // EXEMPLO: Custo de Chakra
         if (TipoDeInformaçao == 1)
-        {
             printf("Chakra:\nEnergia fisica + espiritual\nUsado para jutsus, fortalecimentos, clones etc.\nMais chakra = mais tecnicas\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Custos (0–100):\n1. 20 - jutsus simples\n2. 40 - tecnicas moderadas\n3. 60 - avancados\n4. 80 - alto nivel\n5. 100 - extremos\n");
-        }
+
         break;
     }
 
     case 6:
     { // EXEMPLO: Dano
         if (TipoDeInformaçao == 1)
-        {
             printf("Dano:\nCausado por impacto fisico ou elemental\nMais chakra = mais dano\nAfinidades influenciam eficiencia\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Dano (0–100):\n1. 20 - leve\n2. 40 - corte superficial\n3. 60 - ferida moderada\n4. 80 - golpe forte\n5. 100 - total\n");
-        }
+
         break;
     }
 
     case 7:
     { // EXEMPLO: Reserva de Chakra
         if (TipoDeInformaçao == 1)
-        {
             printf("Reserva de Chakra:\nQuantidade total de energia ninja\nDetermina quanto tempo luta\nPode ser treinada\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Reserva (0–100):\n1. 20 - baixa\n2. 40 - media\n3. 60 - equilibrada\n4. 80 - alta\n5. 100 - lendaria\n");
-        }
+
         break;
     }
 
     case 8:
     { // EXEMPLO: Elemento Principal
         if (TipoDeInformaçao == 1)
-        {
             printf("Elemento Principal:\nTipo de chakra predominante\nDefine tecnicas mais faceis de aprender\nAfinidade influencia potencial\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Fogo\n2. Agua\n3. Terra\n4. Vento\n5. Raio\n");
-        }
+
         break;
     }
 
     case 9:
     { // EXEMPLO: Jutsus Famosos
         if (TipoDeInformaçao == 1)
-        {
             printf("Jutsus:\nTecnicas que usam chakra moldado\nVariam entre basicos e proibidos\nDomino exige treino intenso\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Famosos:\n1. Rasengan\n2. Chidori\n3. Amaterasu\n4. Susano'o\n5. Edo Tensei\n");
-        }
+
         break;
     }
 
     case 11:
     { // EXEMPLO: Líderes de Missões
         if (TipoDeInformaçao == 1)
-        {
             printf("Lider de Missoes:\nResponsavel por organizar e supervisionar missoes\nAvalia riscos e monta equipes\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Kakashi - Time 7\n2. Asuma - Time 10\n3. Guy - Time Guy\n4. Yamato - Time 7\n5. Minato - Time Minato\n");
-        }
+
         break;
     }
 
     case 12:
     { // EXEMPLO: Níveis de Missão
         if (TipoDeInformaçao == 1)
-        {
             printf("Niveis:\nD - facil\nC - moderada\nB - dificil\nA - muito dificil\nS - especial\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Hokage - S\n2. Patrulha - C\n3. Akatsuki - A\n4. Mensagem - D\n5. Diplomata - B\n");
-        }
+
         break;
     }
 
     case 13:
     { // EXEMPLO: Patentes
         if (TipoDeInformaçao == 1)
-        {
             printf("Patentes:\nGenin - iniciante\nChunin - intermediario\nJonin - elite\nANBU - especial\nKage - lider\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Naruto - Genin\n2. Shikamaru - Chunin\n3. Kakashi - Jonin\n4. Itachi - ANBU\n5. Minato - Hokage\n");
-        }
+
         break;
     }
 
     case 14:
     { // EXEMPLO: Status das Missões
         if (TipoDeInformaçao == 1)
-        {
             printf("Status:\nPendente\nEm andamento\nConcluida\nFalha\nCancelada\n");
-        }
         else if (TipoDeInformaçao == 2)
-        {
             printf("Exemplos:\n1. Refem - Em andamento\n2. Fronteira - Concluida\n3. Suprimentos - Pendente\n4. Nukenin - Falha\n5. Mercador - Cancelada\n");
-        }
+
         break;
     }
     }
