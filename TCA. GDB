@@ -112,7 +112,7 @@ int main()
             SalvaDados();
             Carregamento();
             limpar_tela();
-            printf("=== CREDITOS ===\n\nSoftware Desenvolvido por Miguel Lino Souza Forte e Tiago Lucas Kruger da Costa Soares.\n\n");
+            printf("=== CREDITOS ===\n\nSoftware Desenvolvido por Miguel Lino Souza Forte e Tiago Lucas Kruger Soares da Costa\n\n");
             break;
         }
         Carregamento();
@@ -2033,6 +2033,13 @@ void Remover(int TipoDeContexto)
             {
                 int idx = indice - 1;
 
+                for(int i = 0; i < _NumeroDoShinobi; i++)
+                {
+                    if((strcmp(_ConjuntoDeClas[idx].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla)) == 0)
+                    {
+                        _ConjuntoDeShinobis[i].CaracteristicasDoCla = -1;
+                    }
+                }
                 // Liberar memória do clã
                 free(_ConjuntoDeClas[idx].NomeDoCla);
 
