@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
-#include <windows.h>
 #ifdef _WIN32
 #else
 #endif
@@ -888,6 +887,38 @@ tMissao CriarMissao()
             continue;
         }
 
+        if (_NumeroDaMissao > 0)
+        {
+            int j, k, sinal;
+            for (j = 0; j < _NumeroDaMissao; j++)
+            {
+                sinal = 0;
+                for (k = 0; k < _ConjuntoDeMissoes[j].QuantidadeDeNinjas; k++)
+                {
+                    if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].NinjasDaMissao[k]].Nome) == 0)) || ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].LiderResponsavel].Nome) == 0)))
+                    {
+                        if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0))
+                        {
+                            limpar_tela();
+                            printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Este shinobi já está designado a uma missão em andamento!");
+                            sinal = 1;
+                            break;
+                        }
+                    }
+                }
+                if (sinal)
+                {
+                    break;
+                }
+            }
+            if (sinal)
+            {
+                congelar_tela();
+                i--;
+                continue;
+            }
+        }
+
         CadastroDeMissao.LiderResponsavel = OpçaoDeShinobi - 1;
         break;
     }
@@ -1022,7 +1053,7 @@ tMissao CriarMissao()
                 sinal = 0;
                 for (k = 0; k < _ConjuntoDeMissoes[j].QuantidadeDeNinjas; k++)
                 {
-                    if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].NinjasDaMissao[k]].Nome) == 0))
+                    if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].NinjasDaMissao[k]].Nome) == 0) || ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Nome, _ConjuntoDeShinobis[_ConjuntoDeMissoes[j].LiderResponsavel].Nome) == 0)))
                     {
                         if ((strcmp(_ConjuntoDeMissoes[j].Status, "Em Andamento") == 0))
                         {
@@ -1810,7 +1841,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         {
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: LIDER DA MISSAO ]==~>\n");
-                            RelatorioDaOpçao(1, OpçaoDeContexto, 2);
+                            RelatorioDaOpçao(1, _ConjuntoDeMissoes[OpçaoDeContexto - 1].LiderResponsavel + 1, 2);
                             congelar_tela();
                         }
                         else
@@ -1969,11 +2000,11 @@ void Remover(int TipoDeContexto)
                 {
                     if (_ConjuntoDeMissoes[i].LiderResponsavel == indice)
                     {
-                        _ConjuntoDeMissoes[i].LiderResponsavel = 0;
+                        _ConjuntoDeMissoes[i].LiderResponsavel = 0; // Liderança removida
                     }
                     else if (_ConjuntoDeMissoes[i].LiderResponsavel > indice)
                     {
-                        _ConjuntoDeMissoes[i].LiderResponsavel--;
+                        _ConjuntoDeMissoes[i].LiderResponsavel--; // Ajustar índices
                     }
                 }
 
@@ -1982,7 +2013,7 @@ void Remover(int TipoDeContexto)
                 {
                     for (int j = 0; j < _ConjuntoDeMissoes[i].QuantidadeDeNinjas; j++)
                     {
-                        if (_ConjuntoDeMissoes[i].NinjasDaMissao[j] == indice)
+                        if (_ConjuntoDeMissoes[i].NinjasDaMissao[j] == idx)
                         {
                             // Remover este shinobi do array
                             for (int k = j; k < _ConjuntoDeMissoes[i].QuantidadeDeNinjas - 1; k++)
@@ -2001,9 +2032,9 @@ void Remover(int TipoDeContexto)
                             }
                             j--;
                         }
-                        else if (_ConjuntoDeMissoes[i].NinjasDaMissao[j] > indice)
+                        else if (_ConjuntoDeMissoes[i].NinjasDaMissao[j] > idx)
                         {
-                            _ConjuntoDeMissoes[i].NinjasDaMissao[j]--;
+                            _ConjuntoDeMissoes[i].NinjasDaMissao[j]--; // Ajustar índices
                         }
                     }
                 }
@@ -2033,14 +2064,7 @@ void Remover(int TipoDeContexto)
             {
                 int idx = indice - 1;
 
-                for(int i = 0; i < _NumeroDoShinobi; i++)
-                {
-                    if((strcmp(_ConjuntoDeClas[idx].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla)) == 0)
-                    {
-                        _ConjuntoDeShinobis[i].CaracteristicasDoCla = -1;
-                    }
-                }
-                // Liberar memória do clã
+                // Liberar memória do clã antes de mexer nos índices
                 free(_ConjuntoDeClas[idx].NomeDoCla);
 
                 if (_ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios > 0)
@@ -2056,11 +2080,11 @@ void Remover(int TipoDeContexto)
                 // Remover referência dos shinobis que pertencem a este clã
                 for (int i = 0; i < _NumeroDoShinobi; i++)
                 {
-                    if (_ConjuntoDeShinobis[i].CaracteristicasDoCla == indice)
+                    if (_ConjuntoDeShinobis[i].CaracteristicasDoCla == idx)
                     {
-                        _ConjuntoDeShinobis[i].CaracteristicasDoCla = 0; // Sem clã
+                        _ConjuntoDeShinobis[i].CaracteristicasDoCla = -1; // Sem clã
                     }
-                    else if (_ConjuntoDeShinobis[i].CaracteristicasDoCla > indice)
+                    else if (_ConjuntoDeShinobis[i].CaracteristicasDoCla > idx)
                     {
                         _ConjuntoDeShinobis[i].CaracteristicasDoCla--; // Ajustar índices
                     }
@@ -2119,8 +2143,7 @@ void Remover(int TipoDeContexto)
                             _ConjuntoDeShinobis[i].QuantidadeDeJutsus--;
                             if (_ConjuntoDeShinobis[i].QuantidadeDeJutsus > 0)
                             {
-                                _ConjuntoDeShinobis[i].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[i].CaracteristicasDoJutsu,
-                                                                                        _ConjuntoDeShinobis[i].QuantidadeDeJutsus * sizeof(int));
+                                _ConjuntoDeShinobis[i].CaracteristicasDoJutsu = realloc(_ConjuntoDeShinobis[i].CaracteristicasDoJutsu, _ConjuntoDeShinobis[i].QuantidadeDeJutsus * sizeof(int));
                             }
                             else
                             {
@@ -2142,7 +2165,7 @@ void Remover(int TipoDeContexto)
                     // Jutsus hereditários
                     for (int j = 0; j < _ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios; j++)
                     {
-                        if (_ConjuntoDeClas[i].JutsusHereditarios[j] == indice)
+                        if (_ConjuntoDeClas[i].JutsusHereditarios[j] == idx)
                         {
                             // Remover este jutsu do clã
                             for (int k = j; k < _ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios - 1; k++)
@@ -2161,7 +2184,7 @@ void Remover(int TipoDeContexto)
                             }
                             j--;
                         }
-                        else if (_ConjuntoDeClas[i].JutsusHereditarios[j] > indice)
+                        else if (_ConjuntoDeClas[i].JutsusHereditarios[j] > idx)
                         {
                             _ConjuntoDeClas[i].JutsusHereditarios[j]--; // Ajustar índices
                         }
@@ -2170,7 +2193,7 @@ void Remover(int TipoDeContexto)
                     // Jutsus tradicionais
                     for (int j = 0; j < _ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais; j++)
                     {
-                        if (_ConjuntoDeClas[i].JutsusTradicionais[j] == indice)
+                        if (_ConjuntoDeClas[i].JutsusTradicionais[j] == idx)
                         {
                             // Remover este jutsu do clã
                             for (int k = j; k < _ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais - 1; k++)
@@ -2180,8 +2203,7 @@ void Remover(int TipoDeContexto)
                             _ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais--;
                             if (_ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais > 0)
                             {
-                                _ConjuntoDeClas[i].JutsusTradicionais = realloc(_ConjuntoDeClas[i].JutsusTradicionais,
-                                                                                _ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais * sizeof(int));
+                                _ConjuntoDeClas[i].JutsusTradicionais = realloc(_ConjuntoDeClas[i].JutsusTradicionais, _ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais * sizeof(int));
                             }
                             else
                             {
@@ -2190,7 +2212,7 @@ void Remover(int TipoDeContexto)
                             }
                             j--;
                         }
-                        else if (_ConjuntoDeClas[i].JutsusTradicionais[j] > indice)
+                        else if (_ConjuntoDeClas[i].JutsusTradicionais[j] > idx)
                         {
                             _ConjuntoDeClas[i].JutsusTradicionais[j]--; // Ajustar índices
                         }
