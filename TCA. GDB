@@ -50,39 +50,40 @@ typedef struct
 
 void SalvaDados();    // 1. Salva todos os dados em arquivo
 void RecuperaDados(); // 2. Recupera os dados salvos do arquivo
+void LiberarTudo(); // 3. Libera A Memoria Das Variaveis Globais
 
-void SelecionadorDeMenu(int TipoDeMenu);                  // 3. Seleciona qual menu será exibido
-void SelecionarContexto(int TipoDeContexto);              // 4. Abre o submenu do contexto (Shinobi/Clã/Jutsu/Missão)
-void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao); // 5. Executa a ação dentro do contexto selecionado
-int EscolheOpçao(int Contexto);                           // 6. Lê e retorna a opção escolhida no menu
+void SelecionadorDeMenu(int TipoDeMenu);                  // 4. Seleciona qual menu será exibido
+void SelecionarContexto(int TipoDeContexto);              // 5. Abre o submenu do contexto (Shinobi/Clã/Jutsu/Missão)
+void SelecionarAçao(int TipoDeContexto, int OpçaoDaAçao); // 6. Executa a ação dentro do contexto selecionado
+int EscolheOpçao(int Contexto);                           // 7. Lê e retorna a opção escolhida no menu
 
-int NovoCadastro(int TipoDeCadastro, int TipoDeCaso); // 7. Direciona para o tipo correto de criação
-tNinja CriarShinobi(void);                            // 8. Cria um Shinobi
-tCla CriarCla(void);                                  // 9. Cria um Clã
-tJutsu CriarJutsu(void);                              // 10. Cria um Jutsu
-tMissao CriarMissao(void);                            // 11. Cria uma missão
+int NovoCadastro(int TipoDeCadastro, int TipoDeCaso); // 8. Direciona para o tipo correto de criação
+tNinja CriarShinobi(void);                            // 9. Cria um Shinobi
+tCla CriarCla(void);                                  // 10. Cria um Clã
+tJutsu CriarJutsu(void);                              // 11. Cria um Jutsu
+tMissao CriarMissao(void);                            // 12. Cria uma missão
 
-void Alterar(int TipoDeContexto);                 // 12. Gerencia alteração conforme o contexto
-void AlterarShinobiEspecifico(int indiceShinobi); // 13. Altera um Shinobi específico
-void AlterarJutsuEspecifico(int indiceJutsu);     // 14. Altera um Jutsu específico
-void Remover(int TipoDeContexto);                 // 15. Remove Shinobi/Clã/Jutsu/Missão
+void Alterar(int TipoDeContexto);                 // 13. Gerencia alteração conforme o contexto
+void AlterarShinobiEspecifico(int indiceShinobi); // 14. Altera um Shinobi específico
+void AlterarJutsuEspecifico(int indiceJutsu);     // 15. Altera um Jutsu específico
+void Remover(int TipoDeContexto);                 // 16. Remove Shinobi/Clã/Jutsu/Missão
 
-void Imprime(int CasoDeImpressao, int TipoDeImpressao);                    // 16. Seleciona o tipo de impressão
-void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade); // 17. Gera relatórios
-int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao);               // 18. Pergunta se deseja ver mais detalhes
-void Informaçoes(int informaçao, int TipoDeInformaçao);                    // 19. Imprime informações adicionais
+void Imprime(int CasoDeImpressao, int TipoDeImpressao);                    // 17. Seleciona o tipo de impressão
+void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade); // 18. Gera relatórios
+int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao);               // 19. Pergunta se deseja ver mais detalhes
+void Informaçoes(int informaçao, int TipoDeInformaçao);                    // 20. Imprime informações adicionais
 
-void VerificaNivelDeDificuldade(char StrAuX[100]);                                                // 20. Valida nível da missão (S/A/B/C/D)
-void VerificadorDeTexto(char Texto[100]);                                                         // 21. Garante que o texto não tem números
-int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                        // 22. Verifica número dentro de intervalo
-int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado); // 23. Evita repetição
-void SelecionaStatus(int Opçao, char StrAux[100]);                                                // 24. Converte número em status da missão
-void SelecionaPatente(int Opçao, char StrAux[100]);                                               // 25. Converte número em patente da missão
+void VerificaNivelDeDificuldade(char StrAuX[100]);                                                // 21. Valida nível da missão (S/A/B/C/D)
+void VerificadorDeTexto(char Texto[100]);                                                         // 22. Garante que o texto não tem números
+int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                        // 23. Verifica número dentro de intervalo
+int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado); // 24. Evita repetição
+void SelecionaStatus(int Opçao, char StrAux[100]);                                                // 25. Converte número em status da missão
+void SelecionaPatente(int Opçao, char StrAux[100]);                                               // 26. Converte número em patente da missão
 
-void limpar_tela(void);   // 26. Limpa o terminal
-void congelar_tela(void); // 27. Pausa o terminal
-void Carregamento(void);  // 28. Exibe animação de carregamento
-int simOUnao(void);       // 29. Retorna 1 (sim) ou 0 (não)
+void limpar_tela(void);   // 27. Limpa o terminal
+void congelar_tela(void); // 28. Pausa o terminal
+void Carregamento(void);  // 29. Exibe animação de carregamento
+int simOUnao(void);       // 30. Retorna 1 (sim) ou 0 (não)
 //~~~(variáveis globais)~~~//
 tNinja *_ConjuntoDeShinobis;
 int _NumeroDoShinobi = 0;
@@ -109,6 +110,7 @@ int main()
         if (op == 5)
         {
             SalvaDados();
+            LiberarTudo();
             Carregamento();
             limpar_tela();
             printf("=== CREDITOS ===\n\nSoftware Desenvolvido por Miguel Lino Souza Forte e Tiago Lucas Kruger Soares da Costa\n\n");
@@ -510,6 +512,7 @@ tNinja CriarShinobi()
             }
         }
         CadastroDeShinobi.QuantidadeDeJutsus = NumDeJutsus;
+        free(aux);
     }
     else
     {
@@ -669,6 +672,7 @@ tCla CriarCla()
         CadastroDeCla.QuantidadeDeJutsusTradicionais = 0;
         CadastroDeCla.JutsusTradicionais = NULL;
     }
+    free(aux);
 
     //=======================================================================================================================================================================================//
 
@@ -1078,7 +1082,7 @@ tMissao CriarMissao()
         }
         CadastroDeMissao.NinjasDaMissao[i] = OpçaoDeShinobi - 1;
     }
-
+    free(aux);
     //=======================================================================================================================================================================================//
 
     return CadastroDeMissao;
@@ -1818,7 +1822,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         }
         else
         {
-            printf("\nShinobi Presentes: (Todos Os Shinobis Morreram Em Campo De Batalha!)");
+            printf("\nShinobi Presentes: (Todos Os Shinobis Morreram Em Campo De Batalha)");
         }
         printf("\nQuantidade de Ninjas da Missao: (%d)\n=================================\n", _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas);
 
@@ -1847,7 +1851,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         else
                         {
                             limpar_tela();
-                            printf("\n<~==[ EXIBIR: LIDER DA MISSAO ]==~>\nO Lider Desta Missao Foi Morto Em Campo De Batalha!");
+                            printf("\n<~==[ EXIBIR: LIDER DA MISSAO ]==~>\n\nO Lider Desta Missao Foi Morto Em Campo De Batalha!");
                             congelar_tela();
                         }
                     }
@@ -4430,4 +4434,51 @@ void RecuperaDados()
         }
     }
     fclose(Dados);
+}
+
+void LiberarTudo() {
+    // Liberar Shinobis
+    for(int i = 0; i < _NumeroDoShinobi; i++) {
+        free(_ConjuntoDeShinobis[i].Nome);
+        free(_ConjuntoDeShinobis[i].Patente);
+        free(_ConjuntoDeShinobis[i].ElementoPrincipal);
+        if(_ConjuntoDeShinobis[i].QuantidadeDeJutsus > 0) {
+            free(_ConjuntoDeShinobis[i].CaracteristicasDoJutsu);
+        }
+    }
+    free(_ConjuntoDeShinobis);
+
+    // Liberar Jutsus  
+    for(int i = 0; i < _NumeroDoJutsu; i++) {
+        free(_ConjuntoDeJutsus[i].Nome);
+        free(_ConjuntoDeJutsus[i].TipoJutsu);
+        for(int j = 0; j < _ConjuntoDeJutsus[i].QuantidadeDeElementos; j++) {
+            free(_ConjuntoDeJutsus[i].Elementos[j]);
+        }
+        free(_ConjuntoDeJutsus[i].Elementos);
+    }
+    free(_ConjuntoDeJutsus);
+
+    // Liberar Clãs
+    for(int i = 0; i < _NumeroDoCla; i++) {
+        free(_ConjuntoDeClas[i].NomeDoCla);
+        if(_ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios > 0) {
+            free(_ConjuntoDeClas[i].JutsusHereditarios);
+        }
+        if(_ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais > 0) {
+            free(_ConjuntoDeClas[i].JutsusTradicionais);
+        }
+    }
+    free(_ConjuntoDeClas);
+
+    // Liberar Missões
+    for(int i = 0; i < _NumeroDaMissao; i++) {
+        free(_ConjuntoDeMissoes[i].Titulo);
+        free(_ConjuntoDeMissoes[i].NivelDificuldade);
+        free(_ConjuntoDeMissoes[i].Status);
+        if(_ConjuntoDeMissoes[i].QuantidadeDeNinjas > 0) {
+            free(_ConjuntoDeMissoes[i].NinjasDaMissao);
+        }
+    }
+    free(_ConjuntoDeMissoes);
 }
