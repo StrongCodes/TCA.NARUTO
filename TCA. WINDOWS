@@ -674,6 +674,36 @@ tCla CriarCla()
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[((CadastroDeCla.QuantidadeDeJutsusHereditarios) + (NumDeJutsusTradicionais - 1))] = OpçaoDeJutsu;
 
+            if (_NumeroDoCla > 0)
+            {
+                int sinal = 0;
+                for (i = 0; i < _NumeroDoCla; i++)
+                {
+                    if (_ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios > 0)
+                    {
+                        for (int j = 0; j < _ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios; j++)
+                        {
+                            if (((OpçaoDeJutsu - 1) == _ConjuntoDeClas[i].JutsusHereditarios[j]))
+                            {
+                                limpar_tela();
+                                printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nErro! Este Jutsu Ja Eh Um Jutsu Hereditario do Cla %s, Selecione Novamente!", _ConjuntoDeClas[i].NomeDoCla);
+                                congelar_tela();
+                                sinal = 1;
+                                break;
+                            }
+                        }
+                        if (sinal)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (sinal)
+                {
+                    continue;
+                }
+            }
+
             if ((VerficaRepetiçaoDeOpçao(((CadastroDeCla.QuantidadeDeJutsusHereditarios - 1) + (NumDeJutsusTradicionais - 1)) + 1, ((CadastroDeCla.QuantidadeDeJutsusHereditarios - 1) + (NumDeJutsusTradicionais)), aux, OpçaoDeJutsu)))
             {
                 limpar_tela();
