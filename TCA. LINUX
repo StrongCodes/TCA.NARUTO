@@ -50,7 +50,7 @@ typedef struct
 
 void SalvaDados();    // 1. Salva todos os dados em arquivo
 void RecuperaDados(); // 2. Recupera os dados salvos do arquivo
-void LiberarTudo(); // 3. Libera A Memoria Das Variaveis Globais
+void LiberarTudo();   // 3. Libera A Memoria Das Variaveis Globais
 
 void SelecionadorDeMenu(int TipoDeMenu);                  // 4. Seleciona qual menu será exibido
 void SelecionarContexto(int TipoDeContexto);              // 5. Abre o submenu do contexto (Shinobi/Clã/Jutsu/Missão)
@@ -591,6 +591,36 @@ tCla CriarCla()
 
             OpçaoDeJutsu = EscolheOpçao(3);
             aux[NumDeJutsusHereditarios - 1] = OpçaoDeJutsu;
+
+            if (_NumeroDoCla > 0)
+            {
+                int sinal = 0;
+                for (i = 0; i < _NumeroDoCla; i++)
+                {
+                    if (_ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios > 0)
+                    {
+                        for (int j = 0; j < _ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios; j++)
+                        {
+                            if (((OpçaoDeJutsu - 1) == _ConjuntoDeClas[i].JutsusHereditarios[j]))
+                            {
+                                limpar_tela();
+                                printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nErro! Este Jutsu Ja Eh Um Jutsu Hereditario do Cla %s, Selecione Novamente!", _ConjuntoDeClas[i].NomeDoCla);
+                                congelar_tela();
+                                sinal = 1;
+                                break;
+                            }
+                        }
+                        if (sinal)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (sinal)
+                {
+                    continue;
+                }
+            }
 
             if ((NumDeJutsusHereditarios - 1) > 0 && (VerficaRepetiçaoDeOpçao((NumDeJutsusHereditarios - 1), NumDeJutsusHereditarios, aux, OpçaoDeJutsu)))
             {
@@ -1680,7 +1710,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                                 printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
                                 for (i = 0; i < _NumeroDoShinobi; i++)
                                 {
-                                    if ((_ConjuntoDeShinobis[i].CaracteristicasDoCla != -1) && (strcmp(_ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla) == 0))
+                                    if ((strcmp(_ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla) == 0))
                                     {
                                         printf("\n{ %d } - %s: %s %s", ctt + 1, _ConjuntoDeShinobis[i].Patente, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla);
                                         aux[ctt] = i;
@@ -1863,7 +1893,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                             for (i = 0; i < _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas; i++)
                             {
                                 printf("\n{ %d } - %s", i + 1, _ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].Nome);
-                                if(_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla != -1)
+                                if (_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla != -1)
                                 {
                                     printf(" %s", _ConjuntoDeClas[_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla].NomeDoCla);
                                 }
@@ -4435,23 +4465,28 @@ void RecuperaDados()
     fclose(Dados);
 }
 
-void LiberarTudo() {
+void LiberarTudo()
+{
     // Liberar Shinobis
-    for(int i = 0; i < _NumeroDoShinobi; i++) {
+    for (int i = 0; i < _NumeroDoShinobi; i++)
+    {
         free(_ConjuntoDeShinobis[i].Nome);
         free(_ConjuntoDeShinobis[i].Patente);
         free(_ConjuntoDeShinobis[i].ElementoPrincipal);
-        if(_ConjuntoDeShinobis[i].QuantidadeDeJutsus > 0) {
+        if (_ConjuntoDeShinobis[i].QuantidadeDeJutsus > 0)
+        {
             free(_ConjuntoDeShinobis[i].CaracteristicasDoJutsu);
         }
     }
     free(_ConjuntoDeShinobis);
 
-    // Liberar Jutsus  
-    for(int i = 0; i < _NumeroDoJutsu; i++) {
+    // Liberar Jutsus
+    for (int i = 0; i < _NumeroDoJutsu; i++)
+    {
         free(_ConjuntoDeJutsus[i].Nome);
         free(_ConjuntoDeJutsus[i].TipoJutsu);
-        for(int j = 0; j < _ConjuntoDeJutsus[i].QuantidadeDeElementos; j++) {
+        for (int j = 0; j < _ConjuntoDeJutsus[i].QuantidadeDeElementos; j++)
+        {
             free(_ConjuntoDeJutsus[i].Elementos[j]);
         }
         free(_ConjuntoDeJutsus[i].Elementos);
@@ -4459,23 +4494,28 @@ void LiberarTudo() {
     free(_ConjuntoDeJutsus);
 
     // Liberar Clãs
-    for(int i = 0; i < _NumeroDoCla; i++) {
+    for (int i = 0; i < _NumeroDoCla; i++)
+    {
         free(_ConjuntoDeClas[i].NomeDoCla);
-        if(_ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios > 0) {
+        if (_ConjuntoDeClas[i].QuantidadeDeJutsusHereditarios > 0)
+        {
             free(_ConjuntoDeClas[i].JutsusHereditarios);
         }
-        if(_ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais > 0) {
+        if (_ConjuntoDeClas[i].QuantidadeDeJutsusTradicionais > 0)
+        {
             free(_ConjuntoDeClas[i].JutsusTradicionais);
         }
     }
     free(_ConjuntoDeClas);
 
     // Liberar Missões
-    for(int i = 0; i < _NumeroDaMissao; i++) {
+    for (int i = 0; i < _NumeroDaMissao; i++)
+    {
         free(_ConjuntoDeMissoes[i].Titulo);
         free(_ConjuntoDeMissoes[i].NivelDificuldade);
         free(_ConjuntoDeMissoes[i].Status);
-        if(_ConjuntoDeMissoes[i].QuantidadeDeNinjas > 0) {
+        if (_ConjuntoDeMissoes[i].QuantidadeDeNinjas > 0)
+        {
             free(_ConjuntoDeMissoes[i].NinjasDaMissao);
         }
     }
