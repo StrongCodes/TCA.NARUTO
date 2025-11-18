@@ -1819,7 +1819,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         }
         else
         {
-            printf("\nShinobi Presentes: (Nenhum Shinobi)");
+            printf("\nShinobi Presentes: (Todos Os Shinobis Morreram Em Campo De Batalha!)");
         }
         printf("\nQuantidade de Ninjas da Missao: (%d)\n=================================\n", _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas);
 
@@ -1860,13 +1860,22 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                         {
                             for (i = 0; i < _ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas; i++)
                             {
-                                printf("\n{ %d } - %s %s", i + 1, _ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].Nome, _ConjuntoDeClas[_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla].NomeDoCla);
+                                printf("\n{ %d } - %s", i + 1, _ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].Nome);
+                                if(_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla != -1)
+                                {
+                                    printf(" %s", _ConjuntoDeClas[_ConjuntoDeShinobis[_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[i]].CaracteristicasDoCla].NomeDoCla);
+                                }
                             }
                             printf("\nDigite o Numero do Shinobi Que Deseja: ");
                             OpçaoDeShinobi = VereficaQuantia(1, (_ConjuntoDeMissoes[OpçaoDeContexto - 1].QuantidadeDeNinjas));
                             limpar_tela();
                             printf("\n<~==[ EXIBIR: SHINOBI ESPECIFICO DA MISSAO ]==~>\n");
                             RelatorioDaOpçao(1, (_ConjuntoDeMissoes[OpçaoDeContexto - 1].NinjasDaMissao[OpçaoDeShinobi - 1] + 1), 2);
+                            congelar_tela();
+                        }
+                        else
+                        {
+                            printf("\nTodos Os Shinobis Morreram Em Campo De Batalha!");
                             congelar_tela();
                         }
                     }
@@ -2001,7 +2010,7 @@ void Remover(int TipoDeContexto)
                 {
                     if (_ConjuntoDeMissoes[i].LiderResponsavel == indice)
                     {
-                        _ConjuntoDeMissoes[i].LiderResponsavel = 0; // Liderança removida
+                        _ConjuntoDeMissoes[i].LiderResponsavel = -1; // Liderança removida
                     }
                     else if (_ConjuntoDeMissoes[i].LiderResponsavel > indice)
                     {
