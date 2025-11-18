@@ -1680,7 +1680,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                                 printf("\n<~==[ EXIBIR: MEMBROS DO CLA ]==~>\n");
                                 for (i = 0; i < _NumeroDoShinobi; i++)
                                 {
-                                    if ((strcmp(_ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla) == 0))
+                                    if ((_ConjuntoDeShinobis[i].CaracteristicasDoCla != -1) && (strcmp(_ConjuntoDeClas[OpçaoDeContexto - 1].NomeDoCla, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla) == 0))
                                     {
                                         printf("\n{ %d } - %s: %s %s", ctt + 1, _ConjuntoDeShinobis[i].Patente, _ConjuntoDeShinobis[i].Nome, _ConjuntoDeClas[_ConjuntoDeShinobis[i].CaracteristicasDoCla].NomeDoCla);
                                         aux[ctt] = i;
