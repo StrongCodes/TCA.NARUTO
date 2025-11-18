@@ -919,7 +919,6 @@ tMissao CriarMissao()
             if (sinal)
             {
                 congelar_tela();
-                i--;
                 continue;
             }
         }
@@ -2012,11 +2011,11 @@ void Remover(int TipoDeContexto)
                 // Remover de missões onde é líder
                 for (int i = 0; i < _NumeroDaMissao; i++)
                 {
-                    if (_ConjuntoDeMissoes[i].LiderResponsavel == indice)
+                    if (_ConjuntoDeMissoes[i].LiderResponsavel == idx)
                     {
                         _ConjuntoDeMissoes[i].LiderResponsavel = -1; // Liderança removida
                     }
-                    else if (_ConjuntoDeMissoes[i].LiderResponsavel > indice)
+                    else if (_ConjuntoDeMissoes[i].LiderResponsavel > idx)
                     {
                         _ConjuntoDeMissoes[i].LiderResponsavel--; // Ajustar índices
                     }
