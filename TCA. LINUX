@@ -3540,8 +3540,7 @@ void AlterarJutsuEspecifico(int indiceJutsu)
                 printf("2-Alterar\n3-Remover\n");
             }
             printf("4-Voltar\nOpção: ");
-            int maxOpE = (_ConjuntoDeJutsus[idx].QuantidadeDeElementos > 0) ? 4 : 2;
-            int opElemento = VereficaQuantia(1, maxOpE);
+            int opElemento = VereficaQuantia(1, 4);
 
             switch (opElemento)
             {
