@@ -79,13 +79,16 @@ void VerificadorDeTexto(char Texto[100]);                                       
 int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                        // 23. Verifica número dentro de intervalo
 int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado); // 24. Evita repetição
 void SelecionaStatus(int Opçao, char StrAux[100]);                                                // 25. Converte número em status da missão
-void SelecionaPatente(int Opçao, char StrAux[100]);                                               // 26. Converte número em patente da missão
+void SelecionaPatente(int Opçao, char StrAux[100]);
+void Elementos(char StrAux[100]); // 26. Converte número em patente da missão
 
 void limpar_tela(void);   // 27. Limpa o terminal
 void congelar_tela(void); // 28. Pausa o terminal
 void Carregamento(void);  // 29. Exibe animação de carregamento
 int simOUnao(void);       // 30. Retorna 1 (sim) ou 0 (não)
+
 //~~~(variáveis globais)~~~//
+
 tNinja *_ConjuntoDeShinobis;
 int _NumeroDoShinobi = 0;
 
@@ -465,8 +468,8 @@ tNinja CriarShinobi()
 
     DesejaInformaçoes(DesejaInformacoes, 8);
     limpar_tela();
-    printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n\nDigite o Elemento Principal do Shinobi: ");
-    VerificadorDeTexto(StrAux);
+    printf("\n<~==[ CADASTRO DE SHINOBI: ELEMENTO PRINCIPAL DO SHINOBI ]==~>\n");
+    Elementos(StrAux);
     CadastroDeShinobi.ElementoPrincipal = (char *)malloc(((strlen(StrAux)) + 1) * sizeof(char));
     strcpy(CadastroDeShinobi.ElementoPrincipal, StrAux);
 
@@ -810,8 +813,24 @@ tJutsu CriarJutsu()
         while (1)
         {
             limpar_tela();
-            printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nDigite o Elemento Que o jutsu faz relaçao: ");
-            VerificadorDeTexto(StrAuX);
+            printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n");
+            Elementos(StrAuX);
+            int sinal = 0;
+            for(int i = 0; i < QuantidadeDeElementos; i++)
+            {
+                if(CadastroDeJutsu.Elementos[i] != NULL && strcmp(StrAuX, CadastroDeJutsu.Elementos[i]) == 0)
+                {
+                    limpar_tela();
+                    printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nErro! Este Jutsu Ja Foi Vinculado Ao Jutsu!\nPor Favor, Selecione Outro Elemento!");
+                    congelar_tela();
+                    sinal = 1;
+                    break;
+                }
+            }
+            if(sinal)
+            {
+                continue;
+            }
             CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1] = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
             strcpy(CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1], StrAuX);
             printf("\nDeseja Adicionar mais Algum Elemento?(s/n) ");
@@ -3863,6 +3882,38 @@ void VerificaNivelDeDificuldade(char StrAuX[100])
         {
             break;
         }
+    }
+}
+
+void Elementos(char StrAux[100])
+{
+    int OpçaoDeElemento;
+
+    printf("\nSelecione o Elemento Desejado:\n\n{ 1 } - Fogo\n{ 2 } - Agua\n{ 3 } - Vento\n{ 4 } - Terra\n{ 5 } - Trovao\n\n[ 0 ] - Outro\n\nOpçao Desejada: ");
+    OpçaoDeElemento = VereficaQuantia(0, 5);
+    if (OpçaoDeElemento == 0)
+    {
+        printf("\n\nDigite o Elemento Desejado: ");
+        VerificadorDeTexto(StrAux);
+    }
+
+    switch (OpçaoDeElemento)
+    {
+    case 1:
+        strcpy(StrAux, "Fogo");
+        break;
+    case 2:
+        strcpy(StrAux, "Agua");
+        break;
+    case 3:
+        strcpy(StrAux, "Vento");
+        break;
+    case 4:
+        strcpy(StrAux, "Terra");
+        break;
+    case 5:
+        strcpy(StrAux, "Trovao");
+        break;
     }
 }
 
