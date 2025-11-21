@@ -4482,7 +4482,7 @@ void RecuperaDados()
 {
     // int Separador = 0;
     int SeparadorDeContexto = 0, quatidades;
-    char LinhaDeDados[7000], *AuxTok;
+    char LinhaDeDados[750], *AuxTok;
     FILE *Dados;
 
     Dados = fopen("Dados TCA", "r");
