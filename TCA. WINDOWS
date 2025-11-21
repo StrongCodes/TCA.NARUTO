@@ -79,13 +79,13 @@ void VerificadorDeTexto(char Texto[100]);                                       
 int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima);                                        // 23. Verifica número dentro de intervalo
 int VerficaRepetiçaoDeOpçao(int ValordoI, int ValorMaximoDeOpçoes, int *aux, int CodigoDigitado); // 24. Evita repetição
 void SelecionaStatus(int Opçao, char StrAux[100]);                                                // 25. Converte número em status da missão
-void SelecionaPatente(int Opçao, char StrAux[100]);
-void Elementos(char StrAux[100]); // 26. Converte número em patente da missão
+void SelecionaPatente(int Opçao, char StrAux[100]);                                               // 26. Converte número em patente da missão
+void Elementos(char StrAux[100]);                                                                 // 27. Converte o numero em elemento
 
-void limpar_tela(void);   // 27. Limpa o terminal
-void congelar_tela(void); // 28. Pausa o terminal
-void Carregamento(void);  // 29. Exibe animação de carregamento
-int simOUnao(void);       // 30. Retorna 1 (sim) ou 0 (não)
+void limpar_tela(void);   // 28. Limpa o terminal
+void congelar_tela(void); // 29. Pausa o terminal
+void Carregamento(void);  // 30. Exibe animação de carregamento
+int simOUnao(void);       // 31. Retorna 1 (sim) ou 0 (não)
 
 //~~~(variáveis globais)~~~//
 
@@ -128,7 +128,6 @@ int main()
 }
 
 //~~~(implementações das funções)~~~//
-
 void SelecionarContexto(int TipoDeContexto)
 {
     int op = 1;
@@ -174,10 +173,11 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     switch (TipoDeCadastro)
     {
     case 1:
+    {
         if (_NumeroDoShinobi == 0)
         {
             printf("\nNao a Nenhum Shinobi Cadastrado no Momento!\nDeseja Cadastrar Um Novo Shinobi?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 _ConjuntoDeShinobis = (tNinja *)malloc(1 * sizeof(tNinja));
                 _ConjuntoDeShinobis[_NumeroDoShinobi] = CriarShinobi();
@@ -195,7 +195,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             if (TipoDeCaso == 1)
             {
                 printf("Deseja Adicionar Mais Algum Shinobi?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     _ConjuntoDeShinobis = (tNinja *)realloc(_ConjuntoDeShinobis, (_NumeroDoShinobi + 1) * sizeof(tNinja));
                     _ConjuntoDeShinobis[_NumeroDoShinobi] = CriarShinobi();
@@ -225,13 +225,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
         }
         break;
+    }
 
     case 2:
     {
         if (_NumeroDoCla == 0)
         {
             printf("\nNao a Nenhum Cla Cadastrado no Momento!\nDeseja Cadastrar Um Novo Cla?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 _ConjuntoDeClas = (tCla *)malloc(1 * sizeof(tCla));
                 _ConjuntoDeClas[_NumeroDoCla] = CriarCla();
@@ -249,7 +250,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             if (TipoDeCaso == 1)
             {
                 printf("Deseja Adicionar Mais Algum Cla?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     _ConjuntoDeClas = (tCla *)realloc(_ConjuntoDeClas, (_NumeroDoCla + 1) * sizeof(tCla));
                     _ConjuntoDeClas[_NumeroDoCla] = CriarCla();
@@ -282,10 +283,11 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
     }
 
     case 3:
+    {
         if (_NumeroDoJutsu == 0)
         {
             printf("\nNao a Nenhum Jutsu Cadastrado no Momento!\nDeseja Cadastrar Um Novo Jutsu?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 _ConjuntoDeJutsus = (tJutsu *)malloc(1 * sizeof(tJutsu));
                 _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
@@ -303,7 +305,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             if (TipoDeCaso == 1)
             {
                 printf("Deseja Adicionar Mais Algum Jutsu?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     _ConjuntoDeJutsus = (tJutsu *)realloc(_ConjuntoDeJutsus, (_NumeroDoJutsu + 1) * sizeof(tJutsu));
                     _ConjuntoDeJutsus[_NumeroDoJutsu] = CriarJutsu();
@@ -333,12 +335,14 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
             }
         }
         break;
+    }
 
     case 4:
+    {
         if (_NumeroDaMissao == 0)
         {
             printf("\nNao a Nenhuma Missao Cadastrada no Momento!\nDeseja Cadastrar Uma Nova Missao?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 _ConjuntoDeMissoes = (tMissao *)malloc(1 * sizeof(tMissao));
                 _ConjuntoDeMissoes[_NumeroDaMissao] = CriarMissao();
@@ -351,13 +355,12 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
                 return -1;
             }
         }
-
         else
         {
             if (TipoDeCaso == 1)
             {
                 printf("Deseja Adicionar Mais Alguma Missao?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     _ConjuntoDeMissoes = (tMissao *)realloc(_ConjuntoDeMissoes, (_NumeroDaMissao + 1) * sizeof(tMissao));
                     _ConjuntoDeMissoes[_NumeroDaMissao] = CriarMissao();
@@ -388,6 +391,7 @@ int NovoCadastro(int TipoDeCadastro, int TipoDeCaso)
         }
         break;
     }
+    }
     return 0;
 }
 
@@ -405,7 +409,6 @@ tNinja CriarShinobi()
     }
 
     //=======================================================================================================================================================================================//
-
     while (1)
     {
         int erro = 0;
@@ -478,10 +481,9 @@ tNinja CriarShinobi()
     DesejaInformaçoes(DesejaInformacoes, 9);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE SHINOBI: JUTSUS DO SHINOBI ]==~>\n\nO Shinobi Domina Algum Jutsu?(s/n) ");
-    if (simOUnao() == 1)
+    if (simOUnao())
     {
         int *aux = calloc(101, sizeof(int));
-
         NumDeJutsus = 1;
 
         CadastroDeShinobi.CaracteristicasDoJutsu = malloc(NumDeJutsus * sizeof(int));
@@ -504,7 +506,7 @@ tNinja CriarShinobi()
             CadastroDeShinobi.CaracteristicasDoJutsu[NumDeJutsus - 1] = OpçaoDeJutsu - 1;
 
             printf("\nDeseja Selecionar Mais Algum Jutsu?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 NumDeJutsus = NumDeJutsus + 1;
                 CadastroDeShinobi.CaracteristicasDoJutsu = realloc(CadastroDeShinobi.CaracteristicasDoJutsu, NumDeJutsus * sizeof(int));
@@ -521,6 +523,7 @@ tNinja CriarShinobi()
     else
     {
         CadastroDeShinobi.QuantidadeDeJutsus = 0;
+        CadastroDeShinobi.CaracteristicasDoJutsu = NULL;
     }
 
     //=======================================================================================================================================================================================//
@@ -581,7 +584,7 @@ tCla CriarCla()
     DesejaInformaçoes(DesejaInformacoes, 1);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE CLA: JUTSU HEREDITARIO DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Hereditario?(s/n) ");
-    if (simOUnao() == 1)
+    if (simOUnao())
     {
         int NumDeJutsusHereditarios = 1;
 
@@ -637,7 +640,7 @@ tCla CriarCla()
             CadastroDeCla.JutsusHereditarios[NumDeJutsusHereditarios - 1] = OpçaoDeJutsu - 1;
 
             printf("\nDeseja Selecionar Mais um Jutsu?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 NumDeJutsusHereditarios = NumDeJutsusHereditarios + 1;
                 CadastroDeCla.JutsusHereditarios = realloc(CadastroDeCla.JutsusHereditarios, NumDeJutsusHereditarios * sizeof(int));
@@ -663,7 +666,7 @@ tCla CriarCla()
     DesejaInformaçoes(DesejaInformacoes, 3);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE CLA: JUTSU TRADICIONAL DO CLA ]==~>\n\nO Cla Possui Algum Jutsu Tradicional?(s/n) ");
-    if (simOUnao() == 1)
+    if (simOUnao())
     {
         int NumDeJutsusTradicionais = 1;
 
@@ -718,7 +721,7 @@ tCla CriarCla()
             CadastroDeCla.JutsusTradicionais[NumDeJutsusTradicionais - 1] = OpçaoDeJutsu - 1;
 
             printf("\nDeseja Selecionar mais Algum Jutsu?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 NumDeJutsusTradicionais = NumDeJutsusTradicionais + 1;
                 CadastroDeCla.JutsusTradicionais = realloc(CadastroDeCla.JutsusTradicionais, NumDeJutsusTradicionais * sizeof(int));
@@ -805,7 +808,7 @@ tJutsu CriarJutsu()
     DesejaInformaçoes(DesejaInformacoes, 2);
     limpar_tela();
     printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nO Jutsu Tem Relaçao Com Algum Elemento?(s/n) ");
-    if (simOUnao() == 1)
+    if (simOUnao())
     {
         int QuantidadeDeElementos = 1;
         CadastroDeJutsu.Elementos = (char **)malloc((QuantidadeDeElementos) * sizeof(char *));
@@ -816,9 +819,9 @@ tJutsu CriarJutsu()
             printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n");
             Elementos(StrAuX);
             int sinal = 0;
-            for(int i = 0; i < QuantidadeDeElementos; i++)
+            for (int i = 0; i < QuantidadeDeElementos; i++)
             {
-                if(CadastroDeJutsu.Elementos[i] != NULL && strcmp(StrAuX, CadastroDeJutsu.Elementos[i]) == 0)
+                if (CadastroDeJutsu.Elementos[i] != NULL && strcmp(StrAuX, CadastroDeJutsu.Elementos[i]) == 0)
                 {
                     limpar_tela();
                     printf("\n<~==[ CADASTRO DE JUTSU: ELEMENTOS DO JUTSU ]==~>\n\nErro! Este Jutsu Ja Foi Vinculado Ao Jutsu!\nPor Favor, Selecione Outro Elemento!");
@@ -827,14 +830,14 @@ tJutsu CriarJutsu()
                     break;
                 }
             }
-            if(sinal)
+            if (sinal)
             {
                 continue;
             }
             CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1] = (char *)malloc((strlen(StrAuX) + 1) * sizeof(char));
             strcpy(CadastroDeJutsu.Elementos[QuantidadeDeElementos - 1], StrAuX);
             printf("\nDeseja Adicionar mais Algum Elemento?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 QuantidadeDeElementos = QuantidadeDeElementos + 1;
                 CadastroDeJutsu.Elementos = realloc(CadastroDeJutsu.Elementos, (QuantidadeDeElementos) * sizeof(char *));
@@ -1244,7 +1247,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum Shinobi de Maneira Detalhada?(s/n) ");
-                    if (simOUnao() == 1)
+                    if (simOUnao())
                     {
                         printf("Digite o Numero do Shinobi Que Deseja: ");
                         OpçaoDeShinobi = VereficaQuantia(0, (_NumeroDoShinobi));
@@ -1274,7 +1277,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                     else
                     {
                         printf("Deseja Voltar Para o Menu Exibir?(s/n) ");
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             Carregamento();
                             break;
@@ -1318,7 +1321,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum Cla de Maneira Mais Detalhada?(s/n) ");
-                    if (simOUnao() == 1)
+                    if (simOUnao())
                     {
                         printf("Digite o Numero do Cla Que Deseja: ");
                         OpçaoDeCla = VereficaQuantia(0, (_NumeroDoCla));
@@ -1348,7 +1351,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                     else
                     {
                         printf("Deseja Voltar Para o Menu Exibir?(s/n) ");
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             Carregamento();
                             break;
@@ -1392,7 +1395,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n\n[ 0 ] - Listar Todos\n\nDeseja Ver Algum de Maneira Mais Detalhada?(s/n) ");
-                    if (simOUnao() == 1)
+                    if (simOUnao())
                     {
                         printf("Digite o Numero do Jutsu Que Deseja: ");
                         OpçaoDeJutsu = VereficaQuantia(0, (_NumeroDoJutsu));
@@ -1423,7 +1426,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                     else
                     {
                         printf("Deseja Voltar Para o Menu Exibir?(s/n) ");
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             Carregamento();
                             break;
@@ -1467,7 +1470,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                 if (CasoDeImpressao == 1)
                 {
                     printf("\n\n[ 0 ] - Listar Todas\n\nDeseja Ver Alguma de Maneira Mais Detalhada?(s/n) ");
-                    if (simOUnao() == 1)
+                    if (simOUnao())
                     {
                         printf("Digite o Numero da Missao Que Deseja: ");
                         OpçaoDeMissao = VereficaQuantia(0, (_NumeroDaMissao));
@@ -1498,7 +1501,7 @@ void Imprime(int CasoDeImpressao, int TipoDeImpressao)
                     else
                     {
                         printf("Deseja Voltar Para o Menu Exibir?(s/n) ");
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             Carregamento();
                             break;
@@ -1585,7 +1588,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         if (Necessidade == 2)
         {
             printf("\nDeseja Ver O Cla Ou Algum Jutsu de Maneira Mais Detalhada?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 int i, OpçaoDeJutsu, OpçaoEscolhida;
 
@@ -1694,7 +1697,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         if (Necessidade == 2)
         {
             printf("\nDeseja Ver os Membros ou os Jutsus De Maneira Mais Detalhada?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 int OpçaoEscolhida, OpçaoDeJutsu, i;
 
@@ -1785,7 +1788,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
                                 else if ((ctt > 0))
                                 {
                                     printf("\nDeseja Ver Algum Membro De Maneira Mais Detalhada?(s/n) ");
-                                    if (simOUnao() == 1)
+                                    if (simOUnao())
                                     {
                                         printf("\nDigite o Numero do Membro Que Deseja: ");
                                         OpçaoDeMembro = VereficaQuantia(1, ctt);
@@ -1915,7 +1918,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         if (Necessidade == 2)
         {
             printf("\nDeseja Ver os Shinobis da Missao ou o Lider De Maneira Mais Detalhada?(s/n) ");
-            if (simOUnao() == 1)
+            if (simOUnao())
             {
                 while (1)
                 {
@@ -2075,7 +2078,7 @@ void Remover(int TipoDeContexto)
         RelatorioDaOpçao(TipoDeContexto, indice, 1);
 
         printf("\nTem certeza que deseja remover este %s? (s/n): ", tipoNome);
-        if (simOUnao() == 1)
+        if (simOUnao())
         {
             // Executar remoção baseada no tipo
             switch (TipoDeContexto)
@@ -2384,7 +2387,7 @@ void Remover(int TipoDeContexto)
 
         // Pergunta se quer remover outro item do mesmo tipo
         printf("\nDeseja remover outro %s? (s/n): ", tipoNome);
-        if (simOUnao() == 0)
+        if (!simOUnao())
             break;
     }
 }
@@ -2563,7 +2566,7 @@ void AlterarShinobiEspecifico(int indiceShinobi)
 
             case 2:
                 printf("\nRemover %s de %s? (s/n): ", _ConjuntoDeClas[_ConjuntoDeShinobis[idx].CaracteristicasDoCla].NomeDoCla, _ConjuntoDeShinobis[idx].Nome);
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     printf("\nClã removido! Renegado!\n");
                     _ConjuntoDeShinobis[idx].CaracteristicasDoCla = -1;
@@ -2709,7 +2712,7 @@ void AlterarShinobiEspecifico(int indiceShinobi)
                 int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeShinobis[idx].QuantidadeDeJutsus) - 1;
                 int jutsuParaRemover = _ConjuntoDeShinobis[idx].CaracteristicasDoJutsu[jutsuIdxRem];
                 printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover].Nome);
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     for (int i = jutsuIdxRem; i < _ConjuntoDeShinobis[idx].QuantidadeDeJutsus - 1; i++)
                     {
@@ -3053,7 +3056,7 @@ void Alterar(int TipoDeContexto)
                         int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios) - 1;
                         int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusHereditarios[jutsuIdxRem] + 1;
                         printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusHereditarios - 1; i++)
                             {
@@ -3221,7 +3224,7 @@ void Alterar(int TipoDeContexto)
                         int jutsuIdxRem = VereficaQuantia(1, _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais) - 1;
                         int jutsuParaRemover = _ConjuntoDeClas[idx].JutsusTradicionais[jutsuIdxRem] + 1;
                         printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[jutsuParaRemover - 1].Nome);
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             for (int i = jutsuIdxRem; i < _ConjuntoDeClas[idx].QuantidadeDeJutsusTradicionais - 1; i++)
                             {
@@ -3567,7 +3570,7 @@ void Alterar(int TipoDeContexto)
                         int shinobiIdx = VereficaQuantia(1, _ConjuntoDeMissoes[idx].QuantidadeDeNinjas) - 1;
                         int shinobiParaRemover = _ConjuntoDeMissoes[idx].NinjasDaMissao[shinobiIdx];
                         printf("Remover %s? (s/n): ", _ConjuntoDeShinobis[shinobiParaRemover].Nome);
-                        if (simOUnao() == 1)
+                        if (simOUnao())
                         {
                             for (int i = shinobiIdx; i < _ConjuntoDeMissoes[idx].QuantidadeDeNinjas - 1; i++)
                             {
@@ -3587,7 +3590,7 @@ void Alterar(int TipoDeContexto)
         } while (1);
 
         printf("\nAlterar outro %s? (s/n): ", tipoNome);
-        if (simOUnao() == 0)
+        if (!simOUnao())
         {
             break;
         }
@@ -3720,7 +3723,7 @@ void AlterarJutsuEspecifico(int indiceJutsu)
                 printf("Remover elemento (1-%d): ", _ConjuntoDeJutsus[idx].QuantidadeDeElementos);
                 int elemIdxRem = VereficaQuantia(1, _ConjuntoDeJutsus[idx].QuantidadeDeElementos) - 1;
                 printf("Remover %s? (s/n): ", _ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     free(_ConjuntoDeJutsus[idx].Elementos[elemIdxRem]);
                     for (int i = elemIdxRem; i < _ConjuntoDeJutsus[idx].QuantidadeDeElementos - 1; i++)
@@ -4090,7 +4093,7 @@ int EscolheOpçao(int Contexto)
         printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s  DESEJADO ]==~>\n", TipoDeContexto);
         RelatorioDaOpçao(Contexto, OpçaoDesejada, 1);
         printf("Esta Seria a Opçao Desejada?(s/n) ");
-        if (simOUnao() == 1)
+        if (simOUnao())
         {
             return OpçaoDesejada;
             break;
@@ -4183,7 +4186,7 @@ int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao)
             printf("\n<~==[ DESEJA INFORMAÇOES ]==~>\n\nA Proxima Etapa Do Cadastro Eh Sobre Status de Missoes em Naruto ...\nDeseja Exemplos? Ou Alguma Expliçao Sobre?(s/n) ");
             break;
         }
-        if (simOUnao() == 1)
+        if (simOUnao())
         {
             int op;
             printf("Digite qual prefere:\n{ 1 } - Explicaçao\n{ 2 } - Exemplo\n\nOpçao Desejada: ");
@@ -4194,7 +4197,7 @@ int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao)
                 Informaçoes(informaçao, 1);
 
                 printf("\nDeseja Ver Exemplos Também?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     Informaçoes(informaçao, 2);
                 }
@@ -4204,7 +4207,7 @@ int DesejaInformaçoes(int DecisaoDoUsuario, int informaçao)
                 Informaçoes(informaçao, 2);
 
                 printf("\nDeseja Ver uma Explicaçao Também?(s/n) ");
-                if (simOUnao() == 1)
+                if (simOUnao())
                 {
                     Informaçoes(informaçao, 1);
                 }
@@ -4379,7 +4382,7 @@ void SalvaDados()
     {
         if (_NumeroDoJutsu > 0)
         {
-            fprintf(Dados, "%d,", _NumeroDoJutsu);
+            fprintf(Dados, "%d,\n", _NumeroDoJutsu);
             for (int i = 0; i < _NumeroDoJutsu; i++)
             {
                 fprintf(Dados, "%s,", _ConjuntoDeJutsus[i].Nome);
@@ -4395,13 +4398,14 @@ void SalvaDados()
                         fprintf(Dados, "%s/", _ConjuntoDeJutsus[i].Elementos[j]);
                     }
                 }
+                fprintf(Dados, "\n");
             }
         }
-        fprintf(Dados, ";\n");
+        fprintf(Dados, "\n");
 
         if (_NumeroDoCla > 0)
         {
-            fprintf(Dados, "%d,", _NumeroDoCla);
+            fprintf(Dados, "%d,\n", _NumeroDoCla);
             for (int i = 0; i < _NumeroDoCla; i++)
             {
                 fprintf(Dados, "%s,", _ConjuntoDeClas[i].NomeDoCla);
@@ -4422,13 +4426,14 @@ void SalvaDados()
                         fprintf(Dados, "%d,", _ConjuntoDeClas[i].JutsusTradicionais[j]);
                     }
                 }
+                fprintf(Dados, "\n");
             }
         }
-        fprintf(Dados, ";\n");
+        fprintf(Dados, "\n");
 
         if (_NumeroDoShinobi > 0)
         {
-            fprintf(Dados, "%d,", _NumeroDoShinobi);
+            fprintf(Dados, "%d,\n", _NumeroDoShinobi);
             for (int i = 0; i < _NumeroDoShinobi; i++)
             {
                 fprintf(Dados, "%s,", _ConjuntoDeShinobis[i].Nome);
@@ -4445,13 +4450,14 @@ void SalvaDados()
                         fprintf(Dados, "%d,", _ConjuntoDeShinobis[i].CaracteristicasDoJutsu[j]);
                     }
                 }
+                fprintf(Dados, "\n");
             }
         }
-        fprintf(Dados, ";\n");
+        fprintf(Dados, "\n");
 
         if (_NumeroDaMissao > 0)
         {
-            fprintf(Dados, "%d,", _NumeroDaMissao);
+            fprintf(Dados, "%d,\n", _NumeroDaMissao);
             for (int i = 0; i < _NumeroDaMissao; i++)
             {
                 fprintf(Dados, "%s,", _ConjuntoDeMissoes[i].Titulo);
@@ -4464,9 +4470,10 @@ void SalvaDados()
                 {
                     fprintf(Dados, "%d,", _ConjuntoDeMissoes[i].NinjasDaMissao[j]);
                 }
+                fprintf(Dados, "\n");
             }
         }
-        fprintf(Dados, ";\n");
+        fprintf(Dados, "\n");
     }
     fclose(Dados);
 }
@@ -4474,8 +4481,8 @@ void SalvaDados()
 void RecuperaDados()
 {
     // int Separador = 0;
-    int SeparadorDeContexto = 0;
-    char LinhaDeDados[7000], *AuxTok, *DadosDoJutsu, *DadosDoCla, *DadoosDoShinobi, *DadosDeMissao;
+    int SeparadorDeContexto = 0, quatidades;
+    char LinhaDeDados[7000], *AuxTok;
     FILE *Dados;
 
     Dados = fopen("Dados TCA", "r");
@@ -4484,20 +4491,25 @@ void RecuperaDados()
         return;
     }
 
+    int cttaux = 0;
     while ((fgets(LinhaDeDados, sizeof(LinhaDeDados), Dados)))
     {
         if (SeparadorDeContexto == 0)
         {
-            DadosDoJutsu = strtok(LinhaDeDados, ";");
-            _NumeroDoJutsu = 0;
-
-            AuxTok = strtok(DadosDoJutsu, ",");
-            int QuantidadeDeJutsu = atoi(AuxTok);
-            _ConjuntoDeJutsus = (tJutsu *)malloc(QuantidadeDeJutsu * sizeof(tJutsu));
-
-            for (int j = 0; j < QuantidadeDeJutsu; j++)
+            if (cttaux == 0)
             {
-                AuxTok = strtok(NULL, ",");
+                AuxTok = strtok(LinhaDeDados, ",");
+                int QuantidadeDeJutsu = atoi(AuxTok);
+                quatidades = QuantidadeDeJutsu;
+                _ConjuntoDeJutsus = (tJutsu *)malloc(QuantidadeDeJutsu * sizeof(tJutsu));
+                _NumeroDoJutsu = 0;
+                cttaux++;
+                continue;
+            }
+
+            if(_NumeroDoJutsu != quatidades)
+            {
+                AuxTok = strtok(LinhaDeDados, ",");
                 _ConjuntoDeJutsus[_NumeroDoJutsu].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
                 strcpy(_ConjuntoDeJutsus[_NumeroDoJutsu].Nome, AuxTok);
 
@@ -4529,22 +4541,33 @@ void RecuperaDados()
                     _ConjuntoDeJutsus[_NumeroDoJutsu].Elementos = NULL;
                 }
                 _NumeroDoJutsu++;
+                continue;
             }
-            SeparadorDeContexto++;
-            continue;
+            else
+            {
+                SeparadorDeContexto++;
+                cttaux = 0;
+                continue;
+            }
         }
         else if (SeparadorDeContexto == 1)
         {
-            DadosDoCla = strtok(LinhaDeDados, ";");
-            _NumeroDoCla = 0;
-
-            AuxTok = strtok(DadosDoCla, ",");
-            int QuantidadeDeClas = atoi(AuxTok);
-            _ConjuntoDeClas = (tCla *)malloc(QuantidadeDeClas * sizeof(tCla));
-
-            for (int i = 0; i < QuantidadeDeClas; i++)
+            if (cttaux == 0)
             {
-                AuxTok = strtok(NULL, ",");
+                AuxTok = strtok(LinhaDeDados, ",");
+                int QuantidadeDeClas = atoi(AuxTok);
+                printf("%s", AuxTok);
+                quatidades = QuantidadeDeClas;
+                _ConjuntoDeClas = (tCla *)malloc(QuantidadeDeClas * sizeof(tCla));
+                _NumeroDoCla = 0;
+                cttaux++;
+                continue;
+            }
+
+            if(_NumeroDoCla != quatidades)
+            {
+                printf("%d", _NumeroDoCla);
+                AuxTok = strtok(LinhaDeDados, ",");
                 _ConjuntoDeClas[_NumeroDoCla].NomeDoCla = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
                 strcpy(_ConjuntoDeClas[_NumeroDoCla].NomeDoCla, AuxTok);
 
@@ -4576,22 +4599,31 @@ void RecuperaDados()
                     }
                 }
                 _NumeroDoCla++;
+                continue;
             }
-            SeparadorDeContexto++;
-            continue;
+            else
+            {
+                SeparadorDeContexto++;
+                cttaux = 0;
+                continue;
+            }
         }
         else if (SeparadorDeContexto == 2)
         {
-            DadoosDoShinobi = strtok(LinhaDeDados, ";");
-            _NumeroDoShinobi = 0;
-
-            AuxTok = strtok(DadoosDoShinobi, ",");
-            int QuantidadeDeShinobis = atoi(AuxTok);
-            _ConjuntoDeShinobis = (tNinja *)malloc(QuantidadeDeShinobis * sizeof(tNinja));
-
-            for (int i = 0; i < QuantidadeDeShinobis; i++)
+            if (cttaux == 0)
             {
-                AuxTok = strtok(NULL, ",");
+                AuxTok = strtok(LinhaDeDados, ",");
+                int QuantidadeDeShinobis = atoi(AuxTok);
+                quatidades = QuantidadeDeShinobis;
+                _ConjuntoDeShinobis = (tNinja *)malloc(QuantidadeDeShinobis * sizeof(tNinja));
+                _NumeroDoShinobi = 0;
+                cttaux++;
+                continue;
+            }
+
+            if(_NumeroDoShinobi != quatidades)
+            {
+                AuxTok = strtok(LinhaDeDados, ",");
                 _ConjuntoDeShinobis[_NumeroDoShinobi].Nome = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
                 strcpy(_ConjuntoDeShinobis[_NumeroDoShinobi].Nome, AuxTok);
 
@@ -4622,22 +4654,31 @@ void RecuperaDados()
                     }
                 }
                 _NumeroDoShinobi++;
+                continue;
             }
-            SeparadorDeContexto++;
-            continue;
+            else
+            {
+                SeparadorDeContexto++;
+                cttaux = 0;
+                continue;
+            }
         }
         else if (SeparadorDeContexto == 3)
         {
-            DadosDeMissao = strtok(LinhaDeDados, ";");
-            _NumeroDaMissao = 0;
-
-            AuxTok = strtok(DadosDeMissao, ",");
-            int QuantidadeDeMissoes = atoi(AuxTok);
-            _ConjuntoDeMissoes = (tMissao *)malloc(QuantidadeDeMissoes * sizeof(tMissao));
-
-            for (int i = 0; i < QuantidadeDeMissoes; i++)
+            if (cttaux == 0)
             {
-                AuxTok = strtok(NULL, ",");
+                AuxTok = strtok(LinhaDeDados, ",");
+                int QuantidadeDeMissoes = atoi(AuxTok);
+                quatidades = QuantidadeDeMissoes;
+                _ConjuntoDeMissoes = (tMissao *)malloc(QuantidadeDeMissoes * sizeof(tMissao));
+                _NumeroDaMissao = 0;
+                cttaux++;
+                continue;
+            }
+
+            if(_NumeroDaMissao != quatidades)
+            {
+                AuxTok = strtok(LinhaDeDados, ",");
                 _ConjuntoDeMissoes[_NumeroDaMissao].Titulo = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
                 strcpy(_ConjuntoDeMissoes[_NumeroDaMissao].Titulo, AuxTok);
 
@@ -4664,9 +4705,15 @@ void RecuperaDados()
                     _ConjuntoDeMissoes[_NumeroDaMissao].NinjasDaMissao[j] = atoi(AuxTok);
                 }
                 _NumeroDaMissao++;
+                continue;
             }
-            SeparadorDeContexto = 0;
-            break;
+            else
+            {
+                SeparadorDeContexto = 0;
+                cttaux = 0;
+                quatidades = 0;
+                break;
+            }
         }
     }
     fclose(Dados);
