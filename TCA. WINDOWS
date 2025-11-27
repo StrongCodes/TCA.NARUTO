@@ -957,7 +957,7 @@ tMissao CriarMissao()
                 congelar_tela();
                 continue;
             }
-            else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Jounin") == 0 || (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Tokubetsu Jounin") == 0)) == 0) && (strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0))
+            else if ((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Jounin") == 0 || (strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "Tokubetsu Jounin") == 0)) && (strcmp(CadastroDeMissao.NivelDificuldade, "S") == 0))
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO DE MISSAO: LIDER DA MISSAO ]==~>\n\nErro! Os Tokubetsu Jounins e Jounins só Atuam em Missoes de Rank S Com Ordem do Hokage!");
@@ -4692,8 +4692,6 @@ void RecuperaDados()
 
                 AuxTok = strtok(NULL, ",");
                 _ConjuntoDeMissoes[_NumeroDaMissao].QuantidadeDeNinjas = atoi(AuxTok);
-
-                _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
 
                 AuxTok = strtok(NULL, ",");
                 _ConjuntoDeMissoes[_NumeroDaMissao].LiderResponsavel = atoi(AuxTok);
