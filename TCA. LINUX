@@ -1102,7 +1102,7 @@ tMissao CriarMissao()
                     continue;
                 }
             }
-            else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "ANBU") == 0)) && (strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Kage") != 0 && strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Kage") != 0) && strcmp(CadastroDeMissao.NivelDificuldade, "A") != 0 && strcmp(CadastroDeMissao.NivelDificuldade, "S") != 0)
+            else if (((strcmp(_ConjuntoDeShinobis[OpçaoDeShinobi - 1].Patente, "ANBU") == 0)) && (strcmp(_ConjuntoDeShinobis[CadastroDeMissao.LiderResponsavel].Patente, "Kage") != 0) && strcmp(CadastroDeMissao.NivelDificuldade, "A") != 0 && strcmp(CadastroDeMissao.NivelDificuldade, "S") != 0)
             {
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> SHINOBI DESEJADO ]==~>\n\nErro! Os ANBU só atuam em missões Rank A e S, sob ordens diretas do Hokage!");
