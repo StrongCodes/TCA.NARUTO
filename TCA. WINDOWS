@@ -1842,8 +1842,7 @@ void RelatorioDaOpçao(int Contexto, int OpçaoDeContexto, int Necessidade)
         printf("\nTipo do Jutsu: (%s)", _ConjuntoDeJutsus[OpçaoDeContexto - 1].TipoJutsu);
 
         // ELEMENTOS COM VERIFICAÇÕES
-        if (_ConjuntoDeJutsus[OpçaoDeContexto - 1].QuantidadeDeElementos > 0 &&
-            _ConjuntoDeJutsus[OpçaoDeContexto - 1].Elementos != NULL)
+        if (_ConjuntoDeJutsus[OpçaoDeContexto - 1].QuantidadeDeElementos > 0 && _ConjuntoDeJutsus[OpçaoDeContexto - 1].Elementos != NULL)
         {
             printf("\nElementos Presentes no Jutsu: (");
             int primeiro = 1;
@@ -2595,7 +2594,7 @@ void AlterarShinobiEspecifico(int indiceShinobi)
             if (_ConjuntoDeShinobis[idx].QuantidadeDeJutsus > 0)
                 printf("2-Alterar\n3-Remover\n");
             printf("4-Voltar\nOpção: ");
-            int opJutsu = VereficaQuantia(1, 4);
+            int opJutsu;
 
             while (1)
             {
@@ -4035,7 +4034,7 @@ int VereficaQuantia(int QuantiaMinima, int QuantiaMaxima)
 
 int EscolheOpçao(int Contexto)
 {
-    int i, OpçaoDesejada, VariavelDeContexto;
+    int OpçaoDesejada, VariavelDeContexto;
     char TipoDeContexto[100];
 
     switch (Contexto)
@@ -4080,7 +4079,6 @@ int EscolheOpçao(int Contexto)
                 limpar_tela();
                 printf("\n<~==[ CADASTRO POR OPçAO: SELECIONE -> %s DESEJADO ]==~>\n\nCadastre um %s para continuar o cadastro!\n", TipoDeContexto, TipoDeContexto);
                 congelar_tela();
-                i--;
                 continue;
             }
             limpar_tela();
