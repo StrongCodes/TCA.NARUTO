@@ -4378,6 +4378,8 @@ void SalvaDados()
     }
     else
     {
+        fprintf(Dados,"\n");
+
         if (_NumeroDoJutsu > 0)
         {
             fprintf(Dados, "%d,\n", _NumeroDoJutsu);
