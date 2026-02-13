@@ -4556,7 +4556,6 @@ void RecuperaDados()
             {
                 AuxTok = strtok(LinhaDeDados, ",");
                 int QuantidadeDeClas = atoi(AuxTok);
-                printf("%s", AuxTok);
                 quatidades = QuantidadeDeClas;
                 _ConjuntoDeClas = (tCla *)malloc(QuantidadeDeClas * sizeof(tCla));
                 _NumeroDoCla = 0;
@@ -4566,7 +4565,6 @@ void RecuperaDados()
 
             if(_NumeroDoCla != quatidades)
             {
-                printf("%d", _NumeroDoCla);
                 AuxTok = strtok(LinhaDeDados, ",");
                 _ConjuntoDeClas[_NumeroDoCla].NomeDoCla = (char *)malloc((strlen(AuxTok) + 1) * sizeof(char));
                 strcpy(_ConjuntoDeClas[_NumeroDoCla].NomeDoCla, AuxTok);
